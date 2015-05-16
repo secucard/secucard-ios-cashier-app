@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClientLib/Pod/Classes/Vendor/StompKit/StompKit.h

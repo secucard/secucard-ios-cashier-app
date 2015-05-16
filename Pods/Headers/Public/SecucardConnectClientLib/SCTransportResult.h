@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClientLib/Pod/Classes/Model/Transport/SCTransportResult.h

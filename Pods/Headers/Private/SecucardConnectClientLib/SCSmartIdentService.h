@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClientLib/Pod/Classes/Services/Smart/SCSmartIdentService.h

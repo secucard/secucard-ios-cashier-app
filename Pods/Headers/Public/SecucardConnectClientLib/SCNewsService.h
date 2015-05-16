@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClientLib/Pod/Classes/Services/General/SCNewsService.h

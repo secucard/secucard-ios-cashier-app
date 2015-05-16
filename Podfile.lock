@@ -1,0 +1,98 @@
+PODS:
+  - AFNetworking (2.5.4):
+    - AFNetworking/NSURLConnection (= 2.5.4)
+    - AFNetworking/NSURLSession (= 2.5.4)
+    - AFNetworking/Reachability (= 2.5.4)
+    - AFNetworking/Security (= 2.5.4)
+    - AFNetworking/Serialization (= 2.5.4)
+    - AFNetworking/UIKit (= 2.5.4)
+  - AFNetworking/NSURLConnection (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - AFNetworking/UIKit (2.5.4):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - CocoaAsyncSocket (7.4.1)
+  - Mantle (2.0):
+    - Mantle/extobjc (= 2.0)
+  - Mantle/extobjc (2.0)
+  - OMGHTTPURLRQ (2.1):
+    - OMGHTTPURLRQ/RQ (= 2.1)
+  - OMGHTTPURLRQ/FormURLEncode (2.1)
+  - OMGHTTPURLRQ/RQ (2.1):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (2.1)
+  - PromiseKit (1.5.3):
+    - PromiseKit/CALayer (= 1.5.3)
+    - PromiseKit/NSNotificationCenter (= 1.5.3)
+    - PromiseKit/NSURLConnection (= 1.5.3)
+    - PromiseKit/Pause (= 1.5.3)
+    - PromiseKit/UIActionSheet (= 1.5.3)
+    - PromiseKit/UIAlertView (= 1.5.3)
+    - PromiseKit/UIView (= 1.5.3)
+    - PromiseKit/UIViewController (= 1.5.3)
+    - PromiseKit/Until (= 1.5.3)
+    - PromiseKit/When (= 1.5.3)
+  - PromiseKit-AFNetworking (0.1.6):
+    - AFNetworking (~> 2.0)
+    - PromiseKit/Promise
+    - PromiseKit/When
+  - PromiseKit/CALayer (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/NSNotificationCenter (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/NSURLConnection (1.5.3):
+    - OMGHTTPURLRQ
+    - PromiseKit/Promise
+  - PromiseKit/Pause (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/Promise (1.5.3)
+  - PromiseKit/UIActionSheet (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/UIAlertView (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/UIView (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/UIViewController (1.5.3):
+    - PromiseKit/Promise
+  - PromiseKit/Until (1.5.3):
+    - PromiseKit/Promise
+    - PromiseKit/When
+  - PromiseKit/When (1.5.3):
+    - PromiseKit/Promise
+  - Reachability (3.2)
+  - SecucardConnectClientLib (0.1.0):
+    - AFNetworking (~> 2.5)
+    - CocoaAsyncSocket (~> 7.4)
+    - Mantle (~> 2.0)
+    - PromiseKit (~> 1.5)
+    - PromiseKit-AFNetworking
+    - Reachability (~> 3.2)
+
+DEPENDENCIES:
+  - SecucardConnectClientLib (from `~/devid/secucard/projects/app/SecucardConnectClientLib/`)
+
+EXTERNAL SOURCES:
+  SecucardConnectClientLib:
+    :path: "~/devid/secucard/projects/app/SecucardConnectClientLib/"
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
+  Mantle: d7c75b6fb789b20f7ae30cd0d09435fe545896ff
+  OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
+  PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
+  PromiseKit-AFNetworking: fbdd97205d6a78bb94d96d0d56311d1733569aae
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SecucardConnectClientLib: ad4d6b870827c85bf1fe481a50268356aee6e39e
+
+COCOAPODS: 0.37.0.beta.1

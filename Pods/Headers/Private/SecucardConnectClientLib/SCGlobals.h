@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClientLib/Pod/Classes/Helper/SCGlobals.h
