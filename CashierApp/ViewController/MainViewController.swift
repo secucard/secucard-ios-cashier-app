@@ -32,24 +32,28 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var productsCollection:UICollectionView!
   var basketCollection:UICollectionView!
   var checkinsCollection:UICollectionView!
-
+  
   var productCategories: [JSON]?
   var basket = [AnyObject]()
   var checkins = [AnyObject]()
-
   
-  var json: JSON {
-    set {
-      if let cats = newValue["groups"].array {
+  var currentCategory = 0 {
+    didSet {
+      self.productsCollection.reloadData()
+      self.productCategoriesCollection.reloadData()
+    }
+  }
+  
+  
+  var json: JSON = nil {
+    didSet {
+      if let cats = self.json["groups"].array {
+
         self.productCategories = cats
-        
         self.productCategoriesCollection.reloadData()
         self.productsCollection.reloadData()
         
       }
-    }
-    get {
-      return self.json
     }
   }
   
@@ -57,11 +61,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var categoriesLayout = UICollectionViewFlowLayout()
     categoriesLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-    categoriesLayout.itemSize = CGSizeMake(100, 50)
+    categoriesLayout.minimumInteritemSpacing = 0
+    categoriesLayout.estimatedItemSize = CGSizeMake(100, 50)
     
     var productsLayout = UICollectionViewFlowLayout()
     productsLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
-    productsLayout.itemSize = CGSizeMake(100, 100)
+    productsLayout.itemSize = CGSizeMake(150, 150)
     
     var basketLayout = UICollectionViewFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -80,6 +85,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     self.productsCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: productsLayout)
     self.productsCollection.registerClass(ProductCell.self, forCellWithReuseIdentifier: productReuseIdentifier)
+    self.productsCollection.contentInset = UIEdgeInsetsMake(10, 10, 10, 10)
     self.productsCollection.delegate = self
     self.productsCollection.dataSource = self
     
@@ -99,7 +105,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
     super.init(nibName: nibNameOrNil , bundle: nibBundleOrNil)
   }
-
+  
   required init(coder:NSCoder) {
     super.init(coder:coder)
   }
@@ -128,12 +134,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.left.bottom.width.equalTo(view)
       make.height.equalTo(100)
     }
-
-
+    
+    
     // tabs
     view.addSubview(productCategoriesCollection)
     
-    productCategoriesCollection.backgroundColor = UIColor.redColor().colorWithAlphaComponent(0.7)
+    productCategoriesCollection.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.7)
     
     productCategoriesCollection.snp_makeConstraints { (make) -> Void in
       make.top.equalTo(topBar.snp_bottom)
@@ -144,7 +150,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     view.addSubview(productsCollection)
     
-    productsCollection.backgroundColor = UIColor.greenColor().colorWithAlphaComponent(0.7)
+    productsCollection.backgroundColor = UIColor.whiteColor()
     
     productsCollection.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(view)
@@ -156,12 +162,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     view.addSubview(basketCollection)
     
     basketCollection.backgroundColor = UIColor.yellowColor().colorWithAlphaComponent(0.7)
-  
+    
     basketCollection.snp_makeConstraints { (make) -> Void in
       make.top.equalTo(topBar.snp_bottom)
       make.left.equalTo(view.snp_centerX)
-      make.right.equalTo(view)
-      make.bottom.equalTo(view.snp_centerY)
+      make.width.equalTo(view.frame.width/4)
+      make.bottom.equalTo(bottomBar.snp_top)
     }
     
     view.addSubview(checkinsCollection)
@@ -169,11 +175,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinsCollection.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(0.7)
     
     checkinsCollection.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(view.snp_centerX)
+      make.width.equalTo(view.frame.width/4 )
       make.right.equalTo(view)
       make.bottom.equalTo(bottomBar.snp_top)
-      make.top.equalTo(view.snp_centerY)
+      make.top.equalTo(topBar.snp_bottom)
     }
+    
+    self.view.backgroundColor = UIColor.whiteColor()
     
   }
   
@@ -200,10 +208,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
     switch identifierForCollection(collectionView) {
-    
+      
     case CollectionType.ProductCategories:
       if let numCategories = productCategories?.count {
         return numCategories
+      } else {
+        return 0
+      }
+      
+    case CollectionType.Product:
+      
+      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+        return items.count
       } else {
         return 0
       }
@@ -217,8 +233,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     
-    
-    
     switch identifierForCollection(collectionView) {
       
     case CollectionType.ProductCategories:
@@ -227,6 +241,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         var cell:ProductCategoryCell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
         cell.data = categories[indexPath.row]
+        cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : UIColor.lightGrayColor().colorWithAlphaComponent(0.2)
+        
+        return cell
+        
+      }
+      
+    case CollectionType.Product:
+      
+      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+        
+        var cell:ProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as! ProductCell
+        cell.data = items[indexPath.row]
         return cell
         
       }
@@ -241,7 +267,22 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-
+  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    
+    switch identifierForCollection(collectionView) {
+      
+    case CollectionType.ProductCategories:
+      
+      currentCategory = indexPath.row
+      
+    default:
+      
+      return
+      
+    }
+  }
+  
+  
   
   /*
   // MARK: - Navigation

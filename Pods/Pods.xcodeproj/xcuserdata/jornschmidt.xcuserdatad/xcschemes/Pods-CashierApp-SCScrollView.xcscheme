@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F52EDF0B88C6C5A57674E8ED"
+               BlueprintIdentifier = "2E58D863D290A52263D3F24C"
                BuildableName = "SCScrollView.framework"
                BlueprintName = "Pods-CashierApp-SCScrollView"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -15,7 +15,12 @@ class ProductCategoryCell: UICollectionViewCell {
   var data:JSON = nil {
     didSet {
       label.text = self.data["name"].stringValue
-      //label.sizeToFit()
+      
+      label.sizeToFit()
+      var f = label.frame
+      f.size.height = self.frame.size.height
+      f.size.width += 40
+      label.frame = f
     }
   }
   
@@ -31,10 +36,7 @@ class ProductCategoryCell: UICollectionViewCell {
     
     self.addSubview(imageView)
     self.addSubview(label)
-    
-    label.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(self)
-    }
+  
     
     self.backgroundColor = UIColor.whiteColor()
 
@@ -48,5 +50,20 @@ class ProductCategoryCell: UICollectionViewCell {
     super.init(coder: aDecoder)
   }
   
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+    
+    var attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
+    
+    var newFrame = attr.frame
+    self.frame = newFrame
+    
+    self.setNeedsLayout()
+    self.layoutIfNeeded()
+    
+    newFrame.size.width = self.label.frame.size.width
+    attr.frame = newFrame
+    return attr
+    
+  }
   
 }

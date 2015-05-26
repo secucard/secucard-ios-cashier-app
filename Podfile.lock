@@ -21,6 +21,7 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AHEasing (1.2)
+  - Alamofire (1.2.2)
   - CocoaAsyncSocket (7.4.1)
   - Mantle (2.0.2):
     - Mantle/extobjc (= 2.0.2)
@@ -86,6 +87,7 @@ PODS:
   - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 1.2)
   - SCStackViewController (~> 3.2)
   - SecucardConnectClientLib (from `~/devid/secucard/projects/app/SecucardConnectClientLib/`)
   - SnapKit (~> 0.10.0)
@@ -98,6 +100,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   AHEasing: 847f583bcd83a2bb850e38ccdb26d22e2593f34d
+  Alamofire: 11a6022f5089887d92ffb5a3014c97a0a915ab98
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
   Mantle: 967fd31ea0220890b2e76589198996b534bb3fb1
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5

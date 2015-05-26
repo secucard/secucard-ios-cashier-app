@@ -50,6 +50,7 @@ code_sign() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'AFNetworking.framework'
   install_framework 'AHEasing.framework'
+  install_framework 'Alamofire.framework'
   install_framework 'CocoaAsyncSocket.framework'
   install_framework 'Mantle.framework'
   install_framework 'OMGHTTPURLRQ.framework'
@@ -65,6 +66,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
   install_framework 'AHEasing.framework'
+  install_framework 'Alamofire.framework'
   install_framework 'CocoaAsyncSocket.framework'
   install_framework 'Mantle.framework'
   install_framework 'OMGHTTPURLRQ.framework'

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1063ACF0FEF62C602A344E4B"
+               BlueprintIdentifier = "05C339DE7284FC5C9B20F46A"
                BuildableName = "PromiseKit_AFNetworking.framework"
                BlueprintName = "Pods-CashierApp-PromiseKit-AFNetworking"
                ReferencedContainer = "container:Pods.xcodeproj">

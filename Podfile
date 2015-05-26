@@ -8,6 +8,7 @@ pod "SecucardConnectClientLib", :path => "~/devid/secucard/projects/app/Secucard
 pod 'SCStackViewController', '~> 3.2'
 pod 'SwiftyJSON', '~> 2.2'
 pod 'SnapKit', '~> 0.10.0'
+pod 'Alamofire', '~> 1.2'
 
 end
 

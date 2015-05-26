@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B6C3E946544AC25D7F1DAFF"
+               BlueprintIdentifier = "9298965E4F3625D775F971B0"
                BuildableName = "SCStackViewController.framework"
                BlueprintName = "Pods-CashierApp-SCStackViewController"
                ReferencedContainer = "container:Pods.xcodeproj">
