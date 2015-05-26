@@ -1,0 +1,6 @@
+framework module SCScrollView {
+  umbrella header "Pods-CashierApp-SCScrollView-umbrella.h"
+
+  export *
+  module * { export * }
+}

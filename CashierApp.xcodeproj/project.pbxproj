@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6FD18B385DCC40E0BA934A18 /* libPods-CashierApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E25B8B346AE33E498103FD /* libPods-CashierApp.a */; };
+		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AA134EA81B14559B00278E98 /* BasketUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA134EA71B14559B00278E98 /* BasketUserCell.swift */; };
+		AA134EAA1B1455C100278E98 /* BasketProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA134EA91B1455C100278E98 /* BasketProductCell.swift */; };
+		AA134EAC1B1455CB00278E98 /* CheckinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA134EAB1B1455CB00278E98 /* CheckinCell.swift */; };
+		AA9A31FC1B07597100CCF6B4 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A31FB1B07597100CCF6B4 /* ProductCell.swift */; };
+		AA9A32001B075AD100CCF6B4 /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = AA9A31FF1B075AD100CCF6B4 /* products.json */; };
+		AA9A32021B076D0000CCF6B4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A32011B076D0000CCF6B4 /* MainViewController.swift */; };
+		AA9A32051B089EEC00CCF6B4 /* ProductCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9A32041B089EEC00CCF6B4 /* ProductCategoryCell.swift */; };
 		AA9DCD741B0738F20070022E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD731B0738F20070022E /* AppDelegate.swift */; };
-		AA9DCD761B0738F20070022E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD751B0738F20070022E /* ViewController.swift */; };
-		AA9DCD791B0738F20070022E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD771B0738F20070022E /* Main.storyboard */; };
 		AA9DCD7B1B0738F20070022E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD7A1B0738F20070022E /* Images.xcassets */; };
-		AA9DCD7E1B0738F20070022E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD7C1B0738F20070022E /* LaunchScreen.xib */; };
 		AA9DCD8A1B0738F20070022E /* CashierAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD891B0738F20070022E /* CashierAppTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,15 +31,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		53E25B8B346AE33E498103FD /* libPods-CashierApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CashierApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67821B63AF1CC60829C4EA34 /* Pods-CashierApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.debug.xcconfig"; sourceTree = "<group>"; };
+		9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA134EA71B14559B00278E98 /* BasketUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketUserCell.swift; sourceTree = "<group>"; };
+		AA134EA91B1455C100278E98 /* BasketProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketProductCell.swift; sourceTree = "<group>"; };
+		AA134EAB1B1455CB00278E98 /* CheckinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinCell.swift; sourceTree = "<group>"; };
+		AA9A31EF1B07558A00CCF6B4 /* CashierApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CashierApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		AA9A31FB1B07597100CCF6B4 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		AA9A31FF1B075AD100CCF6B4 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		AA9A32011B076D0000CCF6B4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AA9A32041B089EEC00CCF6B4 /* ProductCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCategoryCell.swift; sourceTree = "<group>"; };
 		AA9DCD6E1B0738F20070022E /* CashierApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashierApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9DCD721B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9DCD731B0738F20070022E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA9DCD751B0738F20070022E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AA9DCD781B0738F20070022E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA9DCD7A1B0738F20070022E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AA9DCD7D1B0738F20070022E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AA9DCD831B0738F20070022E /* CashierAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashierAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9DCD881B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9DCD891B0738F20070022E /* CashierAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierAppTests.swift; sourceTree = "<group>"; };
@@ -47,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FD18B385DCC40E0BA934A18 /* libPods-CashierApp.a in Frameworks */,
+				55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,11 +102,10 @@
 		AA9DCD701B0738F20070022E /* CashierApp */ = {
 			isa = PBXGroup;
 			children = (
+				AA9DCD931B073B890070022E /* View */,
+				AA9DCD941B073B890070022E /* ViewController */,
 				AA9DCD731B0738F20070022E /* AppDelegate.swift */,
-				AA9DCD751B0738F20070022E /* ViewController.swift */,
-				AA9DCD771B0738F20070022E /* Main.storyboard */,
 				AA9DCD7A1B0738F20070022E /* Images.xcassets */,
-				AA9DCD7C1B0738F20070022E /* LaunchScreen.xib */,
 				AA9DCD711B0738F20070022E /* Supporting Files */,
 			);
 			path = CashierApp;
@@ -107,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				AA9DCD721B0738F20070022E /* Info.plist */,
+				AA9A31EF1B07558A00CCF6B4 /* CashierApp-Bridging-Header.h */,
+				AA9A31FF1B075AD100CCF6B4 /* products.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -128,10 +138,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AA9DCD931B073B890070022E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA9A31FB1B07597100CCF6B4 /* ProductCell.swift */,
+				AA9A32041B089EEC00CCF6B4 /* ProductCategoryCell.swift */,
+				AA134EA71B14559B00278E98 /* BasketUserCell.swift */,
+				AA134EA91B1455C100278E98 /* BasketProductCell.swift */,
+				AA134EAB1B1455CB00278E98 /* CheckinCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA9DCD941B073B890070022E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AA9A32011B076D0000CCF6B4 /* MainViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		D64ECBCF0DDCB0E63BB2F602 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				53E25B8B346AE33E498103FD /* libPods-CashierApp.a */,
+				9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,6 +178,7 @@
 				AA9DCD6B1B0738F20070022E /* Frameworks */,
 				AA9DCD6C1B0738F20070022E /* Resources */,
 				C85955427AC6E67D7E2C7ED1 /* Copy Pods Resources */,
+				2AC358FE004819A17ABB7A8B /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -187,6 +218,7 @@
 				TargetAttributes = {
 					AA9DCD6D1B0738F20070022E = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 6EX4P3WB6E;
 					};
 					AA9DCD821B0738F20070022E = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -218,8 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA9DCD791B0738F20070022E /* Main.storyboard in Resources */,
-				AA9DCD7E1B0738F20070022E /* LaunchScreen.xib in Resources */,
+				AA9A32001B075AD100CCF6B4 /* products.json in Resources */,
 				AA9DCD7B1B0738F20070022E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +265,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2AC358FE004819A17ABB7A8B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		40AFBC4E04708BCDE22A109B /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,8 +317,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA9DCD761B0738F20070022E /* ViewController.swift in Sources */,
+				AA134EAC1B1455CB00278E98 /* CheckinCell.swift in Sources */,
+				AA9A32021B076D0000CCF6B4 /* MainViewController.swift in Sources */,
 				AA9DCD741B0738F20070022E /* AppDelegate.swift in Sources */,
+				AA134EA81B14559B00278E98 /* BasketUserCell.swift in Sources */,
+				AA9A31FC1B07597100CCF6B4 /* ProductCell.swift in Sources */,
+				AA9A32051B089EEC00CCF6B4 /* ProductCategoryCell.swift in Sources */,
+				AA134EAA1B1455C100278E98 /* BasketProductCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,25 +344,6 @@
 			targetProxy = AA9DCD841B0738F20070022E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AA9DCD771B0738F20070022E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA9DCD781B0738F20070022E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AA9DCD7C1B0738F20070022E /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA9DCD7D1B0738F20070022E /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AA9DCD8B1B0738F20070022E /* Debug */ = {
@@ -354,6 +386,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -392,6 +425,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -402,9 +436,16 @@
 			baseConfigurationReference = 67821B63AF1CC60829C4EA34 /* Pods-CashierApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CashierApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -413,9 +454,15 @@
 			baseConfigurationReference = D59E1E058824726A7A4943FE /* Pods-CashierApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CashierApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
 			};
 			name = Release;
 		};

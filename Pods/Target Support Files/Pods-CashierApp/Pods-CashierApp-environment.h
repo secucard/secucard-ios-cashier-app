@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 4
 
+// AHEasing
+#define COCOAPODS_POD_AVAILABLE_AHEasing
+#define COCOAPODS_VERSION_MAJOR_AHEasing 1
+#define COCOAPODS_VERSION_MINOR_AHEasing 2
+#define COCOAPODS_VERSION_PATCH_AHEasing 0
+
 // CocoaAsyncSocket
 #define COCOAPODS_POD_AVAILABLE_CocoaAsyncSocket
 #define COCOAPODS_VERSION_MAJOR_CocoaAsyncSocket 7
@@ -58,13 +64,13 @@
 #define COCOAPODS_POD_AVAILABLE_Mantle
 #define COCOAPODS_VERSION_MAJOR_Mantle 2
 #define COCOAPODS_VERSION_MINOR_Mantle 0
-#define COCOAPODS_VERSION_PATCH_Mantle 0
+#define COCOAPODS_VERSION_PATCH_Mantle 2
 
 // Mantle/extobjc
 #define COCOAPODS_POD_AVAILABLE_Mantle_extobjc
 #define COCOAPODS_VERSION_MAJOR_Mantle_extobjc 2
 #define COCOAPODS_VERSION_MINOR_Mantle_extobjc 0
-#define COCOAPODS_VERSION_PATCH_Mantle_extobjc 0
+#define COCOAPODS_VERSION_PATCH_Mantle_extobjc 2
 
 // OMGHTTPURLRQ
 #define COCOAPODS_POD_AVAILABLE_OMGHTTPURLRQ
@@ -100,7 +106,7 @@
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_AFNetworking
 #define COCOAPODS_VERSION_MAJOR_PromiseKit_AFNetworking 0
 #define COCOAPODS_VERSION_MINOR_PromiseKit_AFNetworking 1
-#define COCOAPODS_VERSION_PATCH_PromiseKit_AFNetworking 6
+#define COCOAPODS_VERSION_PATCH_PromiseKit_AFNetworking 7
 
 // PromiseKit/CALayer
 #define COCOAPODS_POD_AVAILABLE_PromiseKit_CALayer
@@ -174,9 +180,33 @@
 #define COCOAPODS_VERSION_MINOR_Reachability 2
 #define COCOAPODS_VERSION_PATCH_Reachability 0
 
+// SCScrollView
+#define COCOAPODS_POD_AVAILABLE_SCScrollView
+#define COCOAPODS_VERSION_MAJOR_SCScrollView 1
+#define COCOAPODS_VERSION_MINOR_SCScrollView 1
+#define COCOAPODS_VERSION_PATCH_SCScrollView 5
+
+// SCStackViewController
+#define COCOAPODS_POD_AVAILABLE_SCStackViewController
+#define COCOAPODS_VERSION_MAJOR_SCStackViewController 3
+#define COCOAPODS_VERSION_MINOR_SCStackViewController 2
+#define COCOAPODS_VERSION_PATCH_SCStackViewController 1
+
 // SecucardConnectClientLib
 #define COCOAPODS_POD_AVAILABLE_SecucardConnectClientLib
 #define COCOAPODS_VERSION_MAJOR_SecucardConnectClientLib 0
 #define COCOAPODS_VERSION_MINOR_SecucardConnectClientLib 1
 #define COCOAPODS_VERSION_PATCH_SecucardConnectClientLib 0
+
+// SnapKit
+#define COCOAPODS_POD_AVAILABLE_SnapKit
+#define COCOAPODS_VERSION_MAJOR_SnapKit 0
+#define COCOAPODS_VERSION_MINOR_SnapKit 10
+#define COCOAPODS_VERSION_PATCH_SnapKit 0
+
+// SwiftyJSON
+#define COCOAPODS_POD_AVAILABLE_SwiftyJSON
+#define COCOAPODS_VERSION_MAJOR_SwiftyJSON 2
+#define COCOAPODS_VERSION_MINOR_SwiftyJSON 2
+#define COCOAPODS_VERSION_PATCH_SwiftyJSON 0
 

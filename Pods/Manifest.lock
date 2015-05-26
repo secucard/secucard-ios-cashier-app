@@ -20,10 +20,11 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AHEasing (1.2)
   - CocoaAsyncSocket (7.4.1)
-  - Mantle (2.0):
-    - Mantle/extobjc (= 2.0)
-  - Mantle/extobjc (2.0)
+  - Mantle (2.0.2):
+    - Mantle/extobjc (= 2.0.2)
+  - Mantle/extobjc (2.0.2)
   - OMGHTTPURLRQ (2.1):
     - OMGHTTPURLRQ/RQ (= 2.1)
   - OMGHTTPURLRQ/FormURLEncode (2.1)
@@ -42,9 +43,9 @@ PODS:
     - PromiseKit/UIViewController (= 1.5.3)
     - PromiseKit/Until (= 1.5.3)
     - PromiseKit/When (= 1.5.3)
-  - PromiseKit-AFNetworking (0.1.6):
+  - PromiseKit-AFNetworking (0.1.7):
     - AFNetworking (~> 2.0)
-    - PromiseKit/Promise
+    - PromiseKit/Promise (~> 1.5)
     - PromiseKit/When
   - PromiseKit/CALayer (1.5.3):
     - PromiseKit/Promise
@@ -70,6 +71,10 @@ PODS:
   - PromiseKit/When (1.5.3):
     - PromiseKit/Promise
   - Reachability (3.2)
+  - SCScrollView (1.1.5):
+    - AHEasing (~> 1.0)
+  - SCStackViewController (3.2.1):
+    - SCScrollView (~> 1.1)
   - SecucardConnectClientLib (0.1.0):
     - AFNetworking (~> 2.5)
     - CocoaAsyncSocket (~> 7.4)
@@ -77,9 +82,14 @@ PODS:
     - PromiseKit (~> 1.5)
     - PromiseKit-AFNetworking
     - Reachability (~> 3.2)
+  - SnapKit (0.10.0)
+  - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
+  - SCStackViewController (~> 3.2)
   - SecucardConnectClientLib (from `~/devid/secucard/projects/app/SecucardConnectClientLib/`)
+  - SnapKit (~> 0.10.0)
+  - SwiftyJSON (~> 2.2)
 
 EXTERNAL SOURCES:
   SecucardConnectClientLib:
@@ -87,12 +97,17 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  AHEasing: 847f583bcd83a2bb850e38ccdb26d22e2593f34d
   CocoaAsyncSocket: 7cbf214b27f8e7f7574db6a3fd96352ffaed433d
-  Mantle: d7c75b6fb789b20f7ae30cd0d09435fe545896ff
+  Mantle: 967fd31ea0220890b2e76589198996b534bb3fb1
   OMGHTTPURLRQ: f8c515dfd2f57a5d74c710978f600231f52afec5
   PromiseKit: 7ecae7c190ab92ae00aae6ba7f88942107532b8f
-  PromiseKit-AFNetworking: fbdd97205d6a78bb94d96d0d56311d1733569aae
+  PromiseKit-AFNetworking: 364d4cb942a7278f5219c62dc822867655954a8f
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  SCScrollView: b3bc7d61b359a1fc51f13558ccaaf2211010bfda
+  SCStackViewController: 83e9b7983c26d47b55c501fd48bd18bb6768a138
   SecucardConnectClientLib: ad4d6b870827c85bf1fe481a50268356aee6e39e
+  SnapKit: 53696873f2cf84a15e8d7d0d9729ed4381196b16
+  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
 COCOAPODS: 0.37.0.beta.1
