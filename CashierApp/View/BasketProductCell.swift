@@ -9,52 +9,70 @@
 import UIKit
 import SwiftyJSON
 
+protocol BasketProductCellDelegate {
+  
+  func removeBasketItem(basketItem:BasketItem)
+  func basketItemChanged(basketItem:BasketItem)
+  func basketItemLayoutChanged(basketItem:BasketItem)
+  
+}
+
 class BasketProductCell: UICollectionViewCell {
 
-  var data:Product = Product() {
+  var data:BasketItem? {
     didSet {
       
-      // properties
-      amount = 1
-      discount = 1.0
-      price = data.price
-      
-      // text
-      nameLabel.text = data.name
-      infoLabel.text = "\(data.articleNumber) \(price*discount)€"
+      if let theData = data {
+        
+        // properties
+        discount = 1.0
+        price = theData.product.price
+        
+        // text
+        countLabel.text = "\(theData.amount)"
+        nameLabel.text = theData.product.name
+        infoLabel.text = "\(theData.product.articleNumber) \(price*discount)€"
+        
+      }
       
     }
+    
   }
   
   var discount: Float = 0.0 {
     didSet {
-      infoLabel.text = "\(data.articleNumber) \(price*discount)€"
+      
+      if let theData = data {
+        infoLabel.text = "\(theData.product.articleNumber) \(price*discount)€"
+      }
+      
     }
   }
   
   var price: Float = 0.0 {
     didSet {
-      infoLabel.text = "\(data.articleNumber) \(price*discount)€"
-    }
-  }
-  
-  var amount: Int = 1 {
-    didSet {
-      countLabel.text = "\(amount)"
+      
+      if let theData = data {
+        infoLabel.text = "\(theData.product.articleNumber) \(price*discount)€"
+      }
+      
     }
   }
   
   // regular controls
-  var countLabel: UILabel
-  var nameLabel: UILabel
-  var infoLabel: UILabel
-  var actionsButton : UIButton
+  var countLabel: UILabel!
+  var nameLabel: UILabel!
+  var infoLabel: UILabel!
+  var actionsButton : UIButton!
   
   // actions
-  var increaseButton : UIButton = UIButton()
-  var decreaseButton : UIButton = UIButton()
-  var changePrice : UIButton = UIButton()
-  var addDiscount : UIButton = UIButton()
+  var increaseButton : UIButton!
+  var decreaseButton : UIButton!
+  var changePriceButton : UIButton!
+  var addDiscountButton : UIButton!
+  var removeButton : UIButton!
+  
+  var delegate: BasketProductCellDelegate?
   
   override init(frame: CGRect) {
     
@@ -77,17 +95,46 @@ class BasketProductCell: UICollectionViewCell {
     actionsButton.setTitle("...", forState: UIControlState.Normal)
     actionsButton.backgroundColor = Constants.brightGreyColor
     
+    increaseButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    increaseButton.setTitle("+", forState: UIControlState.Normal)
+    increaseButton.backgroundColor = Constants.brightGreyColor
+    
+    decreaseButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    decreaseButton.setTitle("-", forState: UIControlState.Normal)
+    decreaseButton.backgroundColor = Constants.brightGreyColor
+    
+    changePriceButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    changePriceButton.setTitle("€", forState: UIControlState.Normal)
+    changePriceButton.backgroundColor = Constants.brightGreyColor
+    
+    addDiscountButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    addDiscountButton.setTitle("%", forState: UIControlState.Normal)
+    addDiscountButton.backgroundColor = Constants.brightGreyColor
+    
+    removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    removeButton.setTitle("T", forState: UIControlState.Normal)
+    removeButton.backgroundColor = Constants.warningColor
+    
     var bottomLine: UIView = UIView()
     bottomLine.backgroundColor = Constants.paneBorderColor
     
     // call super
     super.init(frame: frame)
     
+    self.clipsToBounds = true
+    
     // add items
     self.addSubview(countLabel)
     self.addSubview(nameLabel)
     self.addSubview(infoLabel)
     self.addSubview(actionsButton)
+    
+    self.addSubview(increaseButton)
+    self.addSubview(decreaseButton)
+    self.addSubview(changePriceButton)
+    self.addSubview(addDiscountButton)
+    self.addSubview(removeButton)
+    
     self.addSubview(bottomLine)
     
     // layouting
@@ -118,6 +165,46 @@ class BasketProductCell: UICollectionViewCell {
       make.width.height.equalTo(50)
     }
     
+    increaseButton.addTarget(self, action: "increaseButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    increaseButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(10)
+      make.top.equalTo(actionsButton.snp_bottom).offset(10)
+      make.width.height.equalTo(50)
+    }
+    
+    decreaseButton.addTarget(self, action: "decreaseButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    decreaseButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(increaseButton.snp_right).offset(10)
+      make.top.equalTo(actionsButton.snp_bottom).offset(10)
+      make.width.height.equalTo(50)
+    }
+    
+    changePriceButton.addTarget(self, action: "changePriceButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    changePriceButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(decreaseButton.snp_right).offset(10)
+      make.top.equalTo(actionsButton.snp_bottom).offset(10)
+      make.width.height.equalTo(50)
+    }
+    
+    addDiscountButton.addTarget(self, action: "addDiscountButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    addDiscountButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(changePriceButton.snp_right).offset(10)
+      make.top.equalTo(actionsButton.snp_bottom).offset(10)
+      make.width.height.equalTo(50)
+    }
+    
+    removeButton.addTarget(self, action: "removeButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    removeButton.snp_makeConstraints { (make) -> Void in
+      make.right.equalTo(-10)
+      make.top.equalTo(actionsButton.snp_bottom).offset(10)
+      make.width.height.equalTo(50)
+    }
+    
+//    self.snp_makeConstraints { (make) -> Void in
+//      make.width.equalTo(256)
+//      make.height.equalTo(70)
+//    }
+    
     bottomLine.snp_makeConstraints { (make) -> Void in
       make.left.width.bottom.equalTo(self)
       make.height.equalTo(1)
@@ -136,10 +223,72 @@ class BasketProductCell: UICollectionViewCell {
     
   }
   
+  override func prepareForReuse() {
+  
+    self.data = nil
+    self.delegate = nil
+    
+  }
+  
   func actionsButtonTouched() {
     
-    NSLog("touched")
+    if let theData = data {
+      theData.expanded = !theData.expanded
+      delegate?.basketItemLayoutChanged(theData)
+    }
     
+    
+  }
+  
+  func increaseButtonTouched() {
+    
+    if let theData = data {
+      theData.amount++
+      countLabel.text = "\(theData.amount)"
+      delegate?.basketItemChanged(theData)
+    }
+    
+  }
+  
+  func decreaseButtonTouched() {
+    
+    if let theData = data {
+      if (theData.amount > 1) {
+        theData.amount--
+        countLabel.text = "\(theData.amount)"
+        delegate?.basketItemChanged(theData)
+      }
+    }
+    
+  }
+  
+  func changePriceButtonTouched() {
+    
+  }
+  
+  func addDiscountButtonTouched() {
+    
+  }
+  
+  func removeButtonTouched() {
+    
+    if let theDelegate:BasketProductCellDelegate = delegate {
+      if let theData = data {
+        theDelegate.removeBasketItem(theData)
+      }
+    }
+    
+  }
+  
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+    
+    if let theData = data {
+      var newFrame: CGRect = layoutAttributes.frame
+      newFrame.size.height = (theData.expanded) ? 150 : 70
+      layoutAttributes.frame = newFrame
+    }
+    
+    return layoutAttributes
   }
   
 }

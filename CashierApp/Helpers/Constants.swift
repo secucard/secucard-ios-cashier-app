@@ -18,6 +18,7 @@ class Constants: NSObject {
   static let paneBgColor: UIColor = UIColor.whiteColor()
   static let paneBorderColor: UIColor = UIColor.lightGrayColor()
   static let brightGreyColor: UIColor = UIColor.lightGrayColor()
+  static let warningColor: UIColor = UIColor.orangeColor()
   
   // Fontsizes
   static let regularFont: UIFont = UIFont.systemFontOfSize(12.0)

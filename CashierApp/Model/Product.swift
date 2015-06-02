@@ -11,42 +11,54 @@ import SwiftyJSON
 
 class Product: NSObject {
 
-  var data: JSON = [] {
-    didSet {
-      amount = 1
-    }
-  }
-  
-  var amount: Int = 1
+  var data: JSON?
   
   var name: String {
     get {
-      return self.data["title"].stringValue
+      
+      if let d = data {
+        return d["title"].stringValue
+      } else {
+        return ""
+      }
+      
     }
   }
   
   var articleNumber: String {
     get {
-      return self.data["object"]["number"].stringValue
+      if let d = data {
+        return d["object"]["number"].stringValue
+      } else {
+        return ""
+      }
     }
   }
   
   var price: Float {
     get {
-      return self.data["object"]["sale"][0]["price"].floatValue
+      if let d = data {
+        return d["object"]["sale"][0]["price"].floatValue
+      } else {
+        return 0.0
+      }
     }
   }
   
   var imageName: String {
     get {
-      return self.data["object"]["images"][0]["file"].stringValue+".jpg"
+      if let d = data {
+        return d["object"]["images"][0]["file"].stringValue+".jpg"
+      } else {
+        return ""
+      }
     }
   }
   
   convenience init(product : JSON) {
     
     self.init()
-    self.data = product
+    data = product
     
   }
   

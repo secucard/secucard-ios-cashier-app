@@ -10,7 +10,7 @@ import UIKit
 
 class BasketUserCell: UICollectionViewCell {
 
-  var data:Checkin = Checkin() {
+  var data:BasketItem? {
     didSet {
       
     }

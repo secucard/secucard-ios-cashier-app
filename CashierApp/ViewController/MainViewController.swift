@@ -18,7 +18,7 @@ enum CollectionType {
   case Unknown
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -76,9 +76,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     productsLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     productsLayout.itemSize = CGSizeMake(150, 150)
     
-    var basketLayout = UICollectionViewFlowLayout()
+    var basketLayout = BasketFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-    basketLayout.itemSize = CGSizeMake(256, 70)
+    basketLayout.estimatedItemSize = CGSizeMake(256, 70)
     
     var checkinLayout = UICollectionViewFlowLayout()
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -347,13 +347,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case BasketItemType.Checkin:
           
           var cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as! BasketUserCell
-          cell.data = item.checkin
+          cell.data = item
+          
           return cell
           
         case BasketItemType.Product:
           
           var cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as! BasketProductCell
-          cell.data = item.product
+          cell.delegate = self
+          cell.data = item
           
           return cell
           
@@ -392,12 +394,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         basket.append(basketItem)
         basketCollection.reloadData()
         
-        sum = 0.0
-        for bi:BasketItem in basket {
-          if (bi.type == BasketItemType.Product) {
-            sum += bi.product.price * Float(bi.product.amount)
-          }
-        }
+        calcPrice()
         
       }
       
@@ -405,6 +402,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
       return
       
+    }
+  }
+  
+  func calcPrice() {
+    sum = 0.0
+    for bi:BasketItem in basket {
+      if (bi.type == BasketItemType.Product) {
+        sum += bi.product.price * Float(bi.amount)
+      }
     }
   }
   
@@ -416,14 +422,25 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  /*
-  // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
+  func removeBasketItem(basketItem: BasketItem) {
+    
+    for (index:Int, basketItemTest:BasketItem) in enumerate(basket) {
+      if (basketItem == basketItemTest) {
+        basket.removeAtIndex(index)
+        basketCollection.reloadData()
+        calcPrice()
+        return
+      }
+    }
+    
   }
-  */
+  
+  func basketItemLayoutChanged(basketItem: BasketItem) {
+    basketCollection.collectionViewLayout.invalidateLayout()
+  }
+  
+  func basketItemChanged(basketItem: BasketItem) {
+    calcPrice()
+  }
   
 }
