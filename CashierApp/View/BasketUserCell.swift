@@ -10,4 +10,10 @@ import UIKit
 
 class BasketUserCell: UICollectionViewCell {
 
+  var data:Checkin = Checkin() {
+    didSet {
+      
+    }
+  }
+  
 }

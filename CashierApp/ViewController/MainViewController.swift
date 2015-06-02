@@ -20,13 +20,11 @@ enum CollectionType {
 
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
   
-  var productReuseIdentifier = "ProductCell"
-  var categoryReuseIdentifier = "CategoryCell"
-  var basketProductReuseIdentifier = "BasketProductCell"
-  var basketUserReuseIdentifier = "BasketUserCell"
-  var checkinReuseIdentifier = "CheckinCell"
-  
-  var layout = UICollectionViewLayout()
+  let productReuseIdentifier = "ProductCell"
+  let categoryReuseIdentifier = "CategoryCell"
+  let basketProductReuseIdentifier = "BasketProductCell"
+  let basketUserReuseIdentifier = "BasketUserCell"
+  let checkinReuseIdentifier = "CheckinCell"
   
   var productCategoriesCollection:UICollectionView!
   var productsCollection:UICollectionView!
@@ -34,8 +32,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var checkinsCollection:UICollectionView!
   
   var productCategories: [JSON]?
-  var basket = [AnyObject]()
-  var checkins = [AnyObject]()
+  var basket = [BasketItem]()
+  var checkins = [Checkin]()
+  
+  var sumLabel: UILabel = UILabel()
+  
+  var sum: Float = 0.0 {
+    didSet {
+      sumLabel.text = "\(sum) €"
+    }
+  }
+  
+  var emptyButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
   
   var currentCategory = 0 {
     didSet {
@@ -70,7 +78,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var basketLayout = UICollectionViewFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-    basketLayout.itemSize = CGSizeMake(100, 100)
+    basketLayout.itemSize = CGSizeMake(256, 70)
     
     var checkinLayout = UICollectionViewFlowLayout()
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -127,14 +135,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     var bottomBar:UIView = UIView()
-    bottomBar.backgroundColor = UIColor.darkGrayColor()
+    bottomBar.backgroundColor = UIColor.whiteColor()
     view.addSubview(bottomBar);
     
     bottomBar.snp_makeConstraints { (make) -> Void in
       make.left.bottom.width.equalTo(view)
       make.height.equalTo(100)
     }
-    
     
     // tabs
     view.addSubview(productCategoriesCollection)
@@ -161,24 +168,88 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     view.addSubview(basketCollection)
     
-    basketCollection.backgroundColor = UIColor.yellowColor().colorWithAlphaComponent(0.7)
+    basketCollection.backgroundColor = UIColor.whiteColor()
     
     basketCollection.snp_makeConstraints { (make) -> Void in
       make.top.equalTo(topBar.snp_bottom)
       make.left.equalTo(view.snp_centerX)
       make.width.equalTo(view.frame.width/4)
-      make.bottom.equalTo(bottomBar.snp_top)
+      make.bottom.equalTo(bottomBar.snp_top).offset(-100)
+    }
+    
+    // sum field
+    var sumView: UIView = UIView()
+    view.addSubview(sumView)
+    
+    sumView.snp_makeConstraints { (make) -> Void in
+      make.left.width.equalTo(basketCollection)
+      make.top.equalTo(basketCollection.snp_bottom)
+      make.height.equalTo(100)
+    }
+    
+    // sum label
+    sumView.addSubview(sumLabel)
+    
+    sumLabel.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(20)
+      make.top.height.equalTo(sumView)
+      make.width.equalTo(100)
+    }
+    
+    emptyButton.addTarget(self, action: "didTapEmptyButton", forControlEvents: UIControlEvents.TouchUpInside)
+    emptyButton.backgroundColor = Constants.tintColor
+    sumView.addSubview(emptyButton)
+    
+    emptyButton.snp_makeConstraints { (make) -> Void in
+      make.right.equalTo(-20)
+      make.centerY.equalTo(sumView)
+      make.width.height.equalTo(50)
     }
     
     view.addSubview(checkinsCollection)
     
-    checkinsCollection.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(0.7)
+    checkinsCollection.backgroundColor = UIColor.whiteColor()
     
     checkinsCollection.snp_makeConstraints { (make) -> Void in
       make.width.equalTo(view.frame.width/4 )
       make.right.equalTo(view)
       make.bottom.equalTo(bottomBar.snp_top)
       make.top.equalTo(topBar.snp_bottom)
+    }
+    
+    // line above bottom bar
+    let bottomLine:UIView = UIView()
+    bottomLine.backgroundColor = UIColor.darkGrayColor()
+    view.addSubview(bottomLine)
+    
+    bottomLine.snp_makeConstraints { (make) -> Void in
+      make.left.width.equalTo(view)
+      make.bottom.equalTo(sumView)
+      make.height.equalTo(1)
+    }
+    
+    // line between products and basket
+    let vLine1:UIView = UIView()
+    vLine1.backgroundColor = UIColor.darkGrayColor()
+    view.addSubview(vLine1)
+    
+    vLine1.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(basketCollection)
+      make.top.equalTo(topBar.snp_bottom)
+      make.bottom.equalTo(bottomBar.snp_top)
+      make.width.equalTo(1)
+    }
+    
+    // line between products and basket
+    let vLine2:UIView = UIView()
+    vLine2.backgroundColor = UIColor.darkGrayColor()
+    view.addSubview(vLine2)
+    
+    vLine2.snp_makeConstraints { (make) -> Void in
+      make.right.equalTo(basketCollection)
+      make.top.equalTo(topBar.snp_bottom)
+      make.bottom.equalTo(bottomBar.snp_top)
+      make.width.equalTo(1)
     }
     
     self.view.backgroundColor = UIColor.whiteColor()
@@ -210,6 +281,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     switch identifierForCollection(collectionView) {
       
     case CollectionType.ProductCategories:
+      
       if let numCategories = productCategories?.count {
         return numCategories
       } else {
@@ -223,6 +295,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       } else {
         return 0
       }
+      
+    case CollectionType.Basket:
+      
+      return basket.count
+
+    case CollectionType.Checkins:
+      
+      return checkins.count
+      
       
     default:
       return 0
@@ -252,11 +333,37 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       if let items:[JSON] = json["groups"][currentCategory]["items"].array {
         
         var cell:ProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as! ProductCell
-        cell.data = items[indexPath.row]
+        cell.data = Product(product: items[indexPath.row])
         return cell
         
       }
+
+    case CollectionType.Basket:
       
+      let item:BasketItem = basket[indexPath.row]
+        
+        switch item.type {
+          
+        case BasketItemType.Checkin:
+          
+          var cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as! BasketUserCell
+          cell.data = item.checkin
+          return cell
+          
+        case BasketItemType.Product:
+          
+          var cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as! BasketProductCell
+          cell.data = item.product
+          
+          return cell
+          
+        default:
+          
+          return UICollectionViewCell()
+          
+        }
+      
+
     default:
       
       return UICollectionViewCell()
@@ -274,6 +381,25 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     case CollectionType.ProductCategories:
       
       currentCategory = indexPath.row
+    
+    case CollectionType.Product:
+      
+      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+        
+        var item:JSON = items[indexPath.row]
+        let basketItem: BasketItem = BasketItem(product: Product(product: item))
+        
+        basket.append(basketItem)
+        basketCollection.reloadData()
+        
+        sum = 0.0
+        for bi:BasketItem in basket {
+          if (bi.type == BasketItemType.Product) {
+            sum += bi.product.price * Float(bi.product.amount)
+          }
+        }
+        
+      }
       
     default:
       
@@ -282,7 +408,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
-  
+  func didTapEmptyButton() {
+    
+    basket = [BasketItem]()
+    sum = 0.0
+    basketCollection.reloadData()
+    
+  }
   
   /*
   // MARK: - Navigation

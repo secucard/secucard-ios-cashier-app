@@ -12,12 +12,12 @@ import Alamofire
 
 class ProductCell: UICollectionViewCell {
 
-  var data:JSON = nil {
+  var data:Product = Product() {
+
     didSet {
       
-      var imagename = self.data["object"]["images"][0]["file"].stringValue
-      imageView.image = UIImage(named: self.data["object"]["images"][0]["file"].stringValue+".jpg")
-      label.text = self.data["title"].stringValue
+      imageView.image = UIImage(named: self.data.imageName)
+      label.text = self.data.name
       
     }
   }
