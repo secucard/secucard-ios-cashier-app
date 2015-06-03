@@ -23,6 +23,7 @@
 		AA9DCD741B0738F20070022E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD731B0738F20070022E /* AppDelegate.swift */; };
 		AA9DCD7B1B0738F20070022E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA9DCD7A1B0738F20070022E /* Images.xcassets */; };
 		AA9DCD8A1B0738F20070022E /* CashierAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD891B0738F20070022E /* CashierAppTests.swift */; };
+		AAC53C9D1B1F0AE5006A28ED /* ModifyPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC53C9C1B1F0AE5006A28ED /* ModifyPriceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		AA9DCD831B0738F20070022E /* CashierAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashierAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9DCD881B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9DCD891B0738F20070022E /* CashierAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierAppTests.swift; sourceTree = "<group>"; };
+		AAC53C9C1B1F0AE5006A28ED /* ModifyPriceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPriceView.swift; sourceTree = "<group>"; };
 		D59E1E058824726A7A4943FE /* Pods-CashierApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,6 +179,7 @@
 				AA134EA71B14559B00278E98 /* BasketUserCell.swift */,
 				AA134EA91B1455C100278E98 /* BasketProductCell.swift */,
 				AA134EAB1B1455CB00278E98 /* CheckinCell.swift */,
+				AAC53C9C1B1F0AE5006A28ED /* ModifyPriceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				AA9A32051B089EEC00CCF6B4 /* ProductCategoryCell.swift in Sources */,
 				AA134EAA1B1455C100278E98 /* BasketProductCell.swift in Sources */,
 				AA134EB31B1DA28800278E98 /* Constants.swift in Sources */,
+				AAC53C9D1B1F0AE5006A28ED /* ModifyPriceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

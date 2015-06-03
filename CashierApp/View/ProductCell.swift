@@ -31,7 +31,8 @@ class ProductCell: UICollectionViewCell {
     imageView.contentMode = UIViewContentMode.ScaleAspectFit
     
     label = UILabel()
-    label.textColor = UIColor.whiteColor()
+    label.font = Constants.regularFont
+    label.textColor = Constants.textColorBright
     label.textAlignment = NSTextAlignment.Center
     label.numberOfLines = 0
     label.lineBreakMode = NSLineBreakMode.ByWordWrapping
@@ -50,7 +51,7 @@ class ProductCell: UICollectionViewCell {
       make.height.equalTo(50)
     }
     
-    label.backgroundColor = UIColor.blueColor().colorWithAlphaComponent(0.7)
+    label.backgroundColor = Constants.tintColor.colorWithAlphaComponent(0.7)
     
     self.layer.backgroundColor = UIColor.whiteColor().CGColor
     self.layer.borderColor = UIColor.lightGrayColor().CGColor

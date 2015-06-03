@@ -21,6 +21,8 @@ class BasketItem: NSObject {
   var checkin: Checkin = Checkin()
   var product: Product = Product()
   var amount: Int = 1
+  var discount: Float = 0.0
+  var price: Float = 0.0
   var expanded: Bool = false
   
   convenience init(checkin : Checkin) {

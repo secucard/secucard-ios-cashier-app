@@ -73,12 +73,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     categoriesLayout.estimatedItemSize = CGSizeMake(100, 50)
     
     var productsLayout = UICollectionViewFlowLayout()
-    productsLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+    productsLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     productsLayout.itemSize = CGSizeMake(150, 150)
     
     var basketLayout = BasketFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-    basketLayout.estimatedItemSize = CGSizeMake(256, 70)
+    basketLayout.estimatedItemSize = CGSizeMake(310, 70)
     
     var checkinLayout = UICollectionViewFlowLayout()
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -151,7 +151,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     productCategoriesCollection.snp_makeConstraints { (make) -> Void in
       make.top.equalTo(topBar.snp_bottom)
       make.left.equalTo(view)
-      make.right.equalTo(view.snp_centerX)
+      make.width.equalTo(490)
       make.height.equalTo(50)
     }
     
@@ -172,22 +172,22 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     basketCollection.snp_makeConstraints { (make) -> Void in
       make.top.equalTo(topBar.snp_bottom)
-      make.left.equalTo(view.snp_centerX)
-      make.width.equalTo(view.frame.width/4)
+      make.left.equalTo(productsCollection.snp_right)
+      make.width.equalTo(310)
       make.bottom.equalTo(bottomBar.snp_top).offset(-100)
     }
     
     // sum field
     var sumView: UIView = UIView()
     view.addSubview(sumView)
-    
     sumView.snp_makeConstraints { (make) -> Void in
       make.left.width.equalTo(basketCollection)
-      make.top.equalTo(basketCollection.snp_bottom)
-      make.height.equalTo(100)
+      make.bottom.equalTo(bottomBar.snp_top)
+      make.height.equalTo(80)
     }
     
     // sum label
+    sumLabel.font = Constants.sumFont
     sumView.addSubview(sumLabel)
     
     sumLabel.snp_makeConstraints { (make) -> Void in
@@ -201,9 +201,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     sumView.addSubview(emptyButton)
     
     emptyButton.snp_makeConstraints { (make) -> Void in
-      make.right.equalTo(-20)
+      make.right.equalTo(-10)
       make.centerY.equalTo(sumView)
       make.width.height.equalTo(50)
+    }
+    
+    var topBorder: UIView = UIView()
+    topBorder.backgroundColor = Constants.paneBorderColor
+    sumView.addSubview(topBorder)
+    topBorder.snp_makeConstraints { (make) -> Void in
+      make.left.width.top.equalTo(sumView)
+      make.height.equalTo(1)
     }
     
     view.addSubview(checkinsCollection)
@@ -211,7 +219,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinsCollection.backgroundColor = UIColor.whiteColor()
     
     checkinsCollection.snp_makeConstraints { (make) -> Void in
-      make.width.equalTo(view.frame.width/4 )
+      make.left.equalTo(basketCollection.snp_right)
       make.right.equalTo(view)
       make.bottom.equalTo(bottomBar.snp_top)
       make.top.equalTo(topBar.snp_bottom)
@@ -224,7 +232,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     bottomLine.snp_makeConstraints { (make) -> Void in
       make.left.width.equalTo(view)
-      make.bottom.equalTo(sumView)
+      make.bottom.equalTo(bottomBar.snp_top)
       make.height.equalTo(1)
     }
     
@@ -409,7 +417,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     sum = 0.0
     for bi:BasketItem in basket {
       if (bi.type == BasketItemType.Product) {
-        sum += bi.product.price * Float(bi.amount)
+        sum += bi.price * bi.discount * Float(bi.amount)
       }
     }
   }

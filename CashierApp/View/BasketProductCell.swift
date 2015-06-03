@@ -17,7 +17,7 @@ protocol BasketProductCellDelegate {
   
 }
 
-class BasketProductCell: UICollectionViewCell {
+class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
 
   var data:BasketItem? {
     didSet {
@@ -25,38 +25,14 @@ class BasketProductCell: UICollectionViewCell {
       if let theData = data {
         
         // properties
-        discount = 1.0
-        price = theData.product.price
+        theData.discount = 1.0
+        theData.price = theData.product.price
         
-        // text
-        countLabel.text = "\(theData.amount)"
-        nameLabel.text = theData.product.name
-        infoLabel.text = "\(theData.product.articleNumber) \(price*discount)€"
-        
+        setLabels()
       }
       
     }
     
-  }
-  
-  var discount: Float = 0.0 {
-    didSet {
-      
-      if let theData = data {
-        infoLabel.text = "\(theData.product.articleNumber) \(price*discount)€"
-      }
-      
-    }
-  }
-  
-  var price: Float = 0.0 {
-    didSet {
-      
-      if let theData = data {
-        infoLabel.text = "\(theData.product.articleNumber) \(price*discount)€"
-      }
-      
-    }
   }
   
   // regular controls
@@ -200,11 +176,6 @@ class BasketProductCell: UICollectionViewCell {
       make.width.height.equalTo(50)
     }
     
-//    self.snp_makeConstraints { (make) -> Void in
-//      make.width.equalTo(256)
-//      make.height.equalTo(70)
-//    }
-    
     bottomLine.snp_makeConstraints { (make) -> Void in
       make.left.width.bottom.equalTo(self)
       make.height.equalTo(1)
@@ -230,13 +201,26 @@ class BasketProductCell: UICollectionViewCell {
     
   }
   
+  func setLabels() {
+    
+    if let theData = data {
+    
+      countLabel.text = "\(theData.amount)"
+      nameLabel.text = theData.product.name
+      infoLabel.text = "\(theData.product.articleNumber) - \(theData.price)€"
+      if (theData.discount != 1) {
+          infoLabel.text = infoLabel.text?.stringByAppendingString(" - \(Int((1-theData.discount)*100))%")
+      }
+    }
+    
+  }
+  
   func actionsButtonTouched() {
     
     if let theData = data {
       theData.expanded = !theData.expanded
       delegate?.basketItemLayoutChanged(theData)
     }
-    
     
   }
   
@@ -264,9 +248,31 @@ class BasketProductCell: UICollectionViewCell {
   
   func changePriceButtonTouched() {
     
+    var view: ModifyPriceView = ModifyPriceView(type: PriceChangeType.Price)
+    view.delegate = self
+    if let window = UIApplication.sharedApplication().keyWindow {
+      
+      window.addSubview(view)
+      view.snp_makeConstraints { (make) -> Void in
+        make.edges.equalTo(window)
+      }
+      
+    }
+    
   }
   
   func addDiscountButtonTouched() {
+    
+    var view: ModifyPriceView = ModifyPriceView(type: PriceChangeType.Discount)
+    view.delegate = self
+    if let window = UIApplication.sharedApplication().keyWindow {
+      
+      window.addSubview(view)
+      view.snp_makeConstraints { (make) -> Void in
+        make.edges.equalTo(window)
+      }
+      
+    }
     
   }
   
@@ -284,11 +290,29 @@ class BasketProductCell: UICollectionViewCell {
     
     if let theData = data {
       var newFrame: CGRect = layoutAttributes.frame
-      newFrame.size.height = (theData.expanded) ? 150 : 70
+      newFrame.size.height = (theData.expanded) ? 130 : 70
       layoutAttributes.frame = newFrame
     }
     
     return layoutAttributes
+  }
+  
+  //- Mark
+  
+  func priceViewChangedPrice(price: Float) {
+    if let theData = data {
+      theData.price = price
+      setLabels()
+      delegate?.basketItemChanged(theData)
+    }
+  }
+  
+  func priceViewAddedDiscount(discount: Float) {
+    if let theData = data {
+      theData.discount = 1-(discount/100)
+      setLabels()
+      delegate?.basketItemChanged(theData)
+    }
   }
   
 }

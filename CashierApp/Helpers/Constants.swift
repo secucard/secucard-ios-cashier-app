@@ -11,8 +11,8 @@ import UIKit
 class Constants: NSObject {
 
   // Colors
-  static let tintColor: UIColor = UIColor.blueColor()
-  static let tintColorBright: UIColor = UIColor.blueColor()
+  static let tintColor: UIColor = UIColor(red: 51/255, green: 128/255, blue: 255/255, alpha: 1)
+  static let tintColorBright: UIColor = UIColor(red: 51/255, green: 128/255, blue: 255/255, alpha: 1)
   static let textColor: UIColor = UIColor.darkGrayColor()
   static let textColorBright: UIColor = UIColor.whiteColor()
   static let paneBgColor: UIColor = UIColor.whiteColor()
