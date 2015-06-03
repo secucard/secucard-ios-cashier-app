@@ -16,6 +16,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.xcworkspace
 
-# CocoaPods
+# CocoaPods // do not ignore as long as the connect client lib is still in development an referenced locally
 # Pods/
