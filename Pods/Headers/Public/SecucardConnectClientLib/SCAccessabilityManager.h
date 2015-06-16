@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClientLib/Pod/Classes/Manager/SCAccessabilityManager.h

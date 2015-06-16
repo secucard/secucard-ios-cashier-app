@@ -1,6 +1,0 @@
-framework module SCStackViewController {
-  umbrella header "Pods-CashierApp-SCStackViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -2,6 +2,6 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#import <Foundation/Foundation.h>
+#import <SecucardConnectClientLib/SCConnectClient.h>
 #import <UIKit/UIKit.h>
-#import <SCStackViewController/SCStackViewController.h>
+#import <Foundation/Foundation.h>

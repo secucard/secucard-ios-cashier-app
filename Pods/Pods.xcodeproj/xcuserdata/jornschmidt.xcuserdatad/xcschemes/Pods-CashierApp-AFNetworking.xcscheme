@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "71DEF5467446744B6C3F0C90"
+               BlueprintIdentifier = "01ECA9D08CBDB7EDBFC9F0C9"
                BuildableName = "AFNetworking.framework"
                BlueprintName = "Pods-CashierApp-AFNetworking"
                ReferencedContainer = "container:Pods.xcodeproj">

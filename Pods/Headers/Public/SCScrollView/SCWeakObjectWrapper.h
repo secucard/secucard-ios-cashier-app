@@ -1,1 +1,0 @@
-../../../SCScrollView/SCScrollView/SCWeakObjectWrapper.h

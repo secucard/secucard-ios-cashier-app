@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C6D98577EB5DC3C4EFA77D95"
+               BlueprintIdentifier = "48F45B5B90687E81197A1715"
                BuildableName = "SnapKit.framework"
                BlueprintName = "Pods-CashierApp-SnapKit"
                ReferencedContainer = "container:Pods.xcodeproj">

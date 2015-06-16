@@ -1,0 +1,6 @@
+framework module Expecta {
+  umbrella header "Pods-CashierAppTests-Expecta-umbrella.h"
+
+  export *
+  module * { export * }
+}

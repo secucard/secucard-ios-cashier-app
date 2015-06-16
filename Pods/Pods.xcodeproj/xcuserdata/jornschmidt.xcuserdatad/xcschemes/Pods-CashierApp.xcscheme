@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0640"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "279952540A16EDD9DD56FB8C"
+               BlueprintIdentifier = "5B143AE32F084E60841090E4"
                BuildableName = "Pods_CashierApp.framework"
                BlueprintName = "Pods-CashierApp"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -1,6 +1,0 @@
-framework module AHEasing {
-  umbrella header "Pods-CashierApp-AHEasing-umbrella.h"
-
-  export *
-  module * { export * }
-}
