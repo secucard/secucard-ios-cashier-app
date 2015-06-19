@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClient/SecucardConnectClient/Services/Smart/SCDeviceService.h

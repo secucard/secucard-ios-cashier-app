@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 import SnapKit
-import SecucardConnectClientLib
+import SecucardConnectClient
 
 enum CollectionType {
   case Product
@@ -127,7 +127,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     categoriesLayout.minimumInteritemSpacing = 0
     categoriesLayout.estimatedItemSize = CGSizeMake(100, 50)
     
-    productCategoriesCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: categoriesLayout)
+    productCategoriesCollection = UICollectionView(frame: CGRectMake(0, 0, 10, 10), collectionViewLayout: categoriesLayout)
     productCategoriesCollection.registerClass(ProductCategoryCell.self, forCellWithReuseIdentifier: categoryReuseIdentifier)
     
     
@@ -135,17 +135,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     productsLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     productsLayout.itemSize = CGSizeMake(150, 150)
     
-    productsCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: productsLayout)
+    productsCollection = UICollectionView(frame: CGRectMake(0, 0, 10, 10), collectionViewLayout: productsLayout)
     productsCollection.registerClass(ProductCell.self, forCellWithReuseIdentifier: productReuseIdentifier)
     productsCollection.contentInset = UIEdgeInsetsMake(10, 10, 10, 10)
     
     
-    var basketLayout = BasketFlowLayout()
+    var basketLayout = UICollectionViewFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     basketLayout.estimatedItemSize = CGSizeMake(310, 70)
     basketLayout.headerReferenceSize = CGSizeMake(310, 30)
     
-    basketCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: basketLayout)
+    basketCollection = UICollectionView(frame: CGRectMake(0, 0, 10, 10), collectionViewLayout: basketLayout)
     basketCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     basketCollection.registerClass(BasketUserCell.self, forCellWithReuseIdentifier: basketUserReuseIdentifier)
     basketCollection.registerClass(BasketProductCell.self, forCellWithReuseIdentifier: basketProductReuseIdentifier)
@@ -155,7 +155,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     checkinLayout.itemSize = CGSizeMake(224, 50)
     
-    checkinsCollection = UICollectionView(frame: CGRectNull, collectionViewLayout: checkinLayout)
+    checkinsCollection = UICollectionView(frame: CGRectMake(0, 0, 10, 10), collectionViewLayout: checkinLayout)
     checkinsCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     
     // Payment buttons initialization

@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClient/SecucardConnectClient/Model/General/SCGeneralAssignment.h

@@ -2,7 +2,8 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'CashierApp', :exclusive => true do
-  pod "SecucardConnectClientLib", :git => "git@github.com:secucard/secucard-connect-objc-client-lib.git", :branch => "segmentation_error"
+  
+  pod "SecucardConnectClient", :path => "../SecucardConnectClient"
 
   pod 'SwiftyJSON', '~> 2.2'
   pod 'SnapKit', '~> 0.10.0'
@@ -12,9 +13,11 @@ target 'CashierApp', :exclusive => true do
 end
 
 target 'CashierAppTests' do
-  pod "SecucardConnectClientLib", :git => "git@github.com:secucard/secucard-connect-objc-client-lib.git", :branch => "segmentation_error"
+  
+  pod "SecucardConnectClient", :path => "../SecucardConnectClient"
 
   pod 'Specta'
   pod 'Expecta'
+
 end
 

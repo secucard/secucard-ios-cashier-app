@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClientLib/Pod/Classes/Model/Auth/SCAuthToken.h

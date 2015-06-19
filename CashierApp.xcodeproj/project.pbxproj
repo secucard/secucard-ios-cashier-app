@@ -13,7 +13,6 @@
 		AA3561F71B24648500CDECB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F61B24648500CDECB9 /* Foundation.framework */; };
 		AA6390241B300AC900782582 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA6390231B300AC900782582 /* Images.xcassets */; };
 		AA63903F1B300AE400782582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390251B300AE400782582 /* AppDelegate.swift */; };
-		AA6390401B300AE400782582 /* BasketFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390281B300AE400782582 /* BasketFlowLayout.swift */; };
 		AA6390411B300AE400782582 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390291B300AE400782582 /* Constants.swift */; };
 		AA6390421B300AE400782582 /* BasketItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902B1B300AE400782582 /* BasketItem.swift */; };
 		AA6390431B300AE400782582 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902C1B300AE400782582 /* Checkin.swift */; };
@@ -53,14 +52,13 @@
 		85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.release.xcconfig"; sourceTree = "<group>"; };
 		8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA273A171B243FAE00DDDA68 /* CashierApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CashierApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA3561F41B24647A00CDECB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA3561F61B24648500CDECB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA3561F81B2464D800CDECB9 /* Pods_CashierApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_CashierApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_CashierApp.framework"; sourceTree = "<group>"; };
 		AA3561FA1B24662B00CDECB9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		AA5C77DC1B334E80004ECCF7 /* CashierApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CashierApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		AA6390231B300AC900782582 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA6390251B300AE400782582 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA6390281B300AE400782582 /* BasketFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketFlowLayout.swift; sourceTree = "<group>"; };
 		AA6390291B300AE400782582 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AA63902B1B300AE400782582 /* BasketItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketItem.swift; sourceTree = "<group>"; };
 		AA63902C1B300AE400782582 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 		AA6390271B300AE400782582 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				AA6390281B300AE400782582 /* BasketFlowLayout.swift */,
 				AA6390291B300AE400782582 /* Constants.swift */,
 			);
 			path = Helpers;
@@ -217,8 +214,8 @@
 		AA9DCD711B0738F20070022E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AA5C77DC1B334E80004ECCF7 /* CashierApp-Bridging-Header.h */,
 				AA6390231B300AC900782582 /* Images.xcassets */,
-				AA273A171B243FAE00DDDA68 /* CashierApp-Bridging-Header.h */,
 				AA9DCD721B0738F20070022E /* Info.plist */,
 				AA9A31FF1B075AD100CCF6B4 /* products.json */,
 				AA3561FA1B24662B00CDECB9 /* PrefixHeader.pch */,
@@ -306,6 +303,7 @@
 		AA9DCD661B0738F20070022E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = secucard;
 				TargetAttributes = {
@@ -460,7 +458,6 @@
 				AA6390451B300AE400782582 /* BasketProductCell.swift in Sources */,
 				AA6390421B300AE400782582 /* BasketItem.swift in Sources */,
 				AA63903F1B300AE400782582 /* AppDelegate.swift in Sources */,
-				AA6390401B300AE400782582 /* BasketFlowLayout.swift in Sources */,
 				AA6390411B300AE400782582 /* Constants.swift in Sources */,
 				AA6390511B300AE400782582 /* TransactionStatusView.swift in Sources */,
 				AA6390531B300AE400782582 /* ScanViewController.swift in Sources */,
@@ -587,6 +584,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC65AD02C3169F4D14482F7 /* Pods-CashierApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -594,6 +592,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = NO;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Joern Schmidt (5E3YKB66UH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -610,6 +609,7 @@
 				PROVISIONING_PROFILE = "288ec5be-193b-4f5a-befd-d1d06ecb6850";
 				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Debug;
@@ -618,6 +618,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -626,6 +627,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Joern Schmidt (5E3YKB66UH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -640,6 +642,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "288ec5be-193b-4f5a-befd-d1d06ecb6850";
 				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Release;

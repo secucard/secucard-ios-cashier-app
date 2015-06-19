@@ -72,11 +72,11 @@
 #define COCOAPODS_VERSION_MINOR_Mantle_extobjc 0
 #define COCOAPODS_VERSION_PATCH_Mantle_extobjc 2
 
-// SecucardConnectClientLib
-#define COCOAPODS_POD_AVAILABLE_SecucardConnectClientLib
-#define COCOAPODS_VERSION_MAJOR_SecucardConnectClientLib 0
-#define COCOAPODS_VERSION_MINOR_SecucardConnectClientLib 2
-#define COCOAPODS_VERSION_PATCH_SecucardConnectClientLib 0
+// SecucardConnectClient
+#define COCOAPODS_POD_AVAILABLE_SecucardConnectClient
+#define COCOAPODS_VERSION_MAJOR_SecucardConnectClient 0
+#define COCOAPODS_VERSION_MINOR_SecucardConnectClient 0
+#define COCOAPODS_VERSION_PATCH_SecucardConnectClient 1
 
 // SnapKit
 #define COCOAPODS_POD_AVAILABLE_SnapKit

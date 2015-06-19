@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5B143AE32F084E60841090E4"
+               BlueprintIdentifier = "EA4188A3A0D9461141D386EC"
                BuildableName = "Pods_CashierApp.framework"
                BlueprintName = "Pods-CashierApp"
                ReferencedContainer = "container:Pods.xcodeproj">

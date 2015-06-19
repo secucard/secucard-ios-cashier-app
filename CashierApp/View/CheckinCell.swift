@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SecucardConnectClientLib
+import SecucardConnectClient
 
 class CheckinCell: UICollectionViewCell {
 

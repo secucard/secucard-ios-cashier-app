@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClient/SecucardConnectClient/Services/Loyalty/SCCardsService.h

@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClientLib/Pod/Classes/Services/General/App/SCSecuAppService.h

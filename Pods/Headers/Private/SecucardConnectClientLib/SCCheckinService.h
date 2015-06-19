@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClientLib/Pod/Classes/Services/Smart/SCCheckinService.h

@@ -1,0 +1,1 @@
+../../../../../SecucardConnectClient/SecucardConnectClient/Manager/SCStompManager.h

@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClientLib/Pod/Classes/Model/Services/IdResult/SCServicesIdResultContactData.h

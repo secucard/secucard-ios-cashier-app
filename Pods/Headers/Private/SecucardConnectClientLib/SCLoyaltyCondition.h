@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClientLib/Pod/Classes/Model/Loyalty/SCLoyaltyCondition.h
