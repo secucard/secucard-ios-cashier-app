@@ -67,3 +67,13 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'SwiftyJSON.framework'
   install_framework 'TFBarcodeScanner.framework'
 fi
+if [[ "$CONFIGURATION" == "AdHoc" ]]; then
+  install_framework 'AFNetworking.framework'
+  install_framework 'Alamofire.framework'
+  install_framework 'CocoaAsyncSocket.framework'
+  install_framework 'Mantle.framework'
+  install_framework 'SecucardConnectClient.framework'
+  install_framework 'SnapKit.framework'
+  install_framework 'SwiftyJSON.framework'
+  install_framework 'TFBarcodeScanner.framework'
+fi

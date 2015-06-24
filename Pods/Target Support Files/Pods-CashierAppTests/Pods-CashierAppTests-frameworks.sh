@@ -63,3 +63,11 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'SecucardConnectClient.framework'
   install_framework 'Specta.framework'
 fi
+if [[ "$CONFIGURATION" == "AdHoc" ]]; then
+  install_framework 'AFNetworking.framework'
+  install_framework 'CocoaAsyncSocket.framework'
+  install_framework 'Expecta.framework'
+  install_framework 'Mantle.framework'
+  install_framework 'SecucardConnectClient.framework'
+  install_framework 'Specta.framework'
+fi

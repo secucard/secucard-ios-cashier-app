@@ -8,219 +8,161 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>Pods-CashierApp-Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>Pods-CashierApp-CocoaAsyncSocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>Pods-CashierApp-Mantle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>Pods-CashierApp-SecucardConnectClient.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CashierApp-SecucardConnectClient.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
-		</dict>
-		<key>Pods-CashierApp-SecucardConnectClientLib-SecucardConnectClientLib.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>8</integer>
-		</dict>
-		<key>Pods-CashierApp-SecucardConnectClientLib.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>7</integer>
-		</dict>
 		<key>Pods-CashierApp-SnapKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
 		<key>Pods-CashierApp-SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
 		</dict>
 		<key>Pods-CashierApp-TFBarcodeScanner.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>Pods-CashierApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>Pods-CashierAppTests-AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>Pods-CashierAppTests-CocoaAsyncSocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
 		</dict>
 		<key>Pods-CashierAppTests-Expecta.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>15</integer>
 		</dict>
 		<key>Pods-CashierAppTests-Mantle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>16</integer>
 		</dict>
 		<key>Pods-CashierAppTests-SecucardConnectClient.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CashierAppTests-SecucardConnectClient.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>17</integer>
-		</dict>
-		<key>Pods-CashierAppTests-SecucardConnectClientLib-SecucardConnectClientLib.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>19</integer>
-		</dict>
-		<key>Pods-CashierAppTests-SecucardConnectClientLib.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>18</integer>
-		</dict>
 		<key>Pods-CashierAppTests-Specta.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>20</integer>
 		</dict>
 		<key>Pods-CashierAppTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>12EFE13808915D66164D6493</key>
+		<key>0ECA686515D1BBA8553728FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2363D02C73F8207A09C62486</key>
+		<key>3C4EF4454F3E42F84988D7C6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F488BDBEBEE10A3DD5C0AD8</key>
+		<key>44D20DBC575324EE22E291B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>41D3E1E00DDECD8BD6A4DCF8</key>
+		<key>4B9DEFE2638CBF41E7FA7875</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>79C537C61051D8E29F9FFB04</key>
+		<key>5CB15B051DB495D881F19E32</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>83C75B74BD5B86CA3CF0A5BC</key>
+		<key>5DF62DEC857A60F00C6981C6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>851D249572819E6588E45AE5</key>
+		<key>68927A154E749E64B20D6D70</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>85AA432FFFA8FD8578E28483</key>
+		<key>78281E161BABF550A6AEF78B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>89F76839687665F1ACD4F588</key>
+		<key>96F8FAB60210282BD4F21532</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1998CD6CFC09E3E2CEDA795</key>
+		<key>9F47D7057A1D629CEBA8A06E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AC0042C2C17595AA9DB9F8A5</key>
+		<key>A819B039E1989BD8B0FF3568</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C73C76F76F676A50E52999ED</key>
+		<key>B0C15979814CF55333F85424</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CADB4E66F49529933C224537</key>
+		<key>B90A76ACC4472E24F86F6662</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB398A9682A12F863433D221</key>
+		<key>E0D81CB190629E1E357B9D87</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D506525FCCD12D6C370909BA</key>
+		<key>EAAB1D64B23658832C99B18D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EA4188A3A0D9461141D386EC</key>
+		<key>F94755D191AC189F878D5AC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
