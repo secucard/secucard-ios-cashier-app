@@ -41,7 +41,7 @@ class BasketUserCell: UICollectionViewCell {
         
         if let merchantCard = data.merchantCard {
           lockStatusLabel.text = "Status: \(merchantCard.lockStatus)"
-          lastUsedLabel.text = "Zuletzt verw. \(dateFormatter.stringFromDate(merchantCard.lastUsage))"
+//          lastUsedLabel.text = "Zuletzt verw. \(dateFormatter.stringFromDate(merchantCard.lastUsage))"
           pointsLabel.text = "Punkte: \(merchantCard.points)"
           balanceLabel.text = "Guthaben: \(Float(merchantCard.balance)/100) €"
         }

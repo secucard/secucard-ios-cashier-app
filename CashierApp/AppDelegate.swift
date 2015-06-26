@@ -10,6 +10,7 @@
   import UIKit
   import SecucardConnectClient
   import SwiftyJSON
+  import HockeySDK
   
   @UIApplicationMain
   class AppDelegate: UIResponder, UIApplicationDelegate, InitializationViewDelegate {
@@ -23,6 +24,12 @@
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       
+      // integrate HockeyApp
+      BITHockeyManager.sharedHockeyManager().configureWithIdentifier("6092e83f751fc2e16cd727b6af7f9411")
+      BITHockeyManager.sharedHockeyManager().startManager()
+      BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
+      
+      // notification oberservers
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "showDeviceAuthInformation:", name: "deviceAuthCodeRequesting", object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "logAnyEvent:", name: "notificationStompEvent", object: nil)
       
