@@ -6,8 +6,8 @@ target 'CashierApp', :exclusive => true do
   pod "SecucardConnectClient", :path => "../SecucardConnectClient"
 
   pod 'SwiftyJSON', '~> 2.2'
-  pod 'SnapKit', '~> 0.10.0'
-  pod 'Alamofire', '~> 1.2'
+  pod 'SnapKit'
+  pod 'Alamofire'
   pod 'TFBarcodeScanner'
 
 end
@@ -15,9 +15,6 @@ end
 target 'CashierAppTests' do
   
   pod "SecucardConnectClient", :path => "../SecucardConnectClient"
-
-  pod 'Specta'
-  pod 'Expecta'
 
 end
 
