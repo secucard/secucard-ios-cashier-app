@@ -4,7 +4,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import <SecucardConnectClient/SecucardConnectClient.h>
+#import <SecucardConnectSDK/SecucardConnectSDK.h>
 #import <TFBarcodeScanner/TFBarcodeScanner.h>
 #import <Mantle/Mantle.h>
 #import <HockeySDK/HockeySDK.h>

@@ -43,7 +43,6 @@
 		AAD49A7A1B3A94F000DDC734 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A791B3A94F000DDC734 /* Security.framework */; };
 		AAD49A7C1B3A94F700DDC734 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A7B1B3A94F700DDC734 /* SystemConfiguration.framework */; };
 		AAD49A821B3A991C00DDC734 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A7E1B3A991C00DDC734 /* HockeySDK.framework */; };
-		AAD49A831B3A991C00DDC734 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = AAD49A801B3A991C00DDC734 /* HockeySDK.xcconfig */; };
 		AAD49A841B3A991C00DDC734 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAD49A811B3A991C00DDC734 /* HockeySDKResources.bundle */; };
 /* End PBXBuildFile section */
 
@@ -359,7 +358,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = secucard;
 				TargetAttributes = {
 					AA9DCD6D1B0738F20070022E = {
@@ -396,7 +395,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAD49A831B3A991C00DDC734 /* HockeySDK.xcconfig in Resources */,
 				AAD49A841B3A991C00DDC734 /* HockeySDKResources.bundle in Resources */,
 				AA9A32001B075AD100CCF6B4 /* products.json in Resources */,
 				AA6390241B300AC900782582 /* Images.xcassets in Resources */,
@@ -642,7 +640,6 @@
 			baseConfigurationReference = DAC65AD02C3169F4D14482F7 /* Pods-CashierApp.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -678,7 +675,6 @@
 			baseConfigurationReference = 85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -790,7 +786,6 @@
 			baseConfigurationReference = 85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;

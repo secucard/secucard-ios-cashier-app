@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SecucardConnectClient
+import SecucardConnectSDK
 
 class LogView: UIView {
   
@@ -31,7 +31,7 @@ class LogView: UIView {
     addSubview(centerView)
     
     centerView.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(self).insets(UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50))
+      make.edges.equalTo(self).inset(UIEdgeInsets(top: 50, left: 50, bottom: 50, right: 50))
       make.centerY.equalTo(self)
     }
     
@@ -52,7 +52,7 @@ class LogView: UIView {
     centerView.addSubview(logView)
     
     logView.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(centerView).insets(UIEdgeInsets(top: 50, left: 20, bottom: 70, right: 20))
+      make.edges.equalTo(centerView).inset(UIEdgeInsetsMake(50, 20, 70, 20))
     }
     
     let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton

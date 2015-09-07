@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SecucardConnectClient
+import SecucardConnectSDK
 
 class CheckinCell: UICollectionViewCell {
 
@@ -20,7 +20,7 @@ class CheckinCell: UICollectionViewCell {
         label.text = data.customerName
         
         if let pictureUrl = data.picture {
-          imageView.setImageWithURL(NSURL(string: pictureUrl), placeholderImage: UIImage())
+          imageView.setImageWithURL(NSURL(string: pictureUrl)!, placeholderImage: UIImage())
         }
         
       }

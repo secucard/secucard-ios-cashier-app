@@ -8,7 +8,7 @@
   
   import Foundation
   import UIKit
-  import SecucardConnectClient
+  import SecucardConnectSDK
   import SwiftyJSON
   import HockeySDK
   
@@ -93,9 +93,9 @@
         if let window = window  {
           window.addSubview(initView)
           
-          initView.snp_makeConstraints({ (make) -> Void in
+          initView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(window)
-          })
+          }
         }
         
         return;

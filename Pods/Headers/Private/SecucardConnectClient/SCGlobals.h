@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClient/SecucardConnectClient/Helper/SCGlobals.h

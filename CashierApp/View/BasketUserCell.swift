@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SecucardConnectClient
+import SecucardConnectSDK
 
 protocol BasketUserCellDelegate {
   func identRemoveTapped()
@@ -32,9 +32,9 @@ class BasketUserCell: UICollectionViewCell {
         }
         
         if let customerPicture = data.customer?.contact?.picture {
-          imageView.setImageWithURL(NSURL(string: data.customer.contact.picture), placeholderImage: UIImage(named: "User"))
+          imageView.setImageWithURL(NSURL(string: customerPicture)!, placeholderImage: UIImage(named: "User"))
         } else if let customerPicture = data.customer?.picture {
-          imageView.setImageWithURL(NSURL(string: data.customer.picture), placeholderImage: UIImage(named: "User"))
+          imageView.setImageWithURL(NSURL(string: customerPicture)!, placeholderImage: UIImage(named: "User"))
         } else {
           imageView.image = UIImage(named: "User")
         }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SwiftyJSON
 import SnapKit
-import SecucardConnectClient
+import SecucardConnectSDK
 
 enum CollectionType {
   case Product
@@ -962,9 +962,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     view.addSubview(initView)
-    initView.snp_makeConstraints({ (make) -> Void in
+    initView.snp_makeConstraints { (make) -> Void in
       make.edges.equalTo(view)
-    })
+    }
     
   }
   

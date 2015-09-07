@@ -1,6 +1,0 @@
-framework module SecucardConnectClient {
-  umbrella header "Pods-CashierAppTests-SecucardConnectClient-umbrella.h"
-
-  export *
-  module * { export * }
-}

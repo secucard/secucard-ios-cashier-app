@@ -1,6 +1,0 @@
-framework module TFBarcodeScanner {
-  umbrella header "Pods-CashierApp-TFBarcodeScanner-umbrella.h"
-
-  export *
-  module * { export * }
-}

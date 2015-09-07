@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClient/SecucardConnectClient/Manager/SCLogManager.h

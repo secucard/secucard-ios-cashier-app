@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SecucardConnectClient
+import SecucardConnectSDK
 
 class InsertCodeView: UIView {
 

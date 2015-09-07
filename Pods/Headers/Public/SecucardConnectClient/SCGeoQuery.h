@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClient/SecucardConnectClient/Model/SCGeoQuery.h

@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClient/SecucardConnectClient/Vendor/StompKit/StompKit.h

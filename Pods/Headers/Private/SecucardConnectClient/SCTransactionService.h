@@ -1,1 +1,0 @@
-../../../../../SecucardConnectClient/SecucardConnectClient/Services/General/SCTransactionService.h
