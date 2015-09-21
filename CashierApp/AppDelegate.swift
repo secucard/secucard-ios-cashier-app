@@ -33,6 +33,9 @@
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "showDeviceAuthInformation:", name: "deviceAuthCodeRequesting", object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "logAnyEvent:", name: "notificationStompEvent", object: nil)
       
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stompConnectionChanged"), name: "stompConnected", object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stompConnectionChanged"), name: "stompDisconnected", object: nil)
+      
       // read data
       if let path = NSBundle.mainBundle().pathForResource("products", ofType: "json") {
         
@@ -174,6 +177,47 @@
           }
           
         })
+        
+      }
+      
+    }
+    
+    func clientConnected() -> Bool {
+      return SCConnectClient.sharedInstance().connected
+    }
+    
+    func stompConnectionChanged() {
+      
+      if clientConnected() {
+        
+        SCLogManager.info("STOMP: Connected")
+        
+      } else {
+        
+        SCLogManager.warn("STOMP: Disconnected")
+        reconnectStomp()
+        
+      }
+      
+    }
+    
+    func reconnectStomp() {
+      
+      if !SCConnectClient.sharedInstance().connected {
+        
+        SCLogManager.warn("STOMP: Needs reconnect, log back in")
+        
+        connectCashier({ (success, error) -> Void in
+        
+          SCLogManager.warn("STOMP: did log back in")
+          
+        })
+        
+      } else {
+        
+        if SCConnectClient.sharedInstance().connected {
+          SCLogManager.info("STOMP: Does not need reconnect")
+        }
         
       }
       

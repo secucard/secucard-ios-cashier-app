@@ -22,7 +22,7 @@ class ScanViewController: TFBarcodeScannerViewController, ScanCardViewDelegate {
     
     super.viewDidLoad()
     
-    barcodeTypes = 0x200
+    //barcodeTypes = 0x200
     
     scanCardView.delegate = self
     

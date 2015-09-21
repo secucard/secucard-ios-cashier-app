@@ -71,5 +71,6 @@ class Constants: NSObject {
   static let regularFont: UIFont = UIFont.systemFontOfSize(12.0)
   static let headlineFont: UIFont = UIFont.systemFontOfSize(16.0)
   static let sumFont: UIFont = UIFont.systemFontOfSize(18.0)
+  static let statusFont: UIFont = UIFont.systemFontOfSize(28.0)
   
 }

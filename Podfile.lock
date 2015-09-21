@@ -48,7 +48,7 @@ DEPENDENCIES:
   - Quick (~> 0.3.1)
   - SecucardConnectSDK (~> 0.2)
   - SnapKit
-  - SwiftyJSON (~> 2.2)
+  - SwiftyJSON
   - TFBarcodeScanner
 
 SPEC CHECKSUMS:

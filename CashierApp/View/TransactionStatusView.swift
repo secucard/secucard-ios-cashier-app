@@ -10,7 +10,7 @@ import UIKit
 
 class TransactionStatusView: UIView {
 
-  let logView: UITextView = UITextView()
+  let logView = UILabel()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -27,34 +27,17 @@ class TransactionStatusView: UIView {
     
     backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
     
-    let centerView: UIView = UIView()
-    centerView.backgroundColor = UIColor.whiteColor()
-    addSubview(centerView)
+    logView.font = Constants.statusFont
+    logView.textColor = UIColor.whiteColor()
+    logView.numberOfLines = 0
+    logView.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    logView.textAlignment = NSTextAlignment.Center
     
-    centerView.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(50)
-      make.edges.equalTo(self).inset(UIEdgeInsetsMake(50, 50, 50, 50))
-      make.centerY.equalTo(self)
-    }
-    
-    var titleLabel: UILabel = UILabel()
-    titleLabel.text = "Transaktionsstatus"
-    titleLabel.font = UIFont.systemFontOfSize(24)
-    centerView.addSubview(titleLabel)
-    
-    titleLabel.snp_makeConstraints { (make) -> Void in
-      make.top.left.equalTo(20)
-      make.right.equalTo(-20)
-      make.height.equalTo(30)
-    }
-    
-    logView.editable = false
-    logView.scrollEnabled = true
-    logView.font = Constants.regularFont
-    centerView.addSubview(logView)
+    self.addSubview(logView)
     
     logView.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(centerView).inset(UIEdgeInsetsMake(50, 20, 70, 20))
+      make.width.equalTo(self)
+      make.centerY.equalTo(self)
     }
     
     let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
@@ -62,7 +45,7 @@ class TransactionStatusView: UIView {
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
-    centerView.addSubview(cancelButton)
+    self.addSubview(cancelButton)
     
     cancelButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(10)
@@ -71,7 +54,7 @@ class TransactionStatusView: UIView {
       make.bottom.equalTo(-10)
     }
     
-    UIView.animateWithDuration(0.4, animations: { () -> Void in
+    UIView.animateWithDuration(0.2, animations: { () -> Void in
       self.alpha = 1
     })
     
@@ -80,7 +63,24 @@ class TransactionStatusView: UIView {
   func addStatus(string: String) {
     
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-      self.logView.text = "\(self.logView.text)\n\(string)"
+      
+      UIView.animateWithDuration(0.2, animations: { () -> Void in
+        
+        self.logView.alpha = 0
+        
+      }, completion: { (done) -> Void in
+        
+        self.logView.text = "\(string)"
+        
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+          
+          self.logView.alpha = 1
+          
+        })
+        
+      })
+      
+      
     })
     
   }

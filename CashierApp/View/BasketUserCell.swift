@@ -39,12 +39,28 @@ class BasketUserCell: UICollectionViewCell {
           imageView.image = UIImage(named: "User")
         }
         
-        if let merchantCard = data.merchantCard {
-          lockStatusLabel.text = "Status: \(merchantCard.lockStatus)"
-//          lastUsedLabel.text = "Zuletzt verw. \(dateFormatter.stringFromDate(merchantCard.lastUsage))"
-          pointsLabel.text = "Punkte: \(merchantCard.points)"
-          balanceLabel.text = "Guthaben: \(Float(merchantCard.balance)/100) €"
-        }
+//        if let merchantCard = data.merchantCard {
+//          
+//          // get merchant card
+//          
+//          SCCardsService.sharedService().getCard(merchantCard.id, completionHandler: { (card: SCLoyaltyCard?, error: NSError?) -> Void in
+//            
+//            if let error = error {
+//              
+//              SCLogManager.error(error)
+//              
+//            } else if let card = card {
+//              
+//              self.lockStatusLabel.text = "Status: \(merchantCard.lockStatus)"
+//              //          lastUsedLabel.text = "Zuletzt verw. \(dateFormatter.stringFromDate(merchantCard.lastUsage))"
+//              self.pointsLabel.text = "Punkte: \(merchantCard.points)"
+//              self.balanceLabel.text = "Guthaben: \(Float(merchantCard.balance)/100) €"
+//
+//            }
+//            
+//          })
+//          
+//        }
         
       }
     }

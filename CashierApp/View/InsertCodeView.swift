@@ -69,6 +69,21 @@ class InsertCodeView: UIView {
       make.height.equalTo(100)
     }
     
+    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
+    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.backgroundColor = Constants.brightGreyColor
+    cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
+    self.addSubview(cancelButton)
+    
+    cancelButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(10)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+      make.bottom.equalTo(-10)
+    }
+
+    
     UIView.animateWithDuration(0.4, animations: { () -> Void in
       self.alpha = 1
     })

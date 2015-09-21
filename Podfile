@@ -7,7 +7,7 @@ target 'CashierApp', :exclusive => true do
   
   pod 'SecucardConnectSDK', '~> 0.2'
   
-  pod 'SwiftyJSON', '~> 2.2'
+  pod 'SwiftyJSON'	
   pod 'SnapKit'
   pod 'Alamofire'
   pod 'TFBarcodeScanner'

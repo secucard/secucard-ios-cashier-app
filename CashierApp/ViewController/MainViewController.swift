@@ -57,7 +57,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       CheckTransactionReady()
       basketCollection.reloadData()
       calcPrice()
-      updateTransactionBasket()
+      updateTransactionBasket { (success, error) -> Void in
+        
+      }
     }
   }
   
@@ -681,7 +683,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       ident.value = checkin.id
       
       customerUsed = ident
-      updateTransactionIdent()
+      updateTransactionIdent({ (success, error) -> Void in
+        
+      })
       
     default:
       
@@ -738,11 +742,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   // payment actions
 
   func didTapPayButton(button: PaymentButton) {
-    if let usedCustomer = customerUsed {
-      sendTransaction(button.payMethod)
-    } else {
-      showScanCardView()
-    }
+    sendTransaction(button.payMethod)
   }
 
   func showScanCardView() {
@@ -753,7 +753,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func updateTransactionBasket() {
+  func updateTransactionBasket(handler: (success: Bool,error: NSError?) -> Void) {
     
     // create a basket
     let basket = SCSmartBasket()
@@ -781,11 +781,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       if let error = error {
         SCLogManager.error(error)
       }
+      
+      handler(success: success, error: error)
+      
     })
     
   }
   
-  func updateTransactionIdent() {
+  func updateTransactionIdent(handler: (success: Bool,error: NSError?) -> Void) {
     
     // create the ident
     if let ident = customerUsed {
@@ -806,6 +809,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             } else {
               self.customerUsed = resolvedIdent
             }
+            
+            handler(success: success, error: error)
           
           })
         }
@@ -823,13 +828,40 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     if currentTransaction.id == nil {
       SCSmartTransactionService.sharedService().createTransaction(currentTransaction, completionHandler: { (createdTransaction: SCSmartTransaction?, error: NSError?) -> Void in
         
-        if let createdTransaction = createdTransaction {
-          self.currentTransaction = createdTransaction
+        if let error = error {
+          
+          handler(success: false, error: error)
+          return
+          
+        } else {
+        
+          if let createdTransaction = createdTransaction {
+            self.currentTransaction = createdTransaction
+          }
+          
         }
         
-        handler(success: createdTransaction != nil, error: error)
+        self.updateTransactionBasket({ (success, error) -> Void in
+        
+          if let error = error {
+            
+            handler(success: false, error: error)
+            return
+            
+          } else {
+          
+            self.updateTransactionIdent({ (success, error) -> Void in
+              
+              handler(success: createdTransaction != nil, error: error)
+              
+            })
+            
+          }
+          
+        })
         
       })
+      
     } else {
       
       SCSmartTransactionService.sharedService().updateTransaction(currentTransaction, completionHandler: { (updatedTransaction: SCSmartTransaction?, error: NSError?) -> Void in
@@ -872,12 +904,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if event.target == SCGeneralNotification.object().lowercaseString {
           
           var parsingError: NSError?
-          if let notification = MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: event.data, error: &parsingError) as? SCGeneralNotification {
           
-            if let parsingError = parsingError {
-              SCLogManager.error(parsingError)
-            } else {
-              statusView.addStatus(notification.text)
+          // TODO: what to do if data is array ???
+          if let eventDataArray = event.data as? [AnyObject] {
+            
+          } else if let eventDataDict = event.data as? [NSObject:AnyObject] {
+          
+            if let notification = MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: eventDataDict, error: &parsingError) as? SCGeneralNotification {
+              
+              if let parsingError = parsingError {
+                SCLogManager.error(parsingError)
+              } else {
+                statusView.addStatus(notification.text)
+              }
+              
             }
             
           }
@@ -893,44 +933,69 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // start
     SCSmartTransactionService.sharedService().startTransaction(currentTransaction.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: NSError?) -> Void in
       
-      if let error = error {
-        
-        SCLogManager.error(error)
-        statusView.addStatus("Transaktionsabbruch: \(error.localizedDescription)")
-        
-      } else {
-        
-        if let result = transactionResult {
+      dispatch_async(dispatch_get_main_queue(), { () -> Void in
+      
+        if let error = error {
           
-          // check results
-          if result.status == "ok" {
-            statusView.addStatus("Transaktion erfolgreich durchgeführt\n\nStatus:\n\n")
-          } else if result.status == "failed" {
-            statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
-          }
+          SCLogManager.error(error)
+          statusView.addStatus("Transaktionsabbruch: \(error.localizedDescription)")
           
-          if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
+        } else {
+          
+          if let result = transactionResult {
             
-            for line in receiptLines {
+            // check results
+            if result.status == "ok" {
+              statusView.addStatus("Transaktion erfolgreich durchgeführt")
+            } else if result.status == "failed" {
+              statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
+            }
+            
+            if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
               
-              if line.type == "space" {
+              // show receiptView
+              let receiptView = ReceiptView()
+              statusView.addSubview(receiptView)
+              
+              var constraint: Constraint?
+              
+              receiptView.snp_makeConstraints(closure: { (make) -> Void in
+                make.centerX.equalTo(statusView)
+                make.width.equalTo(300)
+                make.bottom.equalTo(statusView)
+                constraint = make.height.equalTo(0).offset(0).constraint
+              })
+              
+              for line in receiptLines {
                 
-                statusView.addStatus("\n")
+                receiptView.addReceiptLine(line)
                 
-              } else if line.type == "textline" {
-                
-                statusView.addStatus("\(line.value)")
-                
-              } else {
-                
-                statusView.addStatus("Type unknown: \(line.type). Value: \(line.value)")
+              }
+              
+              if let constraint = constraint {
+              
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                  
+                  UIView.animateWithDuration(0.4, animations: { () -> Void in
+                    constraint.updateOffset(self.view.frame.size.height-100)
+                    self.view.layoutIfNeeded()
+                  })
+                  
+                }
                 
               }
               
             }
           }
         }
-      }
+        
+        self.currentTransaction = SCSmartTransaction()
+        self.basket = [BasketItem]()
+        self.customerUsed = nil
+        
+      })
+      
     })
   }
   
@@ -1013,7 +1078,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func identRemoveTapped() {
 
     customerUsed = nil
-    updateTransactionIdent()
+    updateTransactionIdent { (success, error) -> Void in
+      
+    }
     
   }
   
@@ -1026,7 +1093,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     ident.value = code
     
     customerUsed = ident
-    updateTransactionIdent()
+    updateTransactionIdent { (success, error) -> Void in
+      
+    }
 
   }
   
@@ -1052,10 +1121,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     if (message.level.value == LogLevelError.value) {
     
-      dispatch_async(dispatch_get_main_queue(), { () -> Void in
-        let alert:UIAlertView = UIAlertView(title: "Fehler", message: message.message, delegate: nil, cancelButtonTitle: "OK")
-        alert.show()
-      })
+//      dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//        let alert:UIAlertView = UIAlertView(title: "Fehler", message: message.message, delegate: nil, cancelButtonTitle: "OK")
+//        alert.show()
+//      })
       
     }
     
