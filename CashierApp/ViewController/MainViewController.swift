@@ -1139,7 +1139,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //        alert.show()
 //      })
       
-      logView.addToLog(message.error)
+      logView.addToLog("ERROR: \(message.message)")
       
     } else {
     
