@@ -30,7 +30,7 @@ enum PayMethod : String {
   case Paypal = "paypal"
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -69,6 +69,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       basketCollection.reloadData()
     }
   }
+  
+  var scanCardView = ScanCardView()
   
   let connectButton: PaymentButton
   let disconnectButton: PaymentButton
@@ -747,9 +749,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
   func showScanCardView() {
 
-    var view: ScanViewController = ScanViewController()
-    view.delegate = self;
-    self.presentViewController(view, animated: true, completion: nil)
+    if TARGET_IPHONE_SIMULATOR == 1 {
+      scanCardView = ScanCardView()
+      scanCardView.delegate = self
+      view.addSubview(scanCardView)
+      
+      scanCardView.snp_makeConstraints { (make) -> Void in
+        make.edges.equalTo(view)
+      }
+    } else {
+      var view: ScanViewController = ScanViewController()
+      view.delegate = self;
+      self.presentViewController(view, animated: true, completion: nil)
+    }
+    
     
   }
   
@@ -1117,7 +1130,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func logManagerHandleLogging(message: SCLogMessage!) {
     
-    logView.addToLog(message.message)
+    
     
     if (message.level.value == LogLevelError.value) {
     
@@ -1126,8 +1139,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //        alert.show()
 //      })
       
+      logView.addToLog(message.error)
+      
+    } else {
+    
+      logView.addToLog(message.message)
+      
     }
     
+  }
+  
+  // MARK: - ScanCardViewDelegate
+  func scanCardFinished(code: String) {
+    scanViewReturnCode(code)
+    scanCardView.hide()
   }
   
 }
