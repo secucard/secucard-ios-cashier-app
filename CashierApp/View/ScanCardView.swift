@@ -14,9 +14,15 @@ protocol ScanCardViewDelegate {
 
 class ScanCardView: UIView {
 
+  let centerView = UIView()
+  
   let scanImageView: UIImageView = UIImageView(image: UIImage(named: "scan"))
   let titleLabel: UILabel = UILabel()
   let numberField: UITextField = UITextField()
+  
+  let cancelButton: UIButton = UIButton(type: UIButtonType.Custom)
+  let okButton: UIButton = UIButton(type: UIButtonType.Custom)
+  
   
   var delegate: ScanCardViewDelegate?
   
@@ -26,7 +32,6 @@ class ScanCardView: UIView {
     
     alpha = 0;
     
-    let centerView = UIView()
     centerView.backgroundColor = UIColor.whiteColor()
     addSubview(centerView)
     
@@ -66,7 +71,6 @@ class ScanCardView: UIView {
       make.top.equalTo(titleLabel.snp_bottom).offset(20)
     }
     
-    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
@@ -80,7 +84,6 @@ class ScanCardView: UIView {
       make.bottom.equalTo(-10)
     }
     
-    let okButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     okButton.setTitle("OK", forState: UIControlState.Normal)
     okButton.addTarget(self, action: "didTapOK", forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
@@ -100,21 +103,17 @@ class ScanCardView: UIView {
   }
 
   required init(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+    fatalError("init(coder:) has not been implemented")
   }
   
   func didTapOK() {
-    
-    if (numberField.text != "") {
-      delegate?.scanCardFinished(numberField.text)
+    if numberField.text != "" {
+      delegate?.scanCardFinished(numberField.text!)
     }
-    
   }
   
   func didTapCancel() {
-    
-    delegate?.scanCardFinished(numberField.text)
-    
+    delegate?.scanCardFinished(numberField.text!)
   }
   
   func hide() {

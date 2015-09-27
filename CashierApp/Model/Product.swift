@@ -18,7 +18,7 @@ class Product: MTLModel, MTLJSONSerializing {
     get {
       
       if let d = data {
-        return d["title"].stringValue
+        return d["desc"].stringValue
       } else {
         return ""
       }
@@ -29,7 +29,7 @@ class Product: MTLModel, MTLJSONSerializing {
   var articleNumber: String {
     get {
       if let d = data {
-        return d["object"]["number"].stringValue
+        return d["articleNumber"].stringValue
       } else {
         return ""
       }
@@ -39,7 +39,7 @@ class Product: MTLModel, MTLJSONSerializing {
   var price: Float {
     get {
       if let d = data {
-        return d["object"]["sale"][0]["price"].floatValue
+        return d["priceOne"].floatValue
       } else {
         return 0.0
       }
@@ -49,7 +49,7 @@ class Product: MTLModel, MTLJSONSerializing {
   var imageName: String {
     get {
       if let d = data {
-        return d["object"]["images"][0]["file"].stringValue+".jpg"
+        return d["file"].stringValue+".jpg"
       } else {
         return ""
       }

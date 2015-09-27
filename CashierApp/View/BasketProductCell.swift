@@ -36,62 +36,53 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
   }
   
   // regular controls
-  var countLabel: UILabel!
-  var nameLabel: UILabel!
-  var infoLabel: UILabel!
-  var actionsButton : UIButton!
+  let countLabel = UILabel()
+  let nameLabel = UILabel()
+  let infoLabel = UILabel()
+  let actionsButton = UIButton(type: UIButtonType.Custom)
   
   // actions
-  var increaseButton : UIButton!
-  var decreaseButton : UIButton!
-  var changePriceButton : UIButton!
-  var addDiscountButton : UIButton!
-  var removeButton : UIButton!
+  let increaseButton = UIButton(type: UIButtonType.Custom)
+  let decreaseButton = UIButton(type: UIButtonType.Custom)
+  let changePriceButton = UIButton(type: UIButtonType.Custom)
+  let addDiscountButton = UIButton(type: UIButtonType.Custom)
+  let removeButton = UIButton(type: UIButtonType.Custom)
   
   var delegate: BasketProductCellDelegate?
   
   override init(frame: CGRect) {
     
     // control initialization
-    countLabel = UILabel()
     countLabel.textColor = Constants.textColorBright
     countLabel.font = Constants.regularFont
     countLabel.backgroundColor = Constants.tintColor
     countLabel.textAlignment = NSTextAlignment.Center
     
-    nameLabel = UILabel()
     nameLabel.textColor = Constants.textColor
     nameLabel.font = Constants.headlineFont
     
-    infoLabel = UILabel()
     infoLabel.textColor = Constants.textColor
     infoLabel.font = Constants.regularFont
     
-    actionsButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     actionsButton.setTitle("...", forState: UIControlState.Normal)
     actionsButton.backgroundColor = Constants.darkGreyColor
     
-    increaseButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     increaseButton.setTitle("+", forState: UIControlState.Normal)
     increaseButton.backgroundColor = Constants.darkGreyColor
     
-    decreaseButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     decreaseButton.setTitle("-", forState: UIControlState.Normal)
     decreaseButton.backgroundColor = Constants.darkGreyColor
     
-    changePriceButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     changePriceButton.setTitle("€", forState: UIControlState.Normal)
     changePriceButton.backgroundColor = Constants.darkGreyColor
     
-    addDiscountButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     addDiscountButton.setTitle("%", forState: UIControlState.Normal)
     addDiscountButton.backgroundColor = Constants.darkGreyColor
     
-    removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     removeButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
     removeButton.backgroundColor = Constants.warningColor
     
-    var bottomLine: UIView = UIView()
+    let bottomLine = UIView()
     bottomLine.backgroundColor = Constants.paneBorderColor
     
     // call super
@@ -183,15 +174,8 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
     
   }
   
-  required init(coder aDecoder: NSCoder) {
-    
-    countLabel = UILabel()
-    nameLabel = UILabel()
-    infoLabel = UILabel()
-    actionsButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-    
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    
   }
   
   override func prepareForReuse() {
@@ -248,7 +232,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
   
   func changePriceButtonTouched() {
     
-    var view: ModifyPriceView = ModifyPriceView(type: PriceChangeType.Price)
+    let view = ModifyPriceView(type: PriceChangeType.Price)
     view.delegate = self
     if let window = UIApplication.sharedApplication().keyWindow {
       
@@ -263,7 +247,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
   
   func addDiscountButtonTouched() {
     
-    var view: ModifyPriceView = ModifyPriceView(type: PriceChangeType.Discount)
+    let view = ModifyPriceView(type: PriceChangeType.Discount)
     view.delegate = self
     if let window = UIApplication.sharedApplication().keyWindow {
       
@@ -286,7 +270,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
     
   }
   
-  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
     
     if let theData = data {
       var newFrame: CGRect = layoutAttributes.frame

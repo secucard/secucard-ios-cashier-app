@@ -28,9 +28,10 @@ class CheckinCell: UICollectionViewCell {
     }
   }
   
-  var imageView: UIImageView
-  var label: UILabel
-  var controls: UIView
+  var imageView = UIImageView()
+  var label = UILabel()
+  var controls = UIView()
+  let removeButton = UIButton(type: UIButtonType.Custom)
   
   var showsControls: Bool = false {
     didSet {
@@ -40,16 +41,14 @@ class CheckinCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     
-    imageView = UIImageView()
     imageView.contentMode = UIViewContentMode.ScaleAspectFit
     
-    label = UILabel()
     label.font = Constants.headlineFont
     label.textColor = Constants.textColor
     label.numberOfLines = 0
-    label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    label.lineBreakMode
+      = NSLineBreakMode.ByWordWrapping
     
-    controls = UIView()
     controls.hidden = true;
     
     super.init(frame: frame)
@@ -75,7 +74,6 @@ class CheckinCell: UICollectionViewCell {
       make.width.equalTo(50)
     }
     
-    let removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     removeButton.backgroundColor = Constants.warningColor
     removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
     controls.addSubview(removeButton)
@@ -91,9 +89,9 @@ class CheckinCell: UICollectionViewCell {
       fatalError("init(coder:) has not been implemented")
   }
   
-  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
     
-      var newFrame: CGRect = layoutAttributes.frame
+      let newFrame: CGRect = layoutAttributes.frame
       layoutAttributes.frame = newFrame
     
     return layoutAttributes

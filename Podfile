@@ -7,10 +7,11 @@ target 'CashierApp', :exclusive => true do
   
   pod 'SecucardConnectSDK', '~> 0.2'
   
-  pod 'SwiftyJSON', '2.2.1'
-  pod 'SnapKit', '0.13.0'
-  pod 'Alamofire', '1.3.1'
+  pod 'SwiftyJSON'
+  pod 'SnapKit'
+  pod 'Alamofire'
   pod 'TFBarcodeScanner'
+  pod 'HockeySDK'
   
 end
 
@@ -18,8 +19,9 @@ target 'CashierAppTests', :exclusive => true do
   
   pod 'SecucardConnectSDK', '~> 0.2'
   
-  pod 'Quick', '~> 0.3.1'
+  pod 'Quick'
   pod 'Nimble'
   pod 'FBSnapshotTestCase'
   pod 'Nimble-Snapshots'
+  
 end

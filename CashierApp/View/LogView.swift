@@ -35,7 +35,7 @@ class LogView: UIView {
       make.centerY.equalTo(self)
     }
     
-    var titleLabel: UILabel = UILabel()
+    let titleLabel: UILabel = UILabel()
     titleLabel.text = "LOG"
     titleLabel.font = UIFont.systemFontOfSize(24)
     centerView.addSubview(titleLabel)
@@ -55,7 +55,7 @@ class LogView: UIView {
       make.edges.equalTo(centerView).inset(UIEdgeInsetsMake(50, 20, 70, 20))
     }
     
-    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    let cancelButton: UIButton = UIButton(type: UIButtonType.Custom)
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
@@ -85,18 +85,18 @@ class LogView: UIView {
       
       var eventTypeString = ""
       
-      switch event.type.value {
-      case EventTypeChanged.value:
+      switch event.type.rawValue {
+      case EventTypeChanged.rawValue:
         eventTypeString = "changed"
-      case EventTypeAdded.value:
+      case EventTypeAdded.rawValue:
         eventTypeString = "added"
-      case EventTypeDisplay.value:
+      case EventTypeDisplay.rawValue:
         eventTypeString = "display"
       default:
         eventTypeString = "unknown"
       }
       
-      if let eventData: AnyObject = event.data {
+      if let _: AnyObject = event.data {
         self.addToLog("EVENT: \(event.target) | TYPE: \(eventTypeString) | DATA: \(event.data)")
       } else {
         self.addToLog("EVENT: \(event.target) | TYPE: \(eventTypeString)")

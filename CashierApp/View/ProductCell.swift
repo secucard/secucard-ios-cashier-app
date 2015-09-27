@@ -12,8 +12,11 @@ import Alamofire
 
 class ProductCell: UICollectionViewCell {
 
+  let imageView = UIImageView()
+  let label = UILabel()
+  
   var data:Product = Product() {
-
+    
     didSet {
       
       imageView.image = UIImage(named: self.data.imageName)
@@ -22,15 +25,10 @@ class ProductCell: UICollectionViewCell {
     }
   }
   
-  var imageView: UIImageView
-  var label: UILabel
-  
   override init(frame: CGRect) {
     
-    imageView = UIImageView()
     imageView.contentMode = UIViewContentMode.ScaleAspectFit
-    
-    label = UILabel()
+  
     label.font = Constants.regularFont
     label.textColor = Constants.textColorBright
     label.textAlignment = NSTextAlignment.Center
@@ -59,11 +57,7 @@ class ProductCell: UICollectionViewCell {
     
   }
   
-  required init(coder aDecoder: NSCoder) {
-    
-    imageView = UIImageView()
-    label = UILabel()
-    
+  required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   

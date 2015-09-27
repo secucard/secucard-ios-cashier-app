@@ -12,25 +12,26 @@ import SnapKit
 
 class ProductCategoryCell: UICollectionViewCell {
   
-  var data:JSON = nil {
+  let imageView = UIImageView()
+  let label = UILabel()
+  
+  var title:String? {
     didSet {
-      label.text = self.data["name"].stringValue
       
+      label.text = title
       label.sizeToFit()
       var f = label.frame
       f.size.height = self.frame.size.height
       f.size.width += 40
       label.frame = f
+      
     }
   }
   
-  var imageView: UIImageView
-  var label: UILabel
+  var data:[JSON]?
   
   override init(frame: CGRect) {
     
-    imageView = UIImageView()
-    label = UILabel()
     label.textAlignment = NSTextAlignment.Center
     super.init(frame: frame)
     
@@ -39,17 +40,13 @@ class ProductCategoryCell: UICollectionViewCell {
   
   }
 
-  required init(coder aDecoder: NSCoder) {
-    
-    imageView = UIImageView()
-    label = UILabel()
-    
-    super.init(coder: aDecoder)
+  required init?(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
   }
   
-  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
     
-    var attr: UICollectionViewLayoutAttributes = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
+    let attr = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
     
     var newFrame = attr.frame
     self.frame = newFrame

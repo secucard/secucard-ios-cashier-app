@@ -27,8 +27,12 @@ class ModifyPriceView: UIView {
   var type: PriceChangeType?
   var delegate: ModifyPriceViewDelegate?
   
-  let priceField: UITextField = UITextField()
-  let typeLabel: UILabel = UILabel()
+  let centerView = UIView()
+  let priceField = UITextField()
+  let typeLabel = UILabel()
+  let titleLabel = UILabel()
+  let cancelButton = UIButton(type: UIButtonType.Custom)
+  let okButton = UIButton(type: UIButtonType.Custom)
   
   override init (frame : CGRect) {
     super.init(frame : frame)
@@ -51,7 +55,6 @@ class ModifyPriceView: UIView {
     
     backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
     
-    let centerView: UIView = UIView()
     centerView.backgroundColor = UIColor.whiteColor()
     addSubview(centerView)
     
@@ -62,7 +65,6 @@ class ModifyPriceView: UIView {
       make.height.equalTo(200)
     }
     
-    var titleLabel: UILabel = UILabel()
     titleLabel.text = "Preisänderungen des Artikels"
     titleLabel.font = UIFont.systemFontOfSize(24)
     centerView.addSubview(titleLabel)
@@ -85,8 +87,8 @@ class ModifyPriceView: UIView {
       make.height.equalTo(50)
     }
     
-    if let theType = type {
-      typeLabel.text = (theType == PriceChangeType.Price) ? "€" : "%"
+    if let type = type {
+      typeLabel.text = (type == PriceChangeType.Price) ? "€" : "%"
     }
     typeLabel.font = UIFont.systemFontOfSize(24)
     centerView.addSubview(typeLabel)
@@ -97,8 +99,6 @@ class ModifyPriceView: UIView {
       make.left.equalTo(priceField.snp_right).offset(10)
     }
 
-    
-    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
@@ -112,7 +112,7 @@ class ModifyPriceView: UIView {
       make.bottom.equalTo(-10)
     }
     
-    let okButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+    
     okButton.setTitle("OK", forState: UIControlState.Normal)
     okButton.addTarget(self, action: "didTapOK", forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
@@ -141,12 +141,12 @@ class ModifyPriceView: UIView {
         
       case PriceChangeType.Price:
         if let theDelegate = delegate {
-          theDelegate.priceViewChangedPrice((self.priceField.text as NSString).floatValue)
+          theDelegate.priceViewChangedPrice((self.priceField.text! as NSString).floatValue)
         }
         
       case PriceChangeType.Discount:
         if let theDelegate = delegate {
-          theDelegate.priceViewAddedDiscount((self.priceField.text as NSString).floatValue)
+          theDelegate.priceViewAddedDiscount((self.priceField.text! as NSString).floatValue)
         }
       }
       

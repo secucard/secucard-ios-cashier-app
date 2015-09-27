@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AA1F10721BB8128900F869C0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F10711BB8128900F869C0 /* HockeySDK.framework */; };
 		AA3561F51B24647A00CDECB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F41B24647A00CDECB9 /* UIKit.framework */; };
 		AA3561F71B24648500CDECB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F61B24648500CDECB9 /* Foundation.framework */; };
 		AA53B3A31BB09E8500E831B4 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA53B3A21BB09E8500E831B4 /* ReceiptView.swift */; };
@@ -43,8 +44,6 @@
 		AAD49A781B3A94E800DDC734 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A771B3A94E800DDC734 /* QuickLook.framework */; };
 		AAD49A7A1B3A94F000DDC734 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A791B3A94F000DDC734 /* Security.framework */; };
 		AAD49A7C1B3A94F700DDC734 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A7B1B3A94F700DDC734 /* SystemConfiguration.framework */; };
-		AAD49A821B3A991C00DDC734 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A7E1B3A991C00DDC734 /* HockeySDK.framework */; };
-		AAD49A841B3A991C00DDC734 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AAD49A811B3A991C00DDC734 /* HockeySDKResources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +61,7 @@
 		85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.release.xcconfig"; sourceTree = "<group>"; };
 		8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA1F10711BB8128900F869C0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		AA3561F41B24647A00CDECB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA3561F61B24648500CDECB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA3561F81B2464D800CDECB9 /* Pods_CashierApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_CashierApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_CashierApp.framework"; sourceTree = "<group>"; };
@@ -123,10 +123,10 @@
 				AAD49A721B3A94CC00DDC734 /* CoreText.framework in Frameworks */,
 				AAD49A701B3A94C100DDC734 /* AssetsLibrary.framework in Frameworks */,
 				AA6390551B300FAA00782582 /* CoreGraphics.framework in Frameworks */,
-				AAD49A821B3A991C00DDC734 /* HockeySDK.framework in Frameworks */,
 				AA3561F51B24647A00CDECB9 /* UIKit.framework in Frameworks */,
 				AA3561F71B24648500CDECB9 /* Foundation.framework in Frameworks */,
 				55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */,
+				AA1F10721BB8128900F869C0 /* HockeySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +292,7 @@
 		D64ECBCF0DDCB0E63BB2F602 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AA1F10711BB8128900F869C0 /* HockeySDK.framework */,
 				AAD49A7D1B3A991C00DDC734 /* HockeySDK.embeddedframework */,
 				AAD49A7B1B3A94F700DDC734 /* SystemConfiguration.framework */,
 				AAD49A791B3A94F000DDC734 /* Security.framework */,
@@ -361,7 +362,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = secucard;
 				TargetAttributes = {
 					AA9DCD6D1B0738F20070022E = {
@@ -398,7 +399,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAD49A841B3A991C00DDC734 /* HockeySDKResources.bundle in Resources */,
 				AA9A32001B075AD100CCF6B4 /* products.json in Resources */,
 				AA6390241B300AC900782582 /* Images.xcassets in Resources */,
 			);
@@ -575,6 +575,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -655,21 +656,25 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					$PODS_FRAMEWORK_BUILD_PATH,
-					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CashierApp/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/CashierApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "a1b78fe6-fb94-4dcf-b829-a9ba4e316941";
 				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Debug;
@@ -691,19 +696,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					$PODS_FRAMEWORK_BUILD_PATH,
-					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CashierApp/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/CashierApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
 				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = Release;
@@ -723,6 +732,7 @@
 				);
 				INFOPLIST_FILE = CashierAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CashierApp.app/CashierApp";
@@ -740,6 +750,7 @@
 				);
 				INFOPLIST_FILE = CashierAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CashierApp.app/CashierApp";
@@ -802,19 +813,23 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					$PODS_FRAMEWORK_BUILD_PATH,
-					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
-					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+					"$(PROJECT_DIR)/Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework",
 				);
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CashierApp/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/CashierApp/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d4d6a16f-4dd2-4a03-b3d5-164d1786b952";
 				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7s armv7";
 			};
 			name = AdHoc;
@@ -830,6 +845,7 @@
 				);
 				INFOPLIST_FILE = CashierAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_INSTALL_OBJC_HEADER = YES;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CashierApp.app/CashierApp";

@@ -14,6 +14,11 @@ class InsertCodeView: UIView {
   let priceField: UITextField = UITextField()
   var authCode: SCAuthDeviceAuthCode?
   
+  let centerView = UIView()
+  let titleLabel = UILabel()
+  let subtitleLabel = UITextView()
+  let cancelButton = UIButton(type: UIButtonType.Custom)
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -34,7 +39,6 @@ class InsertCodeView: UIView {
     
     backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
     
-    let centerView: UIView = UIView()
     centerView.backgroundColor = UIColor.whiteColor()
     addSubview(centerView)
     
@@ -45,7 +49,6 @@ class InsertCodeView: UIView {
       make.height.equalTo(250)
     }
     
-    var titleLabel: UILabel = UILabel()
     titleLabel.text = "Geräteverifikation"
     titleLabel.font = UIFont.systemFontOfSize(24)
     centerView.addSubview(titleLabel)
@@ -56,7 +59,6 @@ class InsertCodeView: UIView {
       make.height.equalTo(30)
     }
     
-    var subtitleLabel: UITextView = UITextView()
     subtitleLabel.editable = false
     subtitleLabel.text = "Bitte verifizieren Sie das Gerät mit dem Code \(authCode!.userCode) unter der Website \(authCode!.verificationUrl)"
     subtitleLabel.font = Constants.headlineFont
@@ -69,7 +71,6 @@ class InsertCodeView: UIView {
       make.height.equalTo(100)
     }
     
-    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
@@ -82,7 +83,6 @@ class InsertCodeView: UIView {
       make.height.equalTo(50)
       make.bottom.equalTo(-10)
     }
-
     
     UIView.animateWithDuration(0.4, animations: { () -> Void in
       self.alpha = 1
@@ -91,7 +91,6 @@ class InsertCodeView: UIView {
   }
   
   internal func didTapCancel() {
-    
     hide()
   }
   

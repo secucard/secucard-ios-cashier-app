@@ -39,28 +39,12 @@ class BasketUserCell: UICollectionViewCell {
           imageView.image = UIImage(named: "User")
         }
         
-        if let merchantCard = data.merchantCard, merchantCardId = data.merchantCard.id {
+        if let merchantCard = data.merchantCard, _ = data.merchantCard.id {
           
           // get merchant card
-          
           self.lockStatusLabel.text = "Status: \(merchantCard.lockStatus)"
-          //          lastUsedLabel.text = "Zuletzt verw. \(dateFormatter.stringFromDate(merchantCard.lastUsage))"
           self.pointsLabel.text = "Punkte: \(merchantCard.points)"
           self.balanceLabel.text = "Guthaben: \(Float(merchantCard.balance)/100) €"
-          
-//          SCCardsService.sharedService().getCard(merchantCardId, completionHandler: { (card: SCLoyaltyCard?, error: NSError?) -> Void in
-//            
-//            if let error = error {
-//              
-//              SCLogManager.error(error)
-//              
-//            } else if let card = card {
-//              
-//              
-//
-//            }
-//            
-//          })
           
         }
         
@@ -68,16 +52,18 @@ class BasketUserCell: UICollectionViewCell {
     }
   }
   
-  let dateFormatter: NSDateFormatter = NSDateFormatter()
+  let dateFormatter = NSDateFormatter()
   
-  var label: UILabel = UILabel()
-  var imageView: UIImageView = UIImageView()
-  var controls: UIView = UIView()
+  let label = UILabel()
+  let imageView = UIImageView()
+  let controls = UIView()
   
-  var lockStatusLabel: UILabel = UILabel()
-  var lastUsedLabel: UILabel = UILabel()
-  var balanceLabel: UILabel = UILabel()
-  var pointsLabel: UILabel = UILabel()
+  let lockStatusLabel = UILabel()
+  let lastUsedLabel = UILabel()
+  let balanceLabel = UILabel()
+  let pointsLabel = UILabel()
+  
+  let removeButton = UIButton(type: UIButtonType.Custom)
   
   override init(frame: CGRect) {
     
@@ -89,9 +75,6 @@ class BasketUserCell: UICollectionViewCell {
     label.numberOfLines = 0
     label.lineBreakMode = NSLineBreakMode.ByWordWrapping
     
-    controls = UIView()
-    
-    imageView = UIImageView()
     imageView.backgroundColor = Constants.darkGreyColor
     
     lockStatusLabel.font = Constants.regularFont
@@ -164,7 +147,6 @@ class BasketUserCell: UICollectionViewCell {
       make.height.equalTo(20)
     }
     
-    let removeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     removeButton.backgroundColor = Constants.warningColor
     removeButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
     removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
@@ -186,7 +168,7 @@ class BasketUserCell: UICollectionViewCell {
     delegate?.identRemoveTapped()
   }
   
-  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes! {
+  override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
     
     var newFrame: CGRect = layoutAttributes.frame
     newFrame.size.height = 120

@@ -14,9 +14,18 @@ protocol InitializationViewDelegate {
 
 class InitializationView: UIView {
 
+  let titleLabel = UILabel()
+  
+  let clientIdLabel = UILabel()
   let clientIdField = UITextView()
+  
+  let clientSecretLabel = UILabel()
   let clientSecretField = UITextView()
+  
+  let uuidLabel = UILabel()
   let uuidField = UITextView()
+  
+  let okButton = UIButton(type: UIButtonType.Custom)
   
   var delegate: InitializationViewDelegate?
   
@@ -44,7 +53,6 @@ class InitializationView: UIView {
       make.centerX.centerY.equalTo(self)
     }
     
-    var titleLabel: UILabel = UILabel()
     titleLabel.text = "Kasseneinstellungen"
     titleLabel.font = UIFont.systemFontOfSize(24)
     centerView.addSubview(titleLabel)
@@ -55,7 +63,6 @@ class InitializationView: UIView {
       make.height.equalTo(30)
     }
     
-    let clientIdLabel = UILabel()
     clientIdLabel.text = "Client Id"
     clientIdLabel.font = Constants.headlineFont
     centerView.addSubview(clientIdLabel)
@@ -88,7 +95,6 @@ class InitializationView: UIView {
     
     // client secret
     
-    let clientSecretLabel = UILabel()
     clientSecretLabel.text = "Client Secret"
     clientSecretLabel.font = Constants.headlineFont
     centerView.addSubview(clientSecretLabel)
@@ -120,8 +126,7 @@ class InitializationView: UIView {
     }
     
     // uuid
-    
-    let uuidLabel = UILabel()
+
     uuidLabel.text = "UUID"
     uuidLabel.font = Constants.headlineFont
     centerView.addSubview(uuidLabel)
@@ -152,7 +157,6 @@ class InitializationView: UIView {
       make.height.equalTo(30)
     }
     
-    let okButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     okButton.setTitle("Senden", forState: UIControlState.Normal)
     okButton.addTarget(self, action: "didTapSend", forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor

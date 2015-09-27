@@ -11,6 +11,7 @@ import UIKit
 class TransactionStatusView: UIView {
 
   let logView = UILabel()
+  let cancelButton = UIButton(type: UIButtonType.Custom)
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -40,7 +41,6 @@ class TransactionStatusView: UIView {
       make.centerY.equalTo(self)
     }
     
-    let cancelButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor

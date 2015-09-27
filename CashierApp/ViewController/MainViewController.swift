@@ -40,12 +40,21 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let basketSectionHeaerReuseIdentifier = "HeaderView"
   
-  let productCategoriesCollection:UICollectionView
-  let productsCollection:UICollectionView
-  let basketCollection:UICollectionView
-  let checkinsCollection:UICollectionView
+  var productCategoriesCollection: UICollectionView
+  var productsCollection: UICollectionView
+  var basketCollection: UICollectionView
+  var checkinsCollection: UICollectionView
   
-  var productCategories: [JSON]?
+  let categoriesLayout = UICollectionViewFlowLayout()
+  let productsLayout = UICollectionViewFlowLayout()
+  let basketLayout = UICollectionViewFlowLayout()
+  let checkinLayout = UICollectionViewFlowLayout()
+  
+  var topBorder = UIView()
+  var sumView = UIView()
+  let bottomBar = UIView()
+  
+  var productCategories: [String:[JSON]]?
   var checkins = [SCSmartCheckin]() {
     didSet {
       checkinsCollection.reloadData()
@@ -87,9 +96,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let availableButtons: [PaymentButton]
   
-  let logView: LogView = LogView()
+  let logView = LogView()
   
-  let sumLabel: UILabel = UILabel()
+  let sumLabel = UILabel()
   
   var sum: Float = 0.0 {
     didSet {
@@ -97,7 +106,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
-  let emptyButton: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+  let emptyButton = UIButton(type: UIButtonType.Custom)
   
   var currentCategory = 0 {
     didSet {
@@ -108,15 +117,46 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   
   var json: JSON = nil {
+    
     didSet {
-      if let cats = self.json["groups"].array {
+      
+      // create categories
+      if let items = self.json["items"].array {
         
-        self.productCategories = cats
+        var catArray = [String:[JSON]]()
+        
+        for item:JSON in items {
+          
+          if let groups = item["group"].array {
+            
+            for group:JSON in groups {
+            
+              if let groupName = group["desc"].string {
+
+                guard let _ = catArray[groupName] else {
+                  catArray[groupName] = [JSON]()
+                  catArray[groupName]?.append(item)
+                  break
+                }
+                
+                catArray[groupName]?.append(item)
+                
+              }
+              
+            }
+            
+          }
+          
+        }
+        
+        self.productCategories = catArray
         self.productCategoriesCollection.reloadData()
         self.productsCollection.reloadData()
         
       }
+      
     }
+    
   }
   
   var currentTransaction: SCSmartTransaction = SCSmartTransaction()
@@ -126,7 +166,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     self.checkins = [SCSmartCheckin]()
     self.basket = [BasketItem]()
     
-    var categoriesLayout = UICollectionViewFlowLayout()
     categoriesLayout.scrollDirection = UICollectionViewScrollDirection.Horizontal
     categoriesLayout.minimumInteritemSpacing = 0
     categoriesLayout.estimatedItemSize = CGSizeMake(100, 50)
@@ -134,8 +173,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     productCategoriesCollection = UICollectionView(frame: CGRectMake(0, 0, 10, 10), collectionViewLayout: categoriesLayout)
     productCategoriesCollection.registerClass(ProductCategoryCell.self, forCellWithReuseIdentifier: categoryReuseIdentifier)
     
-    
-    var productsLayout = UICollectionViewFlowLayout()
     productsLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     productsLayout.itemSize = CGSizeMake(150, 150)
     
@@ -143,8 +180,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     productsCollection.registerClass(ProductCell.self, forCellWithReuseIdentifier: productReuseIdentifier)
     productsCollection.contentInset = UIEdgeInsetsMake(10, 10, 10, 10)
     
-    
-    var basketLayout = UICollectionViewFlowLayout()
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     basketLayout.estimatedItemSize = CGSizeMake(310, 70)
     basketLayout.headerReferenceSize = CGSizeMake(310, 30)
@@ -155,7 +190,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     basketCollection.registerClass(BasketProductCell.self, forCellWithReuseIdentifier: basketProductReuseIdentifier)
     basketCollection.registerClass(SectionheaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: basketSectionHeaerReuseIdentifier)
     
-    var checkinLayout = UICollectionViewFlowLayout()
     checkinLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     checkinLayout.itemSize = CGSizeMake(224, 50)
     
@@ -178,8 +212,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidDisconnect:"), name: "clientDidDisconnect", object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidConnect:"), name: "clientDidConnect", object: nil)
-//    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompResult:"), name: "notificationStompResult", object: nil)
-//    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didReceiveStompError:"), name: "notificationStompError", object: nil)
     
     // add delegates to collections
     self.productCategoriesCollection.delegate = self
@@ -234,7 +266,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(50)
     }
     
-    var bottomBar:UIView = UIView()
+    
     bottomBar.backgroundColor = UIColor.whiteColor()
     view.addSubview(bottomBar);
     
@@ -317,7 +349,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     // sum field
-    var sumView: UIView = UIView()
     sumView.backgroundColor = Constants.brightGreyColor
     
     view.addSubview(sumView)
@@ -348,7 +379,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.height.equalTo(50)
     }
     
-    var topBorder: UIView = UIView()
     topBorder.backgroundColor = Constants.brightGreyColor
     sumView.addSubview(topBorder)
     topBorder.snp_makeConstraints { (make) -> Void in
@@ -554,7 +584,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+      if let categories = productCategories, let items:[JSON] = Array(categories.values)[section] {
         return items.count
       } else {
         return 0
@@ -568,7 +598,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
       } else {
         
-        if let usedCustomer = customerUsed {
+        if let _ = customerUsed {
           return 1
         } else {
           return 0
@@ -595,8 +625,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
       if let categories = productCategories {
         
-        var cell:ProductCategoryCell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
-        cell.data = categories[indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
+
+        cell.title = Array(categories.keys)[indexPath.row]
+        cell.data = Array(categories.values)[indexPath.row]
+        
         cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : Constants.brightGreyColor
         
         return cell
@@ -605,9 +638,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+      if let categories = productCategories, let items:[JSON] = Array(categories.values)[currentCategory] {
         
-        if let cell:ProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as? ProductCell {
+        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as? ProductCell {
           cell.data = Product(product: items[indexPath.row])
           return cell
         }
@@ -620,7 +653,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let item:BasketItem = basket[indexPath.row]
         
-        if let cell:BasketProductCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
+        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(basketProductReuseIdentifier, forIndexPath: indexPath) as? BasketProductCell {
           cell.delegate = self
           cell.data = item
           return cell
@@ -628,7 +661,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
       } else {
         
-        if let cell:BasketUserCell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
+        if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(basketUserReuseIdentifier, forIndexPath: indexPath) as? BasketUserCell {
           cell.data = customerUsed
           cell.delegate = self
           return cell
@@ -639,9 +672,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Checkins:
       
-      let checkin:SCSmartCheckin = checkins[indexPath.row]
+      let checkin = checkins[indexPath.row]
       
-      if let cell:CheckinCell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
+      if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(checkinReuseIdentifier, forIndexPath: indexPath) as? CheckinCell {
         cell.data = checkin
         return cell
       }
@@ -666,9 +699,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let items:[JSON] = json["groups"][currentCategory]["items"].array {
+      if let categories = productCategories, let items:[JSON] = Array(categories.values)[currentCategory] {
         
-        var item:JSON = items[indexPath.row]
+        let item = items[indexPath.row]
         let basketItem: BasketItem = BasketItem(product: Product(product: item))
         
         basket.append(basketItem)
@@ -717,12 +750,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   
-  
   // MARK: - ModifyPriceViewDelegate
   
   func removeBasketItem(basketItem: BasketItem) {
     
-    for (index:Int, basketItemTest:BasketItem) in enumerate(basket) {
+    for (index, basketItemTest) in basket.enumerate() {
       if (basketItem == basketItemTest) {
         basket.removeAtIndex(index)
         return
@@ -758,7 +790,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         make.edges.equalTo(view)
       }
     } else {
-      var view: ScanViewController = ScanViewController()
+      let view = ScanViewController()
       view.delegate = self;
       self.presentViewController(view, animated: true, completion: nil)
     }
@@ -916,21 +948,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if event.target == SCGeneralNotification.object().lowercaseString {
           
-          var parsingError: NSError?
-          
           // TODO: what to do if data is array ???
-          if let eventDataArray = event.data as? [AnyObject] {
+          if let _ = event.data as? [AnyObject] {
             
           } else if let eventDataDict = event.data as? [NSObject:AnyObject] {
           
-            if let notification = MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: eventDataDict, error: &parsingError) as? SCGeneralNotification {
-              
-              if let parsingError = parsingError {
-                SCLogManager.error(parsingError)
-              } else {
-                statusView.addStatus(notification.text)
-              }
-              
+            if let notification = try? MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: eventDataDict) as? SCGeneralNotification {
+              statusView.addStatus(notification!.text)
+            } else {
+              //SCLogManager.error(<#T##error: NSError!##NSError!#>)
             }
             
           }
@@ -1132,7 +1158,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     
-    if (message.level.value == LogLevelError.value) {
+    if (message.level.rawValue == LogLevelError.rawValue) {
     
 //      dispatch_async(dispatch_get_main_queue(), { () -> Void in
 //        let alert:UIAlertView = UIAlertView(title: "Fehler", message: message.message, delegate: nil, cancelButtonTitle: "OK")

@@ -126,8 +126,6 @@
         
         client.connect({ (success: Bool, error: NSError?) -> Void in
           
-          let s: Bool = success
-          
           if let error = error {
             handler(success: false, error: error)
           }
@@ -149,7 +147,7 @@
             
             SCCheckinService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
               
-              if let event = event {
+              if let _ = event {
                 self.mainController.logView.addToLog("handled event -> get checkins")
                 self.pollCheckins()
               }
@@ -158,7 +156,7 @@
             
             SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
               
-              if let event = event {
+              if let _ = event {
                 self.mainController.logView.addToLog("handled event -> print notification to transaction status")
               }
               
