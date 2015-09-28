@@ -11,6 +11,7 @@ import UIKit
 import SwiftyJSON
 import SnapKit
 import SecucardConnectSDK
+import Alamofire
 
 enum CollectionType {
   case Product
@@ -54,7 +55,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var sumView = UIView()
   let bottomBar = UIView()
   
-  var productCategories: [String:[JSON]]?
+  var manager: Manager?
+  
+  var productCategories: [String:[SCSmartProduct]]?
   var checkins = [SCSmartCheckin]() {
     didSet {
       checkinsCollection.reloadData()
@@ -100,9 +103,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let sumLabel = UILabel()
   
-  var sum: Float = 0.0 {
+  var sum:Float = 0.0 {
     didSet {
-      sumLabel.text = String(format: "%.2f €", sum)
+      sumLabel.text = String(format: "%.2f €", sum/100)
     }
   }
   
@@ -123,7 +126,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       // create categories
       if let items = self.json["items"].array {
         
-        var catArray = [String:[JSON]]()
+        var catArray = [String:[SCSmartProduct]]()
         
         for item:JSON in items {
           
@@ -132,14 +135,22 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             for group:JSON in groups {
             
               if let groupName = group["desc"].string {
-
+                
+                var product: SCSmartProduct?
+                do {
+                  product = try MTLJSONAdapter.modelOfClass(SCSmartProduct.self, fromJSONDictionary: item.dictionaryObject!) as? SCSmartProduct
+                } catch {
+                  print("cannot parse product")
+                }
+                
+                
                 guard let _ = catArray[groupName] else {
-                  catArray[groupName] = [JSON]()
-                  catArray[groupName]?.append(item)
+                  catArray[groupName] = [SCSmartProduct]()
+                  catArray[groupName]?.append(product!)
                   break
                 }
                 
-                catArray[groupName]?.append(item)
+                catArray[groupName]?.append(product!)
                 
               }
               
@@ -243,6 +254,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     self.connectButton.alpha = 1
     self.disconnectButton.enabled = false
     self.disconnectButton.alpha = 0.5
+    
+    
+    // security
+    
+    let serverTrustPolicies: [String: ServerTrustPolicy] = [
+      "connect.secucard.com": .DisableEvaluation
+    ]
+    
+    manager = Manager(
+      serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
+    )
     
   }
   
@@ -542,7 +564,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     sum = 0.0
     for bi:BasketItem in basket {
       if (bi.type == BasketItemType.Product) {
-        let newVal = sum + (bi.price * bi.discount * Float(bi.amount))
+        let newVal = sum + (Float(bi.price) * bi.discount * Float(bi.amount))
         sum = newVal
       }
     }
@@ -584,7 +606,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let categories = productCategories, let items:[JSON] = Array(categories.values)[section] {
+      if let categories = productCategories, let items:[SCSmartProduct] = Array(categories.values)[currentCategory] {
         return items.count
       } else {
         return 0
@@ -626,7 +648,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       if let categories = productCategories {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
-
+        
         cell.title = Array(categories.keys)[indexPath.row]
         cell.data = Array(categories.values)[indexPath.row]
         
@@ -638,10 +660,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let categories = productCategories, let items:[JSON] = Array(categories.values)[currentCategory] {
+      if let categories = productCategories, let items:[SCSmartProduct] = Array(categories.values)[currentCategory] {
         
         if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as? ProductCell {
-          cell.data = Product(product: items[indexPath.row])
+          cell.data = items[indexPath.row]
           return cell
         }
         
@@ -699,10 +721,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let categories = productCategories, let items:[JSON] = Array(categories.values)[currentCategory] {
+      if let categories = productCategories, let items:[SCSmartProduct] = Array(categories.values)[currentCategory] {
         
         let item = items[indexPath.row]
-        let basketItem: BasketItem = BasketItem(product: Product(product: item))
+        let basketItem: BasketItem = BasketItem(product: item)
         
         basket.append(basketItem)
         calcPrice()
@@ -805,8 +827,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var productList = [AnyObject]()
     for basketItem:BasketItem in self.basket {
-      if let productData = basketItem.product.data {
-        //productList.append(productData.dictionaryObject!)
+      if let productData = basketItem.product {
+        productList.append(productData)
         //productList.append(productData.stringValue)
       }
     }
@@ -818,7 +840,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // create a basket info
     
     let basketInfo = SCSmartBasketInfo()
-    basketInfo.sum = Int(sum*100)
+    basketInfo.sum = Int(sum)
     basketInfo.currency = "EUR"
     currentTransaction.basketInfo = basketInfo
     

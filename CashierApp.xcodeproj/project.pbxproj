@@ -18,7 +18,6 @@
 		AA6390411B300AE400782582 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390291B300AE400782582 /* Constants.swift */; };
 		AA6390421B300AE400782582 /* BasketItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902B1B300AE400782582 /* BasketItem.swift */; };
 		AA6390431B300AE400782582 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902C1B300AE400782582 /* Checkin.swift */; };
-		AA6390441B300AE400782582 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902D1B300AE400782582 /* Product.swift */; };
 		AA6390451B300AE400782582 /* BasketProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902F1B300AE400782582 /* BasketProductCell.swift */; };
 		AA6390461B300AE400782582 /* BasketUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390301B300AE400782582 /* BasketUserCell.swift */; };
 		AA6390471B300AE400782582 /* CheckinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390311B300AE400782582 /* CheckinCell.swift */; };
@@ -73,7 +72,6 @@
 		AA6390291B300AE400782582 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AA63902B1B300AE400782582 /* BasketItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketItem.swift; sourceTree = "<group>"; };
 		AA63902C1B300AE400782582 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
-		AA63902D1B300AE400782582 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		AA63902F1B300AE400782582 /* BasketProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketProductCell.swift; sourceTree = "<group>"; };
 		AA6390301B300AE400782582 /* BasketUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketUserCell.swift; sourceTree = "<group>"; };
 		AA6390311B300AE400782582 /* CheckinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinCell.swift; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			children = (
 				AA63902B1B300AE400782582 /* BasketItem.swift */,
 				AA63902C1B300AE400782582 /* Checkin.swift */,
-				AA63902D1B300AE400782582 /* Product.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -525,7 +522,6 @@
 				AA6390471B300AE400782582 /* CheckinCell.swift in Sources */,
 				AA6390481B300AE400782582 /* InitializationView.swift in Sources */,
 				AA63904C1B300AE400782582 /* PaymentButton.swift in Sources */,
-				AA6390441B300AE400782582 /* Product.swift in Sources */,
 				AA63904E1B300AE400782582 /* ProductCell.swift in Sources */,
 				AA63904F1B300AE400782582 /* ScanCardView.swift in Sources */,
 				AA6390491B300AE400782582 /* InsertCodeView.swift in Sources */,

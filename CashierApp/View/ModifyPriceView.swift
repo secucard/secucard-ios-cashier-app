@@ -141,7 +141,7 @@ class ModifyPriceView: UIView {
         
       case PriceChangeType.Price:
         if let theDelegate = delegate {
-          theDelegate.priceViewChangedPrice((self.priceField.text! as NSString).floatValue)
+          theDelegate.priceViewChangedPrice((self.priceField.text! as NSString).floatValue*100)
         }
         
       case PriceChangeType.Discount:

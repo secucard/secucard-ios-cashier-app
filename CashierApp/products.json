@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "id": "551010cb58db623f7cfbf051",
+      "id": 1,
       "group": [
         {
           "id": "1",
@@ -13,12 +13,12 @@
       "articleNumber": "ART00001",
       "file": "551010cb58db623f7cfbf034",
       "desc": "Uhr Antik",
-      "priceOne": 1.0,
+      "priceOne": 100,
       "quantity": 1,
       "tax": 7
     },
     {
-      "id": "551010cb58db623f7cfbf052",
+      "id": 2,
       "group": [
         {
           "id": "1",
@@ -26,7 +26,7 @@
           "level": 1
         }
       ],
-      "priceOne": 37.99,
+      "priceOne": 3799,
       "ean": "4009900401937",
       "articleNumber": "ART00002",
       "file": "551010cb58db623f7cfbf035",
@@ -35,7 +35,7 @@
       "tax": 7
     },
     {
-      "id": "551010cb58db623f7cfbf053",
+      "id": 3,
       "group": [
         {
           "id": "1",
@@ -47,12 +47,12 @@
       "articleNumber": "ART00003",
       "file": "551010cb58db623f7cfbf036",
       "desc": "Schlüsselkasten",
-      "priceOne": 69.99,
+      "priceOne": 6999,
       "quantity": 1,
       "tax": 7
     },
     {
-      "id": "551010cb58db623f7cfbf054",
+      "id": 4,
       "group": [
         {
           "id": "1",
@@ -60,7 +60,7 @@
           "level": 1
         }
       ],
-      "priceOne": 319.99,
+      "priceOne": 31999,
       "ean": "4009900401937",
       "articleNumber": "ART00004",
       "file": "551010cb58db623f7cfbf037",
@@ -74,19 +74,24 @@
           "id": "1",
           "desc": "Wohnwelt",
           "level": 1
+        },
+        {
+          "id": "2",
+          "desc": "Sommerwelt",
+          "level": 1
         }
       ],
-      "priceOne": 74.99,
+      "priceOne": 7499,
       "ean": "4009900401937",
       "articleNumber": "ART00005",
       "file": "551010cb58db623f7cfbf038",
       "desc": "Stuhl",
       "quantity": 1,
       "tax": 7,
-      "id": "55101787075e05ba7c964f3c"
+      "id": 5
     },
     {
-      "id": "551010cb58db623f7cfbf056",
+      "id": 6,
       "group": [
         {
           "id": "1",
@@ -94,7 +99,7 @@
           "level": 1
         }
       ],
-      "priceOne": 109.99,
+      "priceOne": 10999,
       "ean": "4009900401937",
       "articleNumber": "ART00006",
       "file": "551010cb58db623f7cfbf039",
@@ -103,7 +108,7 @@
       "tax": 7
     },
     {
-      "id": "551010cb58db623f7cfbf057",
+      "id": 7,
       "group": [
         {
           "id": "1",
@@ -111,7 +116,7 @@
           "level": 1
         }
       ],
-      "priceOne": 249.99,
+      "priceOne": 24999,
       "ean": "4009900401937",
       "articleNumber": "ART00007",
       "file": "551010cb58db623f7cfbf040",
@@ -120,7 +125,7 @@
       "tax": 7
     },
     {
-      "id": "551010cb58db623f7cfbf058",
+      "id": 8,
       "group": [
         {
           "id": "2",
@@ -128,7 +133,7 @@
           "level": 1
         }
       ],
-      "priceOne": 39.95,
+      "priceOne": 3995,
       "ean": "4009900401937",
       "articleNumber": "ART00008",
       "file": "551010cb58db623f7cfbf041",
@@ -137,7 +142,7 @@
       "tax": 7
     },
     {
-      "id": "551010cb58db623f7cfbf059",
+      "id": 9,
       "group": [
         {
           "id": "2",
@@ -145,7 +150,7 @@
           "level": 1
         }
       ],
-      "priceOne": 44.99,
+      "priceOne": 4499,
       "ean": "4009900401937",
       "articleNumber": "ART00009",
       "file": "551010cb58db623f7cfbf042",
@@ -161,14 +166,14 @@
           "level": 1
         }
       ],
-      "priceOne": 28.99,
+      "priceOne": 2899,
       "ean": "4009900401937",
       "articleNumber": "ART00010",
       "file": "551010cb58db623f7cfbf043",
       "desc": "Strandbag",
       "quantity": 1,
       "tax": 7,
-      "id": "55101787075e05ba7c964f36"
+      "id": 10
     },
     {
       "group": [
@@ -178,13 +183,14 @@
           "level": 1
         }
       ],
-      "priceOne": 4.99,
+      "priceOne": 499,
       "ean": "4009900401937",
       "articleNumber": "ART00011",
       "file": "551010cb58db623f7cfbf044",
       "desc": "Flip Flop Sunshine",
       "quantity": 1,
-      "tax": 7
+      "tax": 7,
+      "id": 11
     },
     {
       "group": [
@@ -200,7 +206,8 @@
       "file": "551010cb58db623f7cfbf045",
       "desc": "Sonnenschirm Pendalex V+, 280cm",
       "quantity": 1,
-      "tax": 7
+      "tax": 7,
+      "id": 12
     },
     {
       "group": [
@@ -210,13 +217,14 @@
           "level": 1
         }
       ],
-      "priceOne": 23.99,
+      "priceOne": 2399,
       "ean": "4009900401937",
       "articleNumber": "ART00013",
       "file": "551010cb58db623f7cfbf046",
       "desc": "Strohhut mit UV Schutz",
       "quantity": 1,
-      "tax": 7
+      "tax": 7,
+      "id": 13
     },
     {
       "group": [
@@ -226,13 +234,14 @@
           "level": 1
         }
       ],
-      "priceOne": 2.49,
+      "priceOne": 249,
       "ean": "4009900401937",
       "articleNumber": "ART00014",
       "file": "551010cb58db623f7cfbf047",
       "desc": "Pilotenbrille Sunset Red",
       "quantity": 1,
-      "tax": 7
+      "tax": 7,
+      "id": 14
     }
   ]
 }

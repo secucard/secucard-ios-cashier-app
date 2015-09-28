@@ -35,7 +35,7 @@ PODS:
     - Nimble (~> 2.0.0-rc.2)
     - Quick (~> 0.5)
   - Quick (0.6.0)
-  - SecucardConnectSDK (0.2.4):
+  - SecucardConnectSDK (0.2.5):
     - AFNetworking (= 2.6.0)
     - CocoaAsyncSocket (= 7.4.2)
     - Mantle (= 2.0.4)
@@ -47,7 +47,7 @@ DEPENDENCIES:
   - Alamofire
   - FBSnapshotTestCase
   - HockeySDK
-  - Nimble
+  - Nimble (= 2.0.0-rc.3)
   - Nimble-Snapshots
   - Quick
   - SecucardConnectSDK (~> 0.2)
@@ -65,7 +65,7 @@ SPEC CHECKSUMS:
   Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
   Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
   Quick: 563686dbcf0ae0f9f7401ac9cd2d786ee1b7f3d7
-  SecucardConnectSDK: 59c4a4aa39db53f8b2b392758702bf79c8a957ea
+  SecucardConnectSDK: 1dc2fa989f3eac849e2a5b0b6752eec5517fc81a
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
   TFBarcodeScanner: d98a2f224d8176722a8e4bc7d3b9e3e110690fef

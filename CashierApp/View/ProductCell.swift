@@ -9,18 +9,19 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
+import SecucardConnectSDK
 
 class ProductCell: UICollectionViewCell {
 
   let imageView = UIImageView()
   let label = UILabel()
   
-  var data:Product = Product() {
+  var data: SCSmartProduct? {
     
     didSet {
       
-      imageView.image = UIImage(named: self.data.imageName)
-      label.text = self.data.name
+      imageView.image = UIImage(named: (self.data?.articleNumber)!)
+      label.text = self.data?.desc
       
     }
   }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import SecucardConnectSDK
 
 protocol BasketProductCellDelegate {
   
@@ -26,7 +27,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
         
         // properties
         theData.discount = 1.0
-        theData.price = theData.product.price
+        theData.price = Float(theData.product.priceOne)
         
         setLabels()
       }
@@ -190,8 +191,8 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
     if let theData = data {
     
       countLabel.text = "\(theData.amount)"
-      nameLabel.text = theData.product.name
-      infoLabel.text = "\(theData.product.articleNumber) - \(theData.price)€"
+      nameLabel.text = theData.product.desc
+      infoLabel.text = "\(theData.product.articleNumber) - \(theData.price/100)€"
       if (theData.discount != 1) {
           infoLabel.text = infoLabel.text?.stringByAppendingString(" - \(Int((1-theData.discount)*100))%")
       }

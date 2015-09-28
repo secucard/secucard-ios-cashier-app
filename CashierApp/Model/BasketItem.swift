@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Mantle
+import SecucardConnectSDK
 
 enum BasketItemType {
   case Product
@@ -18,19 +19,19 @@ enum BasketItemType {
 class BasketItem: MTLModel, MTLJSONSerializing {
 
   var type: BasketItemType!
-  dynamic var product: Product!
+  dynamic var product: SCSmartProduct!
   
   var amount: Int = 1
   var discount: Float = 1.0
   var price: Float = 0.0
   var expanded: Bool = false
   
-  convenience init(product : Product) {
+  convenience init(product : SCSmartProduct) {
     
     self.init()
     self.type = BasketItemType.Product
     self.product = product
-    self.price = product.price
+    self.price = Float(product.priceOne)
     
   }
   
@@ -39,7 +40,7 @@ class BasketItem: MTLModel, MTLJSONSerializing {
   }
   
   class func productJSONTransformer() -> NSValueTransformer {
-    return MTLJSONAdapter.dictionaryTransformerWithModelClass(Product.self);
+    return MTLJSONAdapter.dictionaryTransformerWithModelClass(SCSmartProduct.self);
   }
 
   

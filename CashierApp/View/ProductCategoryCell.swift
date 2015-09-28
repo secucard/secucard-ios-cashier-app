@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import SnapKit
+import SecucardConnectSDK
 
 class ProductCategoryCell: UICollectionViewCell {
   
@@ -28,7 +29,7 @@ class ProductCategoryCell: UICollectionViewCell {
     }
   }
   
-  var data:[JSON]?
+  var data:[SCSmartProduct]?
   
   override init(frame: CGRect) {
     
