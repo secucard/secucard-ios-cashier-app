@@ -11,7 +11,6 @@
       ],
       "ean": "4009900401937",
       "articleNumber": "ART00001",
-      "file": "551010cb58db623f7cfbf034",
       "desc": "Uhr Antik",
       "priceOne": 100,
       "quantity": 1,
@@ -29,7 +28,6 @@
       "priceOne": 3799,
       "ean": "4009900401937",
       "articleNumber": "ART00002",
-      "file": "551010cb58db623f7cfbf035",
       "desc": "Briefkasten",
       "quantity": 1,
       "tax": 7
@@ -45,7 +43,6 @@
       ],
       "ean": "4009900401937",
       "articleNumber": "ART00003",
-      "file": "551010cb58db623f7cfbf036",
       "desc": "Schlüsselkasten",
       "priceOne": 6999,
       "quantity": 1,
@@ -63,7 +60,6 @@
       "priceOne": 31999,
       "ean": "4009900401937",
       "articleNumber": "ART00004",
-      "file": "551010cb58db623f7cfbf037",
       "desc": "Kommode Shabby Chic",
       "quantity": 1,
       "tax": 7
@@ -84,7 +80,6 @@
       "priceOne": 7499,
       "ean": "4009900401937",
       "articleNumber": "ART00005",
-      "file": "551010cb58db623f7cfbf038",
       "desc": "Stuhl",
       "quantity": 1,
       "tax": 7,
@@ -102,7 +97,6 @@
       "priceOne": 10999,
       "ean": "4009900401937",
       "articleNumber": "ART00006",
-      "file": "551010cb58db623f7cfbf039",
       "desc": "Regal Groß",
       "quantity": 1,
       "tax": 7
@@ -119,7 +113,6 @@
       "priceOne": 24999,
       "ean": "4009900401937",
       "articleNumber": "ART00007",
-      "file": "551010cb58db623f7cfbf040",
       "desc": "Esstisch",
       "quantity": 1,
       "tax": 7
@@ -136,7 +129,6 @@
       "priceOne": 3995,
       "ean": "4009900401937",
       "articleNumber": "ART00008",
-      "file": "551010cb58db623f7cfbf041",
       "desc": "Surfbrett",
       "quantity": 1,
       "tax": 7
@@ -153,7 +145,6 @@
       "priceOne": 4499,
       "ean": "4009900401937",
       "articleNumber": "ART00009",
-      "file": "551010cb58db623f7cfbf042",
       "desc": "Strandtuch in mehreren Farben",
       "quantity": 1,
       "tax": 7
@@ -164,12 +155,16 @@
           "id": "2",
           "desc": "Sommerwelt",
           "level": 1
+        },
+        {
+          "id": "99",
+          "desc": "Smart",
+          "level": 1
         }
       ],
       "priceOne": 2899,
       "ean": "4009900401937",
       "articleNumber": "ART00010",
-      "file": "551010cb58db623f7cfbf043",
       "desc": "Strandbag",
       "quantity": 1,
       "tax": 7,
@@ -181,12 +176,16 @@
           "id": "2",
           "desc": "Sommerwelt",
           "level": 1
+        },
+        {
+          "id": "99",
+          "desc": "Smart",
+          "level": 1
         }
       ],
       "priceOne": 499,
       "ean": "4009900401937",
       "articleNumber": "ART00011",
-      "file": "551010cb58db623f7cfbf044",
       "desc": "Flip Flop Sunshine",
       "quantity": 1,
       "tax": 7,
@@ -203,7 +202,6 @@
       "priceOne": 1495,
       "ean": "4009900401937",
       "articleNumber": "ART00012",
-      "file": "551010cb58db623f7cfbf045",
       "desc": "Sonnenschirm Pendalex V+, 280cm",
       "quantity": 1,
       "tax": 7,
@@ -220,7 +218,6 @@
       "priceOne": 2399,
       "ean": "4009900401937",
       "articleNumber": "ART00013",
-      "file": "551010cb58db623f7cfbf046",
       "desc": "Strohhut mit UV Schutz",
       "quantity": 1,
       "tax": 7,
@@ -232,16 +229,68 @@
           "id": "2",
           "desc": "Sommerwelt",
           "level": 1
+        },
+        {
+          "id": "99",
+          "desc": "Smart",
+          "level": 1
         }
       ],
       "priceOne": 249,
       "ean": "4009900401937",
       "articleNumber": "ART00014",
-      "file": "551010cb58db623f7cfbf047",
       "desc": "Pilotenbrille Sunset Red",
       "quantity": 1,
       "tax": 7,
       "id": 14
+    },
+    {
+      "id": 15,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00015",
+      "desc": "Callya Prepaid 15€",
+      "priceOne": 1500,
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 16,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid",
+          "level": 1
+        }
+      ],
+      "priceOne": 1500,
+      "ean": "4009900401937",
+      "articleNumber": "ART00016",
+      "desc": "itunes gutschein 15€",
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 17,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00017",
+      "desc": "Nintendo eshop card 15€",
+      "priceOne": 1500,
+      "quantity": 1,
+      "tax": 7
     }
   ]
 }

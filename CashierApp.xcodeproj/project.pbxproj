@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */; settings = {ASSET_TAGS = (); }; };
 		AA1F10721BB8128900F869C0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F10711BB8128900F869C0 /* HockeySDK.framework */; };
 		AA3561F51B24647A00CDECB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F41B24647A00CDECB9 /* UIKit.framework */; };
 		AA3561F71B24648500CDECB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F61B24648500CDECB9 /* Foundation.framework */; };
@@ -60,6 +61,7 @@
 		85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.release.xcconfig"; sourceTree = "<group>"; };
 		8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		AA1F10711BB8128900F869C0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		AA3561F41B24647A00CDECB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AA3561F61B24648500CDECB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,6 +193,7 @@
 				AA63903A1B300AE400782582 /* SectionheaderView.swift */,
 				AA63903B1B300AE400782582 /* TransactionStatusView.swift */,
 				AA53B3A21BB09E8500E831B4 /* ReceiptView.swift */,
+				AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				AA6390411B300AE400782582 /* Constants.swift in Sources */,
 				AA6390511B300AE400782582 /* TransactionStatusView.swift in Sources */,
 				AA6390531B300AE400782582 /* ScanViewController.swift in Sources */,
+				AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */,
 				AA6390501B300AE400782582 /* SectionheaderView.swift in Sources */,
 				AA63904D1B300AE400782582 /* ProductCategoryCell.swift in Sources */,
 				AA6390431B300AE400782582 /* Checkin.swift in Sources */,

@@ -31,7 +31,7 @@ enum PayMethod : String {
   case Paypal = "paypal"
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate, UIGestureRecognizerDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -51,13 +51,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let basketLayout = UICollectionViewFlowLayout()
   let checkinLayout = UICollectionViewFlowLayout()
   
+  var longPress:UILongPressGestureRecognizer!
+  
   var topBorder = UIView()
   var sumView = UIView()
   let bottomBar = UIView()
   
   var manager: Manager?
   
-  var productCategories: [String:[SCSmartProduct]]?
+  var productCategories = [String:[SCSmartProduct]]()
   var checkins = [SCSmartCheckin]() {
     didSet {
       checkinsCollection.reloadData()
@@ -160,6 +162,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
           
         }
         
+        // order by key
+//        let sortedCats = catArray.sort { $0.0 < $1.0 }
+        
         self.productCategories = catArray
         self.productCategoriesCollection.reloadData()
         self.productsCollection.reloadData()
@@ -230,6 +235,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     self.productsCollection.delegate = self
     self.productsCollection.dataSource = self
+    
+    longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+    longPress.minimumPressDuration = 1.0
+    longPress.delegate = self
+    longPress.cancelsTouchesInView  = true
+    productsCollection.addGestureRecognizer(longPress)
+    productsCollection.panGestureRecognizer.requireGestureRecognizerToFail(longPress)
     
     self.basketCollection.delegate = self
     self.basketCollection.dataSource = self
@@ -598,15 +610,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.ProductCategories:
       
-      if let numCategories = productCategories?.count {
-        return numCategories
-      } else {
-        return 0
-      }
+        return productCategories.count
       
     case CollectionType.Product:
       
-      if let categories = productCategories, let items:[SCSmartProduct] = Array(categories.values)[currentCategory] {
+      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory] {
         return items.count
       } else {
         return 0
@@ -645,22 +653,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.ProductCategories:
       
-      if let categories = productCategories {
-        
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
         
-        cell.title = Array(categories.keys)[indexPath.row]
-        cell.data = Array(categories.values)[indexPath.row]
+        cell.title = Array(productCategories.keys)[indexPath.row]
+        cell.data = Array(productCategories.values)[indexPath.row]
         
         cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : Constants.brightGreyColor
         
         return cell
-        
-      }
       
     case CollectionType.Product:
       
-      if let categories = productCategories, let items:[SCSmartProduct] = Array(categories.values)[currentCategory] {
+      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory] {
         
         if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as? ProductCell {
           cell.data = items[indexPath.row]
@@ -721,7 +725,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let categories = productCategories, let items:[SCSmartProduct] = Array(categories.values)[currentCategory] {
+      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory] {
         
         let item = items[indexPath.row]
         let basketItem: BasketItem = BasketItem(product: item)
@@ -1201,6 +1205,33 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func scanCardFinished(code: String) {
     scanViewReturnCode(code)
     scanCardView.hide()
+  }
+  
+  func handleLongPress(sender: UILongPressGestureRecognizer) {
+    
+    let p = sender.locationInView(productsCollection)
+    
+    let indexPath = productsCollection.indexPathForItemAtPoint(p)
+    if let indexPath = indexPath {
+      if sender.state == UIGestureRecognizerState.Began {
+        let item = Array(productCategories.values)[currentCategory][indexPath.row]
+        
+        let detailView = ProductDetailView()
+        view.addSubview(detailView)
+        
+        detailView.snp_makeConstraints(closure: { (make) -> Void in
+          make.edges.equalTo(view)
+        })
+        
+        detailView.product = item
+        detailView.alpha = 0
+        
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+          detailView.alpha = 1
+        })
+      }
+    }
+    
   }
   
 }
