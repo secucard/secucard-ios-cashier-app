@@ -22,19 +22,12 @@ PODS:
     - AFNetworking/NSURLSession
   - Alamofire (2.0.2)
   - CocoaAsyncSocket (7.4.2)
-  - FBSnapshotTestCase (1.8.1)
   - HockeySDK (3.8.2):
     - HockeySDK/AllFeaturesLib (= 3.8.2)
   - HockeySDK/AllFeaturesLib (3.8.2)
   - Mantle (2.0.4):
     - Mantle/extobjc (= 2.0.4)
   - Mantle/extobjc (2.0.4)
-  - Nimble (2.0.0-rc.3)
-  - Nimble-Snapshots (1.0.0):
-    - FBSnapshotTestCase (~> 1.7)
-    - Nimble (~> 2.0.0-rc.2)
-    - Quick (~> 0.5)
-  - Quick (0.6.0)
   - SecucardConnectSDK (0.2.6):
     - AFNetworking (= 2.6.0)
     - CocoaAsyncSocket (= 7.4.2)
@@ -45,11 +38,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - FBSnapshotTestCase
   - HockeySDK
-  - Nimble (= 2.0.0-rc.3)
-  - Nimble-Snapshots
-  - Quick
   - SecucardConnectSDK (~> 0.2)
   - SnapKit
   - SwiftyJSON
@@ -59,12 +48,8 @@ SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
-  FBSnapshotTestCase: 3dc3899168747a0319c5278f5b3445c13a6532dd
   HockeySDK: 9f4ac41263acf9d8a4d59491a7f17af16529b935
   Mantle: 6bee68168423948be0c0c5924832bf3af188e099
-  Nimble: 9dff98ee195ffe7351d3b2fb01d3a1420fd97948
-  Nimble-Snapshots: c16dd279a4840ec06288198fafd53f3c17750ff3
-  Quick: 563686dbcf0ae0f9f7401ac9cd2d786ee1b7f3d7
   SecucardConnectSDK: 278f66e1de447f22b74fb204606ee03a38830f01
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4

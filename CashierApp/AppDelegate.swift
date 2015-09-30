@@ -78,6 +78,13 @@
         
       }
       
+      // keyboard show up problem fix
+//      let lagFreeField = UITextField()
+//      self.window?.addSubview(lagFreeField)
+//      lagFreeField.becomeFirstResponder()
+//      lagFreeField.resignFirstResponder()
+//      lagFreeField.removeFromSuperview()
+      
       return true
     }
     

@@ -19,9 +19,9 @@ target 'CashierAppTests', :exclusive => true do
   
   pod 'SecucardConnectSDK', '~> 0.2'
   
-  pod 'Quick'
-  pod 'Nimble', '= 2.0.0-rc.3'
-  pod 'FBSnapshotTestCase'
-  pod 'Nimble-Snapshots'
-  
+#  pod 'Quick'
+#  pod 'Nimble', '= 2.0.0-rc.3'
+#  pod 'FBSnapshotTestCase'
+#  pod 'Nimble-Snapshots'
+
 end

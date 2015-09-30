@@ -12,19 +12,20 @@ protocol InitializationViewDelegate {
   func didSaveCredentials()
 }
 
-class InitializationView: UIView {
+class InitializationView: UIView, UITextFieldDelegate {
 
   let titleLabel = UILabel()
   
   let clientIdLabel = UILabel()
-  let clientIdField = UITextView()
+  let clientIdField = UITextField()
   
   let clientSecretLabel = UILabel()
-  let clientSecretField = UITextView()
+  let clientSecretField = UITextField()
   
   let uuidLabel = UILabel()
-  let uuidField = UITextView()
+  let uuidField = UITextField()
   
+  let cancelButton = UIButton(type: UIButtonType.Custom)
   let okButton = UIButton(type: UIButtonType.Custom)
   
   var delegate: InitializationViewDelegate?
@@ -50,7 +51,8 @@ class InitializationView: UIView {
     centerView.snp_makeConstraints { (make) -> Void in
       make.width.equalTo(500)
       make.height.equalTo(300)
-      make.centerX.centerY.equalTo(self)
+      make.centerX.equalTo(self)
+      make.top.equalTo(50)
     }
     
     titleLabel.text = "Kasseneinstellungen"
@@ -76,6 +78,8 @@ class InitializationView: UIView {
     
     clientIdField.font = Constants.headlineFont
     clientIdField.layer.borderWidth = 1
+    clientIdField.returnKeyType = UIReturnKeyType.Done
+    clientIdField.delegate = self
     clientIdField.layer.borderColor = Constants.darkGreyColor.CGColor
 
     if let clientId = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientId.rawValue) as? String {
@@ -108,6 +112,8 @@ class InitializationView: UIView {
     
     clientSecretField.font = Constants.headlineFont
     clientSecretField.layer.borderWidth = 1
+    clientSecretField.returnKeyType = UIReturnKeyType.Done
+    clientSecretField.delegate = self
     clientSecretField.layer.borderColor = Constants.darkGreyColor.CGColor
     
     if let secret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String {
@@ -140,6 +146,8 @@ class InitializationView: UIView {
     
     uuidField.font = Constants.headlineFont
     uuidField.layer.borderWidth = 1
+    uuidField.returnKeyType = UIReturnKeyType.Done
+    uuidField.delegate = self
     uuidField.layer.borderColor = Constants.darkGreyColor.CGColor
     
     if let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String {
@@ -157,13 +165,25 @@ class InitializationView: UIView {
       make.height.equalTo(30)
     }
     
+    cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
+    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.backgroundColor = Constants.tintColor
+    centerView.addSubview(cancelButton)
+    
+    cancelButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(10)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+      make.bottom.equalTo(-10)
+    }
+    
     okButton.setTitle("Senden", forState: UIControlState.Normal)
     okButton.addTarget(self, action: "didTapSend", forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
     centerView.addSubview(okButton)
     
     okButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(10)
+      make.right.equalTo(-10)
       make.width.equalTo(100)
       make.height.equalTo(50)
       make.bottom.equalTo(-10)
@@ -188,6 +208,12 @@ class InitializationView: UIView {
       hide()
       
     }
+    
+  }
+  
+  func didTapCancel() {
+    
+    hide()
     
   }
   
@@ -229,6 +255,11 @@ class InitializationView: UIView {
         self.removeFromSuperview()
         
     }
+  }
+  
+  func textFieldShouldReturn(textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
   
 }
