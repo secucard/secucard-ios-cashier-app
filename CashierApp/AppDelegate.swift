@@ -26,6 +26,7 @@
       
       // integrate HockeyApp
       BITHockeyManager.sharedHockeyManager().configureWithIdentifier("6092e83f751fc2e16cd727b6af7f9411")
+      BITHockeyManager.sharedHockeyManager().updateManager.alwaysShowUpdateReminder = false
       BITHockeyManager.sharedHockeyManager().startManager()
       BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
       
@@ -79,11 +80,11 @@
       }
       
       // keyboard show up problem fix
-//      let lagFreeField = UITextField()
-//      self.window?.addSubview(lagFreeField)
-//      lagFreeField.becomeFirstResponder()
-//      lagFreeField.resignFirstResponder()
-//      lagFreeField.removeFromSuperview()
+      //      let lagFreeField = UITextField()
+      //      self.window?.addSubview(lagFreeField)
+      //      lagFreeField.becomeFirstResponder()
+      //      lagFreeField.resignFirstResponder()
+      //      lagFreeField.removeFromSuperview()
       
       return true
     }
@@ -95,7 +96,7 @@
       let clientSecret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String
       let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String
       
-      if clientId == nil || clientSecret == nil || uuid == nil {
+      guard clientId != nil || clientSecret != nil || uuid != nil else {
         
         let initView = InitializationView()
         initView.delegate = self
@@ -130,6 +131,29 @@
       if let client = SCConnectClient.sharedInstance() {
         
         client.initWithConfiguration(clientConfig)
+        
+        // only when connecting we request auth code, so we have to do that directly
+        if !SCAccountManager.sharedManager().accessTokenValid() {
+          
+          SCAccountManager.sharedManager().requestTokenWithDeviceAuth({ (token: String!, error: NSError!) -> Void in
+            
+            self.connectWhenSave(handler)
+            
+          })
+          
+        } else {
+          
+          self.connectWhenSave(handler)
+          
+        }
+        
+      }
+      
+    }
+    
+    func connectWhenSave( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
+      
+      if let client = SCConnectClient.sharedInstance() {
         
         client.connect({ (success: Bool, error: NSError?) -> Void in
           
@@ -200,7 +224,7 @@
       } else {
         
         SCLogManager.warn("STOMP: Disconnected")
-        reconnectStomp()
+        //reconnectStomp()
         
       }
       
@@ -213,7 +237,7 @@
         SCLogManager.warn("STOMP: Needs reconnect, log back in")
         
         connectCashier({ (success, error) -> Void in
-        
+          
           SCLogManager.warn("STOMP: did log back in")
           
         })
@@ -286,18 +310,18 @@
     
     func didSaveCredentials() {
       
-      SCConnectClient.sharedInstance().disconnect { (success: Bool, error: NSError!) -> Void in
+      SCConnectClient.sharedInstance().logoff { (success: Bool, error: NSError!) -> Void in
         
         if (success) {
           NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
         }
         
-        self.connectCashier { (success, error) -> Void in
-          
-          if let error = error {
-            SCLogManager.error(error)
-          }
-        }
+        //        self.connectCashier { (success, error) -> Void in
+        //
+        //          if let error = error {
+        //            SCLogManager.error(error)
+        //          }
+        //        }
         
       }
       

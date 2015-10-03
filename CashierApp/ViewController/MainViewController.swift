@@ -31,7 +31,7 @@ enum PayMethod : String {
   case Paypal = "paypal"
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate, UIGestureRecognizerDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate, UIGestureRecognizerDelegate, ConnectionButtonDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -86,8 +86,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   var scanCardView = ScanCardView()
   
-  let connectButton: PaymentButton
-  let disconnectButton: PaymentButton
+  let connectionButton = ConnectionButton()
+  
   let scanCardButton: PaymentButton
   let showLogButton: PaymentButton
   let settingsButton: PaymentButton
@@ -213,8 +213,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinsCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     
     // Payment buttons initialization
-    connectButton = PaymentButton(icon: "Connect", action: Selector("didTapConnect"))
-    disconnectButton = PaymentButton(icon: "Disconnect", action: Selector("didTapDisconnect"))
     scanCardButton = PaymentButton(icon: "ScanCard", action: Selector("didTapScanCard"))
     showLogButton = PaymentButton(icon: "Log", action: Selector("didTapShowLog"))
     settingsButton = PaymentButton(icon: "Settings", action: Selector("didTapShowSettings"))
@@ -223,6 +221,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // call super initialization
     super.init(nibName: nil, bundle: nil)
+    
+    
+    scanCardButton.target = self
+    showLogButton.target = self
+    settingsButton.target = self
     
     SCLogManager.sharedManager().delegate = self
     
@@ -255,18 +258,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     payLoyaltyButton.target = self
     payPaypalButton.target = self
     payDemoButton.target = self
-    
-    connectButton.target = self
-    disconnectButton.target = self
-    scanCardButton.target = self
-    showLogButton.target = self
-    settingsButton.target = self
-    
-    self.connectButton.enabled = true
-    self.connectButton.alpha = 1
-    self.disconnectButton.enabled = false
-    self.disconnectButton.alpha = 0.5
-    
     
     // security
     
@@ -482,26 +473,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     }
     
-    // connect button
+    // connection button
     
-    bottomBar.addSubview(connectButton)
+    bottomBar.addSubview(connectionButton)
+    connectionButton.hostConnected = SCConnectClient.sharedInstance().connected
+    connectionButton.delegate = self
     
-    connectButton.snp_makeConstraints { (make) -> Void in
+    connectionButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(10)
       make.centerY.equalTo(bottomBar)
-      make.width.equalTo(50)
       make.height.equalTo(50)
-    }
-    
-    // disconnect button
-    
-    bottomBar.addSubview(disconnectButton)
-    
-    disconnectButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(connectButton.snp_right).offset(10)
-      make.centerY.equalTo(bottomBar)
-      make.width.equalTo(50)
-      make.height.equalTo(50)
+      make.width.equalTo(120)
     }
     
     // scan card button
@@ -509,7 +491,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     bottomBar.addSubview(scanCardButton)
     
     scanCardButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(disconnectButton.snp_right).offset(10)
+      make.left.equalTo(connectionButton.snp_right).offset(10)
       make.centerY.equalTo(bottomBar)
       make.width.equalTo(50)
       make.height.equalTo(50)
@@ -1098,8 +1080,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func didTapConnect() {
-    
+  // MARK: - ConnectButtonDelegate
+  func didTapConnect() {    
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       appDelegate.connectCashier({ (success: Bool, error: NSError?) -> Void in
       })
@@ -1107,22 +1089,19 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func didTapDisconnect() {
+    
     SCConnectClient.sharedInstance().disconnect { (success: Bool, error: NSError!) -> Void in
       if (success) {
         NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
       }
     }
+    
   }
   
   func clientDidDisconnect(notification : NSNotification) {
     
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-      
-      self.connectButton.enabled = true
-      self.connectButton.alpha = 1
-      self.disconnectButton.enabled = false
-      self.disconnectButton.alpha = 0.5
-      
+      self.connectionButton.hostConnected = false
     })
     
   }
@@ -1130,12 +1109,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func clientDidConnect(notification : NSNotification) {
     
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-    
-      self.disconnectButton.enabled = true
-      self.disconnectButton.alpha = 1
-      self.connectButton.enabled = false
-      self.connectButton.alpha = 0.5
-      
+      self.connectionButton.hostConnected = true
     })
     
   }

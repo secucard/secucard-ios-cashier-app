@@ -66,10 +66,13 @@ class Constants: NSObject {
   static let darkGreyColor: UIColor = UIColor(red: 55/255, green: 55/255, blue: 55/255, alpha: 1)
   
   static let warningColor: UIColor = UIColor.orangeColor()
+  static let greenColor: UIColor = UIColor(red: 130/255, green: 202/255, blue: 56/255, alpha: 1)
+  static let redColor: UIColor = UIColor(red: 209/255, green: 66/255, blue: 58/255, alpha: 1)
   
   // Fontsizes
   static let regularFont: UIFont = UIFont.systemFontOfSize(12.0)
   static let headlineFont: UIFont = UIFont.systemFontOfSize(16.0)
+  static let settingFont: UIFont = UIFont.systemFontOfSize(14.0)
   static let sumFont: UIFont = UIFont.systemFontOfSize(18.0)
   static let statusFont: UIFont = UIFont.systemFontOfSize(28.0)
   

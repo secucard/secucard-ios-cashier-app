@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SecucardConnectSDK
 
 protocol InitializationViewDelegate {
   func didSaveCredentials()
@@ -26,9 +27,17 @@ class InitializationView: UIView, UITextFieldDelegate {
   let uuidField = UITextField()
   
   let cancelButton = UIButton(type: UIButtonType.Custom)
+  let logoffButton = UIButton(type: UIButtonType.Custom)
   let okButton = UIButton(type: UIButtonType.Custom)
   
   var delegate: InitializationViewDelegate?
+  
+  var somethingChanged = false {
+    didSet {
+      okButton.enabled = somethingChanged
+      okButton.alpha = somethingChanged ? 1 : 0.5
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -40,6 +49,9 @@ class InitializationView: UIView, UITextFieldDelegate {
   }
   
   func setupView() {
+    
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("connectionChanged"), name: "clientDidDisconnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("connectionChanged"), name: "clientDidConnect", object: nil)
     
     alpha = 0;
     backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
@@ -76,7 +88,7 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
-    clientIdField.font = Constants.headlineFont
+    clientIdField.font = Constants.settingFont
     clientIdField.layer.borderWidth = 1
     clientIdField.returnKeyType = UIReturnKeyType.Done
     clientIdField.delegate = self
@@ -89,6 +101,10 @@ class InitializationView: UIView, UITextFieldDelegate {
     }
     
     centerView.addSubview(clientIdField)
+    
+    let idFieldSpacer = UIView(frame: CGRectMake(0, 0, 5, 5))
+    clientIdField.leftViewMode = UITextFieldViewMode.Always
+    clientIdField.leftView = idFieldSpacer
     
     clientIdField.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(clientIdLabel.snp_right).offset(20)
@@ -110,11 +126,15 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
-    clientSecretField.font = Constants.headlineFont
+    clientSecretField.font = Constants.settingFont
     clientSecretField.layer.borderWidth = 1
     clientSecretField.returnKeyType = UIReturnKeyType.Done
     clientSecretField.delegate = self
     clientSecretField.layer.borderColor = Constants.darkGreyColor.CGColor
+    
+    let secretFieldSpacer = UIView(frame: CGRectMake(0, 0, 5, 5))
+    clientSecretField.leftViewMode = UITextFieldViewMode.Always
+    clientSecretField.leftView = secretFieldSpacer
     
     if let secret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String {
       clientSecretField.text = secret
@@ -144,11 +164,15 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
-    uuidField.font = Constants.headlineFont
+    uuidField.font = Constants.settingFont
     uuidField.layer.borderWidth = 1
     uuidField.returnKeyType = UIReturnKeyType.Done
     uuidField.delegate = self
     uuidField.layer.borderColor = Constants.darkGreyColor.CGColor
+    
+    let uuidFieldSpacer = UIView(frame: CGRectMake(0, 0, 5, 5))
+    uuidField.leftViewMode = UITextFieldViewMode.Always
+    uuidField.leftView = uuidFieldSpacer
     
     if let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String {
       uuidField.text = uuid
@@ -165,6 +189,8 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
+    // Buttons
+    
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
     cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.tintColor
@@ -177,7 +203,22 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.bottom.equalTo(-10)
     }
     
-    okButton.setTitle("Senden", forState: UIControlState.Normal)
+    logoffButton.setTitle("Abmelden", forState: UIControlState.Normal)
+    logoffButton.addTarget(self, action: "didTapLogoff", forControlEvents: UIControlEvents.TouchUpInside)
+    logoffButton.backgroundColor = Constants.warningColor
+    centerView.addSubview(logoffButton)
+    
+    logoffButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(cancelButton.snp_right).offset(10)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+      make.bottom.equalTo(-10)
+    }
+    
+    logoffButton.enabled = SCConnectClient.sharedInstance().connected
+    logoffButton.alpha = SCConnectClient.sharedInstance().connected ? 1.0 : 0.5
+    
+    okButton.setTitle("Speichern", forState: UIControlState.Normal)
     okButton.addTarget(self, action: "didTapSend", forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
     centerView.addSubview(okButton)
@@ -189,11 +230,16 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.bottom.equalTo(-10)
     }
     
+    okButton.enabled = somethingChanged
+    okButton.alpha = somethingChanged ? 1 : 0.5
+    
     UIView.animateWithDuration(0.4, animations: { () -> Void in
       self.alpha = 1
     })
     
   }
+  
+  // Button handlers
   
   func didTapSend() {
     
@@ -214,6 +260,16 @@ class InitializationView: UIView, UITextFieldDelegate {
   func didTapCancel() {
     
     hide()
+    
+  }
+  
+  func didTapLogoff() {
+    
+      SCConnectClient.sharedInstance().logoff() { (success: Bool, error: NSError!) -> Void in
+        if (success) {
+          NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
+        }
+      }
     
   }
   
@@ -257,9 +313,23 @@ class InitializationView: UIView, UITextFieldDelegate {
     }
   }
   
+  // MARK: - UITexFieldDelegate
+  
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    self.somethingChanged = true
+    return true
+  }
+  
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
+  }
+  
+  // notification handler
+  
+  func connectionChanged() {
+    logoffButton.enabled = SCConnectClient.sharedInstance().connected
+    logoffButton.alpha = SCConnectClient.sharedInstance().connected ? 1.0 : 0.5
   }
   
 }
