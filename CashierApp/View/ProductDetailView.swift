@@ -33,7 +33,7 @@ class ProductDetailView: UIView {
         informationView.text = informationView.text.stringByAppendingString("\nWarengruppen\n")
         
         for group in product.groups {
-            informationView.text = informationView.text.stringByAppendingString("Warengruppe \(group.id) - Level \(group.groupLevel) : \(group.desc)\n")
+            informationView.text = informationView.text.stringByAppendingString("GAP \(group.id) - Level \(group.groupLevel) : \(group.desc)\n")
         }
         
         /*

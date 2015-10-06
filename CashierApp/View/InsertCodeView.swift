@@ -91,6 +91,9 @@ class InsertCodeView: UIView {
   }
   
   internal func didTapCancel() {
+    
+    SCAccountManager.sharedManager().stopPollingToken()
+    
     hide()
   }
   

@@ -28,7 +28,7 @@ PODS:
   - Mantle (2.0.4):
     - Mantle/extobjc (= 2.0.4)
   - Mantle/extobjc (2.0.4)
-  - SecucardConnectSDK (0.2.6):
+  - SecucardConnectSDK (0.2.9):
     - AFNetworking (= 2.6.0)
     - CocoaAsyncSocket (= 7.4.2)
     - Mantle (= 2.0.4)
@@ -50,9 +50,9 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   HockeySDK: 9f4ac41263acf9d8a4d59491a7f17af16529b935
   Mantle: 6bee68168423948be0c0c5924832bf3af188e099
-  SecucardConnectSDK: 278f66e1de447f22b74fb204606ee03a38830f01
+  SecucardConnectSDK: c0dc174c0b7eb5d16a8d29b69f5e885ce0a6e754
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
   TFBarcodeScanner: d98a2f224d8176722a8e4bc7d3b9e3e110690fef
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0.beta.5

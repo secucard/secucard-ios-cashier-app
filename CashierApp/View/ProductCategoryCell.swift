@@ -29,7 +29,7 @@ class ProductCategoryCell: UICollectionViewCell {
     }
   }
   
-  var data:[SCSmartProduct]?
+  var data:[String:[SCSmartProduct]]?
   
   override init(frame: CGRect) {
     

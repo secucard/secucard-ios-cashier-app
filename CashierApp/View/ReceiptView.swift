@@ -9,9 +9,17 @@
 import UIKit
 import SecucardConnectSDK
 
-class ReceiptView: UIView {
+class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
 
-  let textView = UITextView()
+  var receiptLines: [SCSmartReceiptLine]? {
+    didSet {
+      if let receiptLines = receiptLines {
+        tableView.reloadData()
+      }
+    }
+  }
+  
+  let tableView = UITableView()
   
   init() {
     super.init(frame: CGRectNull)
@@ -23,9 +31,17 @@ class ReceiptView: UIView {
     layer.shadowOffset = CGSizeMake(0.0, 20.0)
     layer.shadowOpacity = 1
     
-    addSubview(textView)
-    textView.font = UIFont(name:"Courier" , size: 16.0)
-    textView.snp_makeConstraints { (make) -> Void in
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    tableView.estimatedRowHeight = 10
+    tableView.registerClass(ReceiptHeadingCell.self, forCellReuseIdentifier: "headingCell")
+    tableView.registerClass(ReceiptTextCell.self, forCellReuseIdentifier: "textCell")
+    tableView.registerClass(ReceiptKeyValueCell.self, forCellReuseIdentifier: "keyValueCell")
+    tableView.registerClass(ReceiptSpaceCell.self, forCellReuseIdentifier: "emptyCell")
+    
+    addSubview(tableView)
+    tableView.snp_makeConstraints { (make) -> Void in
       make.edges.equalTo(self).inset(10)
     }
     
@@ -45,36 +61,53 @@ class ReceiptView: UIView {
   
   func addReceiptLine(line: SCSmartReceiptLine) {
     
+    
+  }
+  
+  func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return 1
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    guard receiptLines != nil else {
+     return 0
+    }
+    
+    return receiptLines!.count
+    
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    guard receiptLines != nil else {
+      return UITableViewCell()
+    }
+    
+    let line = receiptLines![indexPath.row]
+    var cell: ReceiptCell?
+    
     if line.type == "separator" {
       
-      if let caption = line.value["caption"] as? String {
-        
-        textView.text = ("\(textView.text)\(caption)\n")
-        
-      }
-      
+      cell = tableView.dequeueReusableCellWithIdentifier("headingCell", forIndexPath: indexPath) as! ReceiptHeadingCell
+
     } else if line.type == "name-value" {
       
-      if let name = line.value["name"] as? String, value = line.value["value"] as? String {
-        
-        textView.text = ("\(textView.text)\(name): \(value)\n")
-        
-      }
+      cell = tableView.dequeueReusableCellWithIdentifier("keyValueCell", forIndexPath: indexPath) as! ReceiptKeyValueCell
       
-    } else if line.type == "space" {
+    } else if line.type == "textline" {
       
-      textView.text = "\(textView.text)\n"
+      cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) as! ReceiptTextCell
       
     } else {
       
-      if let lineText = line.value["text"] as? String {
-      
-        textView.text = ("\(textView.text)\(lineText)\n")
-        
-      }
-      
+      cell = tableView.dequeueReusableCellWithIdentifier("emptyCell", forIndexPath: indexPath) as! ReceiptSpaceCell
     }
+
+    cell!.data = line
+    return cell!
     
   }
+  
 
 }

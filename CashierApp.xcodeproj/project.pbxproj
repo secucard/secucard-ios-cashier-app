@@ -10,6 +10,15 @@
 		05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E431BC28C1700C70DB2 /* TransactionInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E451BC2A89100C70DB2 /* receipt.json in Resources */ = {isa = PBXBuildFile; fileRef = AA125E441BC2A89100C70DB2 /* receipt.json */; settings = {ASSET_TAGS = (); }; };
+		AA125E471BC2B06000C70DB2 /* ReceiptHeadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E461BC2B06000C70DB2 /* ReceiptHeadingCell.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E491BC2B34100C70DB2 /* ReceiptTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E481BC2B34100C70DB2 /* ReceiptTextCell.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E4B1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E4A1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E4D1BC2B82700C70DB2 /* ReceiptSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E4C1BC2B82700C70DB2 /* ReceiptSpaceCell.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E4F1BC2B88600C70DB2 /* ReceiptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E4E1BC2B88600C70DB2 /* ReceiptCell.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E511BC2EE8E00C70DB2 /* ReceiptLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E501BC2EE8E00C70DB2 /* ReceiptLabel.swift */; settings = {ASSET_TAGS = (); }; };
+		AA125E611BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E601BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift */; settings = {ASSET_TAGS = (); }; };
 		AA1F10721BB8128900F869C0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F10711BB8128900F869C0 /* HockeySDK.framework */; };
 		AA256A071BBFE8B800283963 /* ConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA256A061BBFE8B800283963 /* ConnectionButton.swift */; settings = {ASSET_TAGS = (); }; };
 		AA3561F51B24647A00CDECB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F41B24647A00CDECB9 /* UIKit.framework */; };
@@ -38,6 +47,8 @@
 		AA6390551B300FAA00782582 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA6390541B300FAA00782582 /* CoreGraphics.framework */; };
 		AA9A32001B075AD100CCF6B4 /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = AA9A31FF1B075AD100CCF6B4 /* products.json */; };
 		AA9DCD8A1B0738F20070022E /* CashierAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD891B0738F20070022E /* CashierAppTests.swift */; };
+		AAC9FFDA1BC0095700397F54 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FFD91BC0095700397F54 /* AddProductView.swift */; settings = {ASSET_TAGS = (); }; };
+		AAC9FFDC1BC00E8800397F54 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */; settings = {ASSET_TAGS = (); }; };
 		AAD49A701B3A94C100DDC734 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A6F1B3A94C100DDC734 /* AssetsLibrary.framework */; };
 		AAD49A721B3A94CC00DDC734 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A711B3A94CC00DDC734 /* CoreText.framework */; };
 		AAD49A741B3A94D700DDC734 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A731B3A94D700DDC734 /* MobileCoreServices.framework */; };
@@ -63,6 +74,15 @@
 		8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionInfoInputView.swift; sourceTree = "<group>"; };
+		AA125E441BC2A89100C70DB2 /* receipt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = receipt.json; sourceTree = "<group>"; };
+		AA125E461BC2B06000C70DB2 /* ReceiptHeadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptHeadingCell.swift; sourceTree = "<group>"; };
+		AA125E481BC2B34100C70DB2 /* ReceiptTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptTextCell.swift; sourceTree = "<group>"; };
+		AA125E4A1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptKeyValueCell.swift; sourceTree = "<group>"; };
+		AA125E4C1BC2B82700C70DB2 /* ReceiptSpaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptSpaceCell.swift; sourceTree = "<group>"; };
+		AA125E4E1BC2B88600C70DB2 /* ReceiptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptCell.swift; sourceTree = "<group>"; };
+		AA125E501BC2EE8E00C70DB2 /* ReceiptLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptLabel.swift; sourceTree = "<group>"; };
+		AA125E601BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsSectionHeaderView.swift; sourceTree = "<group>"; };
 		AA1F10711BB8128900F869C0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
 		AA256A061BBFE8B800283963 /* ConnectionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionButton.swift; sourceTree = "<group>"; };
 		AA3561F41B24647A00CDECB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -98,6 +118,8 @@
 		AA9DCD831B0738F20070022E /* CashierAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashierAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9DCD881B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9DCD891B0738F20070022E /* CashierAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierAppTests.swift; sourceTree = "<group>"; };
+		AAC9FFD91BC0095700397F54 /* AddProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
+		AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
 		AAD49A6F1B3A94C100DDC734 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		AAD49A711B3A94CC00DDC734 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		AAD49A731B3A94D700DDC734 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -193,10 +215,20 @@
 				AA6390381B300AE400782582 /* ProductCell.swift */,
 				AA6390391B300AE400782582 /* ScanCardView.swift */,
 				AA63903A1B300AE400782582 /* SectionheaderView.swift */,
+				AA125E601BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift */,
 				AA63903B1B300AE400782582 /* TransactionStatusView.swift */,
 				AA53B3A21BB09E8500E831B4 /* ReceiptView.swift */,
 				AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */,
 				AA256A061BBFE8B800283963 /* ConnectionButton.swift */,
+				AAC9FFD91BC0095700397F54 /* AddProductView.swift */,
+				AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */,
+				AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */,
+				AA125E461BC2B06000C70DB2 /* ReceiptHeadingCell.swift */,
+				AA125E481BC2B34100C70DB2 /* ReceiptTextCell.swift */,
+				AA125E4C1BC2B82700C70DB2 /* ReceiptSpaceCell.swift */,
+				AA125E4A1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift */,
+				AA125E4E1BC2B88600C70DB2 /* ReceiptCell.swift */,
+				AA125E501BC2EE8E00C70DB2 /* ReceiptLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -252,6 +284,7 @@
 				AA9DCD721B0738F20070022E /* Info.plist */,
 				AA9A31FF1B075AD100CCF6B4 /* products.json */,
 				AA3561FA1B24662B00CDECB9 /* PrefixHeader.pch */,
+				AA125E441BC2A89100C70DB2 /* receipt.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -403,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA9A32001B075AD100CCF6B4 /* products.json in Resources */,
+				AA125E451BC2A89100C70DB2 /* receipt.json in Resources */,
 				AA6390241B300AC900782582 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,26 +548,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAC9FFDA1BC0095700397F54 /* AddProductView.swift in Sources */,
 				AA6390461B300AE400782582 /* BasketUserCell.swift in Sources */,
 				AA63904A1B300AE400782582 /* LogView.swift in Sources */,
+				AA125E431BC28C1700C70DB2 /* TransactionInfoInputView.swift in Sources */,
 				AA6390451B300AE400782582 /* BasketProductCell.swift in Sources */,
 				AA6390421B300AE400782582 /* BasketItem.swift in Sources */,
 				AA63903F1B300AE400782582 /* AppDelegate.swift in Sources */,
+				AA125E611BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift in Sources */,
+				AA125E4D1BC2B82700C70DB2 /* ReceiptSpaceCell.swift in Sources */,
+				AA125E471BC2B06000C70DB2 /* ReceiptHeadingCell.swift in Sources */,
 				AA6390411B300AE400782582 /* Constants.swift in Sources */,
 				AA6390511B300AE400782582 /* TransactionStatusView.swift in Sources */,
+				AAC9FFDC1BC00E8800397F54 /* TextInputField.swift in Sources */,
 				AA6390531B300AE400782582 /* ScanViewController.swift in Sources */,
 				AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */,
+				AA125E4F1BC2B88600C70DB2 /* ReceiptCell.swift in Sources */,
 				AA6390501B300AE400782582 /* SectionheaderView.swift in Sources */,
 				AA63904D1B300AE400782582 /* ProductCategoryCell.swift in Sources */,
 				AA6390431B300AE400782582 /* Checkin.swift in Sources */,
 				AA6390471B300AE400782582 /* CheckinCell.swift in Sources */,
+				AA125E511BC2EE8E00C70DB2 /* ReceiptLabel.swift in Sources */,
 				AA6390481B300AE400782582 /* InitializationView.swift in Sources */,
 				AA63904C1B300AE400782582 /* PaymentButton.swift in Sources */,
 				AA63904E1B300AE400782582 /* ProductCell.swift in Sources */,
 				AA63904F1B300AE400782582 /* ScanCardView.swift in Sources */,
 				AA6390491B300AE400782582 /* InsertCodeView.swift in Sources */,
+				AA125E4B1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift in Sources */,
 				AA53B3A31BB09E8500E831B4 /* ReceiptView.swift in Sources */,
 				AA256A071BBFE8B800283963 /* ConnectionButton.swift in Sources */,
+				AA125E491BC2B34100C70DB2 /* ReceiptTextCell.swift in Sources */,
 				AA63904B1B300AE400782582 /* ModifyPriceView.swift in Sources */,
 				AA6390521B300AE400782582 /* MainViewController.swift in Sources */,
 			);

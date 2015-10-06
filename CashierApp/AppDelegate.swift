@@ -54,6 +54,7 @@
         }
       }
       
+    
       // initialize view
       mainController = MainViewController()
       
@@ -67,10 +68,6 @@
       window?.rootViewController = self.mainController
       window?.makeKeyAndVisible()
       
-      //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientId.rawValue)
-      //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.ClientSecret.rawValue)
-      //      NSUserDefaults.standardUserDefaults().removeObjectForKey(DefaultsKeys.UUID.rawValue)
-      
       connectCashier { (success: Bool, error: NSError?) -> Void in
         
         if let error = error {
@@ -79,24 +76,24 @@
         
       }
       
-      // keyboard show up problem fix
-      //      let lagFreeField = UITextField()
-      //      self.window?.addSubview(lagFreeField)
-      //      lagFreeField.becomeFirstResponder()
-      //      lagFreeField.resignFirstResponder()
-      //      lagFreeField.removeFromSuperview()
-      
       return true
     }
     
     func connectCashier( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
       
       // check if all information for initialization ist there
-      let clientId = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientId.rawValue) as? String
-      let clientSecret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String
-      let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String
+      let clientId = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.ClientId.rawValue)
+      let clientSecret = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.ClientSecret.rawValue)
+      let uuid = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.UUID.rawValue)
       
-      guard clientId != nil || clientSecret != nil || uuid != nil else {
+      var server = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.Server.rawValue)
+      if server == nil {
+        server = Constants.serverData[0]
+        NSUserDefaults.standardUserDefaults().setObject(server, forKey: DefaultsKeys.Server.rawValue)
+      }
+      
+      
+      guard clientId != nil && clientSecret != nil && uuid != nil && server != nil else {
         
         let initView = InitializationView()
         initView.delegate = self
@@ -116,13 +113,13 @@
       
       // initialize connect client
       
-      let restConfig: SCRestConfiguration = SCRestConfiguration(baseUrl: Constants.baseUrl, andAuthUrl: Constants.authUrl)
+      let restConfig: SCRestConfiguration = SCRestConfiguration(baseUrl: "\(server!)\(Constants.apiString)", andAuthUrl: "\(server!)")
       
       let stompConfig: SCStompConfiguration = SCStompConfiguration(host: Constants.stompHost, andVHost: Constants.stompVHost, port: Constants.stompPort, userId: "", password: "", useSSL: true, replyQueue: Constants.replyQueue, connectionTimeoutSec: Constants.connectionTimeoutSec, socketTimeoutSec: Constants.socketTimeoutSec, heartbeatMs: Constants.heartbeatMs, basicDestination: Constants.basicDestination)
       
       let clientCredentials: SCClientCredentials = SCClientCredentials(clientId: clientId, clientSecret: clientSecret)
       
-      let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: Constants.authUrl, clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: uuid, authType: "device")
+      let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: "\(server!)", clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: uuid, authType: "device")
       
       // TEMP: add to always call device auth
       // SCAccountManager.sharedManager().killToken()

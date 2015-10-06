@@ -12,13 +12,14 @@ enum DefaultsKeys : String {
   case ClientId = "clientId"
   case ClientSecret = "clientSecret"
   case UUID = "uuid"
+  case Server = "server"
 }
 
 class Constants: NSObject {
   
   // API Settings
-  static let baseUrl: String = "https://connect.secucard.com/api/v2/"
-  static let authUrl: String = "https://connect.secucard.com/"
+  static let baseUrl: String = "https://connect.secucard.com/"
+  static let apiString: String = "api/v2/"
   
   static let stompHost: String = "connect.secucard.com"
   static let stompVHost: String = "/"
@@ -54,6 +55,8 @@ class Constants: NSObject {
   
   static let merchantRef: String = "KundeXY"
   
+  static let serverData = ["https://connect.secucard.com/","https://connect-dev1.secupay-ag.de/","https://connect-dev2.secupay-ag.de/","https://connect-dev3.secupay-ag.de/","https://connect-dev4.secupay-ag.de/","https://connect-dev5.secupay-ag.de/","https://connect-dev6.secupay-ag.de/","https://connect-dev7.secupay-ag.de/","https://connect-dev8.secupay-ag.de/","https://connect-dev9.secupay-ag.de/","https://connect-dev10.secupay-ag.de/"]
+  
   // Colors
   static let tintColor: UIColor = UIColor(red: 63/255, green: 116/255, blue: 164/255, alpha: 1)
   static let tintColorBright: UIColor = UIColor(red: 146/255, green: 186/255, blue: 224/255, alpha: 1)
@@ -70,10 +73,18 @@ class Constants: NSObject {
   static let redColor: UIColor = UIColor(red: 209/255, green: 66/255, blue: 58/255, alpha: 1)
   
   // Fontsizes
-  static let regularFont: UIFont = UIFont.systemFontOfSize(12.0)
-  static let headlineFont: UIFont = UIFont.systemFontOfSize(16.0)
-  static let settingFont: UIFont = UIFont.systemFontOfSize(14.0)
-  static let sumFont: UIFont = UIFont.systemFontOfSize(18.0)
-  static let statusFont: UIFont = UIFont.systemFontOfSize(28.0)
+  static let regularFont = UIFont.systemFontOfSize(12.0)
+  static let headlineFont = UIFont.systemFontOfSize(16.0)
+  static let settingFont = UIFont.systemFontOfSize(14.0)
+  static let sumFont = UIFont.systemFontOfSize(18.0)
+  static let statusFont = UIFont.systemFontOfSize(28.0)
+  
+//  static let receiptHeadingFont = UIFont.init(name: "HiraKakuProN-W3", size: 16)
+//  static let receiptRegularFont = UIFont.init(name: "HiraKakuProN-W3", size: 14)
+//  static let receiptBoldFont = UIFont.init(name: "HiraKakuProN-W6", size: 14)
+  
+  static let receiptHeadingFont = UIFont.systemFontOfSize(16)
+  static let receiptRegularFont = UIFont.systemFontOfSize(14)
+  static let receiptBoldFont = UIFont.boldSystemFontOfSize(14)
   
 }

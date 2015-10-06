@@ -5,7 +5,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -21,7 +21,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -37,7 +37,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -53,7 +53,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -68,12 +68,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
-          "level": 1
-        },
-        {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -90,7 +85,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -106,7 +101,7 @@
       "group": [
         {
           "id": "1",
-          "desc": "Wohnwelt",
+          "desc": "Haushalt",
           "level": 1
         }
       ],
@@ -121,9 +116,14 @@
       "id": 8,
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
+        },
+        {
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 3995,
@@ -137,9 +137,14 @@
       "id": 9,
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
+        },
+        {
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 4499,
@@ -152,14 +157,14 @@
     {
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
         },
         {
-          "id": "99",
-          "desc": "Smart",
-          "level": 1
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 2899,
@@ -173,14 +178,14 @@
     {
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
         },
         {
-          "id": "99",
-          "desc": "Smart",
-          "level": 1
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 499,
@@ -194,9 +199,14 @@
     {
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
+        },
+        {
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 1495,
@@ -210,9 +220,14 @@
     {
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
+        },
+        {
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 2399,
@@ -226,14 +241,14 @@
     {
       "group": [
         {
-          "id": "2",
-          "desc": "Sommerwelt",
+          "id": "1",
+          "desc": "Haushalt",
           "level": 1
         },
         {
-          "id": "99",
-          "desc": "Smart",
-          "level": 1
+          "id": "2",
+          "desc": "Sommerartikel",
+          "level": 2
         }
       ],
       "priceOne": 249,
@@ -249,13 +264,13 @@
       "group": [
         {
           "id": "3",
-          "desc": "Prepaid",
+          "desc": "Prepaid (Smart)",
           "level": 1
         }
       ],
       "ean": "4009900401937",
-      "articleNumber": "ART00015",
-      "desc": "Callya Prepaid 15€",
+      "articleNumber": "ART00301",
+      "desc": "EPlus 15€",
       "priceOne": 1500,
       "quantity": 1,
       "tax": 7
@@ -265,14 +280,14 @@
       "group": [
         {
           "id": "3",
-          "desc": "Prepaid",
+          "desc": "Prepaid (Smart)",
           "level": 1
         }
       ],
-      "priceOne": 1500,
+      "priceOne": 2000,
       "ean": "4009900401937",
-      "articleNumber": "ART00016",
-      "desc": "itunes gutschein 15€",
+      "articleNumber": "ART00302",
+      "desc": "EPlus 20€",
       "quantity": 1,
       "tax": 7
     },
@@ -281,14 +296,142 @@
       "group": [
         {
           "id": "3",
-          "desc": "Prepaid",
+          "desc": "Prepaid (Smart)",
           "level": 1
         }
       ],
       "ean": "4009900401937",
-      "articleNumber": "ART00017",
-      "desc": "Nintendo eshop card 15€",
+      "articleNumber": "ART00303",
+      "desc": "EPlus 30€",
+      "priceOne": 3000,
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 15,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid (Smart)",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00311",
+      "desc": "Vodafone 5€",
+      "priceOne": 500,
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 16,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid (Smart)",
+          "level": 1
+        }
+      ],
       "priceOne": 1500,
+      "ean": "4009900401937",
+      "articleNumber": "ART00312",
+      "desc": "Vodafone 15€",
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 17,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid (Smart)",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00313",
+      "desc": "Vodafone 25€",
+      "priceOne": 2500,
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 15,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid (Smart)",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00321",
+      "desc": "T-Mobile 15€",
+      "priceOne": 1500,
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 16,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid (Smart)",
+          "level": 1
+        }
+      ],
+      "priceOne": 3000,
+      "ean": "4009900401937",
+      "articleNumber": "ART00322",
+      "desc": "T-Mobile 30€",
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 17,
+      "group": [
+        {
+          "id": "3",
+          "desc": "Prepaid (Smart)",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00323",
+      "desc": "T-Mobile 50€",
+      "priceOne": 5000,
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 16,
+      "group": [
+        {
+          "id": "99",
+          "desc": "Loyalty (Smart)",
+          "level": 1
+        }
+      ],
+      "priceOne": 1500,
+      "ean": "4009900401937",
+      "articleNumber": "ART00341",
+      "desc": "Gutscheinaufladung 15€",
+      "quantity": 1,
+      "tax": 7
+    },
+    {
+      "id": 17,
+      "group": [
+        {
+          "id": "99",
+          "desc": "Loyalty (Smart)",
+          "level": 1
+        }
+      ],
+      "ean": "4009900401937",
+      "articleNumber": "ART00342",
+      "desc": "Gutscheinaufladung 30€",
+      "priceOne": 3000,
       "quantity": 1,
       "tax": 7
     }

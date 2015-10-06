@@ -13,18 +13,24 @@ protocol InitializationViewDelegate {
   func didSaveCredentials()
 }
 
-class InitializationView: UIView, UITextFieldDelegate {
-
+class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+  
   let titleLabel = UILabel()
   
   let clientIdLabel = UILabel()
-  let clientIdField = UITextField()
+  let clientIdField = TextInputField()
   
   let clientSecretLabel = UILabel()
-  let clientSecretField = UITextField()
+  let clientSecretField = TextInputField()
   
   let uuidLabel = UILabel()
-  let uuidField = UITextField()
+  let uuidField = TextInputField()
+  
+  let serverLabel = UILabel()
+  let serverField = TextInputField()
+  let serverPicker = UIPickerView()
+  
+  
   
   let cancelButton = UIButton(type: UIButtonType.Custom)
   let logoffButton = UIButton(type: UIButtonType.Custom)
@@ -36,6 +42,14 @@ class InitializationView: UIView, UITextFieldDelegate {
     didSet {
       okButton.enabled = somethingChanged
       okButton.alpha = somethingChanged ? 1 : 0.5
+    }
+  }
+  
+  var newServer: String? {
+    didSet {
+      if let newServer = newServer {
+        serverField.text = newServer
+      }
     }
   }
   
@@ -62,7 +76,7 @@ class InitializationView: UIView, UITextFieldDelegate {
     
     centerView.snp_makeConstraints { (make) -> Void in
       make.width.equalTo(500)
-      make.height.equalTo(300)
+      make.height.equalTo(350)
       make.centerX.equalTo(self)
       make.top.equalTo(50)
     }
@@ -88,12 +102,8 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
-    clientIdField.font = Constants.settingFont
-    clientIdField.layer.borderWidth = 1
-    clientIdField.returnKeyType = UIReturnKeyType.Done
     clientIdField.delegate = self
-    clientIdField.layer.borderColor = Constants.darkGreyColor.CGColor
-
+    
     if let clientId = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientId.rawValue) as? String {
       clientIdField.text = clientId
     } else {
@@ -101,10 +111,6 @@ class InitializationView: UIView, UITextFieldDelegate {
     }
     
     centerView.addSubview(clientIdField)
-    
-    let idFieldSpacer = UIView(frame: CGRectMake(0, 0, 5, 5))
-    clientIdField.leftViewMode = UITextFieldViewMode.Always
-    clientIdField.leftView = idFieldSpacer
     
     clientIdField.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(clientIdLabel.snp_right).offset(20)
@@ -126,15 +132,7 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
-    clientSecretField.font = Constants.settingFont
-    clientSecretField.layer.borderWidth = 1
-    clientSecretField.returnKeyType = UIReturnKeyType.Done
     clientSecretField.delegate = self
-    clientSecretField.layer.borderColor = Constants.darkGreyColor.CGColor
-    
-    let secretFieldSpacer = UIView(frame: CGRectMake(0, 0, 5, 5))
-    clientSecretField.leftViewMode = UITextFieldViewMode.Always
-    clientSecretField.leftView = secretFieldSpacer
     
     if let secret = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.ClientSecret.rawValue) as? String {
       clientSecretField.text = secret
@@ -152,7 +150,7 @@ class InitializationView: UIView, UITextFieldDelegate {
     }
     
     // uuid
-
+    
     uuidLabel.text = "UUID"
     uuidLabel.font = Constants.headlineFont
     centerView.addSubview(uuidLabel)
@@ -164,15 +162,7 @@ class InitializationView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
     }
     
-    uuidField.font = Constants.settingFont
-    uuidField.layer.borderWidth = 1
-    uuidField.returnKeyType = UIReturnKeyType.Done
     uuidField.delegate = self
-    uuidField.layer.borderColor = Constants.darkGreyColor.CGColor
-    
-    let uuidFieldSpacer = UIView(frame: CGRectMake(0, 0, 5, 5))
-    uuidField.leftViewMode = UITextFieldViewMode.Always
-    uuidField.leftView = uuidFieldSpacer
     
     if let uuid = NSUserDefaults.standardUserDefaults().objectForKey(DefaultsKeys.UUID.rawValue) as? String {
       uuidField.text = uuid
@@ -185,6 +175,53 @@ class InitializationView: UIView, UITextFieldDelegate {
     uuidField.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(uuidLabel.snp_right).offset(20)
       make.top.equalTo(uuidLabel)
+      make.right.equalTo(-20)
+      make.height.equalTo(30)
+    }
+    
+    // server picker
+    
+    serverLabel.font = Constants.headlineFont
+    centerView.addSubview(serverLabel)
+    
+    var server = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.Server.rawValue)
+    if server == nil {
+      server = Constants.serverData[0]
+      NSUserDefaults.standardUserDefaults().setObject(server, forKey: DefaultsKeys.Server.rawValue)
+    }
+    
+    serverLabel.text = "Server"
+    serverLabel.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(20)
+      make.top.equalTo(uuidLabel.snp_bottom).offset(20)
+      make.width.equalTo(100)
+      make.height.equalTo(30)
+    }
+    
+    serverPicker.delegate = self
+    serverPicker.dataSource = self
+    
+    let toolBar = UIToolbar(frame: CGRectMake(0, 0, self.frame.size.width, 50))
+    
+    let cancelBarButton = UIBarButtonItem(title: "Abbrechen", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("didTapPickerCancel"))
+    cancelBarButton.tintColor = UIColor.whiteColor()
+
+    let doneBarButton = UIBarButtonItem(title: "OK", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("didTapPickerOk"))
+    doneBarButton.tintColor = UIColor.whiteColor()
+    
+    let flexibleBarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+
+    toolBar.items = [cancelBarButton, flexibleBarSpace, doneBarButton]
+    
+    serverField.inputAccessoryView = toolBar
+    serverField.inputView = serverPicker
+    serverField.text = server
+    
+    centerView.addSubview(serverField)
+    
+    serverField.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(serverLabel.snp_right).offset(20)
+      make.top.equalTo(serverLabel)
       make.right.equalTo(-20)
       make.height.equalTo(30)
     }
@@ -241,6 +278,17 @@ class InitializationView: UIView, UITextFieldDelegate {
   
   // Button handlers
   
+  func didTapPickerCancel() {
+    serverField.resignFirstResponder()
+  }
+  
+  func didTapPickerOk() {
+    self.somethingChanged = true
+    let row = serverPicker.selectedRowInComponent(0)
+    self.newServer = Constants.serverData[row]
+    serverField.resignFirstResponder()
+  }
+  
   func didTapSend() {
     
     if (checkFields()) {
@@ -248,7 +296,8 @@ class InitializationView: UIView, UITextFieldDelegate {
       NSUserDefaults.standardUserDefaults().setObject(clientIdField.text, forKey: DefaultsKeys.ClientId.rawValue)
       NSUserDefaults.standardUserDefaults().setObject(clientSecretField.text, forKey: DefaultsKeys.ClientSecret.rawValue)
       NSUserDefaults.standardUserDefaults().setObject(uuidField.text, forKey: DefaultsKeys.UUID.rawValue)
-
+      NSUserDefaults.standardUserDefaults().setObject(newServer, forKey: DefaultsKeys.Server.rawValue)
+      
       delegate?.didSaveCredentials()
       
       hide()
@@ -265,11 +314,11 @@ class InitializationView: UIView, UITextFieldDelegate {
   
   func didTapLogoff() {
     
-      SCConnectClient.sharedInstance().logoff() { (success: Bool, error: NSError!) -> Void in
-        if (success) {
-          NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
-        }
+    SCConnectClient.sharedInstance().logoff() { (success: Bool, error: NSError!) -> Void in
+      if (success) {
+        NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
       }
+    }
     
   }
   
@@ -311,6 +360,24 @@ class InitializationView: UIView, UITextFieldDelegate {
         self.removeFromSuperview()
         
     }
+  }
+  
+  // MARK: - UIPickerViewDataSource, UIPickerViewDelegate
+  
+  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return Constants.serverData.count
+  }
+  
+  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return Constants.serverData[row]
+  }
+  
+  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    
   }
   
   // MARK: - UITexFieldDelegate

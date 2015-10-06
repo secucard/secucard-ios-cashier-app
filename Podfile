@@ -5,19 +5,19 @@ use_frameworks!
 
 target 'CashierApp', :exclusive => true do
   
-  pod 'SecucardConnectSDK', '~> 0.2'
+  pod 'SecucardConnectSDK', '0.2.9'
   
-  pod 'SwiftyJSON'
-  pod 'SnapKit'
-  pod 'Alamofire'
-  pod 'TFBarcodeScanner'
-  pod 'HockeySDK'
+  pod 'SwiftyJSON', '2.3.0'
+  pod 'SnapKit', '0.15.0'
+  pod 'Alamofire', '2.0.2'
+  pod 'TFBarcodeScanner', '1.1.0'
+  pod 'HockeySDK', '3.8.2'
   
 end
 
 target 'CashierAppTests', :exclusive => true do
   
-  pod 'SecucardConnectSDK', '~> 0.2'
+  pod 'SecucardConnectSDK', '0.2.9'
   
 #  pod 'Quick'
 #  pod 'Nimble', '= 2.0.0-rc.3'

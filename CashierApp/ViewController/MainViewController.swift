@@ -31,7 +31,7 @@ enum PayMethod : String {
   case Paypal = "paypal"
 }
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate, UIGestureRecognizerDelegate, ConnectionButtonDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate, UIGestureRecognizerDelegate, ConnectionButtonDelegate, AddProductViewDelegate, TransactionInfoInputViewDelegate {
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
@@ -40,6 +40,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let checkinReuseIdentifier = "CheckinCell"
   
   let basketSectionHeaerReuseIdentifier = "HeaderView"
+  let productSectionHeaerReuseIdentifier = "ProductsHeaderView"
   
   var productCategoriesCollection: UICollectionView
   var productsCollection: UICollectionView
@@ -59,7 +60,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   var manager: Manager?
   
-  var productCategories = [String:[SCSmartProduct]]()
+  var productCategories = [String:[String:[SCSmartProduct]]]()
   var checkins = [SCSmartCheckin]() {
     didSet {
       checkinsCollection.reloadData()
@@ -72,7 +73,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       basketCollection.reloadData()
       calcPrice()
       updateTransactionBasket { (success, error) -> Void in
-        
+        if let error = error {
+          SCLogManager.error(error)
+        }
       }
     }
   }
@@ -88,7 +91,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let connectionButton = ConnectionButton()
   
-  let scanCardButton: PaymentButton
   let showLogButton: PaymentButton
   let settingsButton: PaymentButton
   
@@ -113,6 +115,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let emptyButton = UIButton(type: UIButtonType.Custom)
   
+  let transactionInfoButton = UIButton(type: UIButtonType.Custom)
+  
   var currentCategory = 0 {
     didSet {
       self.productsCollection.reloadData()
@@ -128,31 +132,39 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       // create categories
       if let items = self.json["items"].array {
         
-        var catArray = [String:[SCSmartProduct]]()
+        var catArray = [String:[String:[SCSmartProduct]]]()
         
         for item:JSON in items {
           
-          if let groups = item["group"].array {
+          var product: SCSmartProduct?
+          do {
+            product = try MTLJSONAdapter.modelOfClass(SCSmartProduct.self, fromJSONDictionary: item.dictionaryObject!) as? SCSmartProduct
+          } catch {
+            print("cannot parse product")
+          }
+          
+          if let groupname1 = product?.groups[0].desc, product = product {
             
-            for group:JSON in groups {
+            if catArray[groupname1] == nil {
+              catArray[groupname1] = [String:[SCSmartProduct]]()
+            }
             
-              if let groupName = group["desc"].string {
-                
-                var product: SCSmartProduct?
-                do {
-                  product = try MTLJSONAdapter.modelOfClass(SCSmartProduct.self, fromJSONDictionary: item.dictionaryObject!) as? SCSmartProduct
-                } catch {
-                  print("cannot parse product")
+            if product.groups.count <= 1 {
+              
+              if catArray[groupname1]!["Normal"] == nil {
+                catArray[groupname1]!["Normal"] = [SCSmartProduct]()
+              }
+
+              catArray[groupname1]!["Normal"]!.append(product)
+              
+            } else {
+            
+              if let groupname2 = product.groups[1].desc {
+                if catArray[groupname1]![groupname2] == nil {
+                  catArray[groupname1]![groupname2] = [SCSmartProduct]()
                 }
                 
-                
-                guard let _ = catArray[groupName] else {
-                  catArray[groupName] = [SCSmartProduct]()
-                  catArray[groupName]?.append(product!)
-                  break
-                }
-                
-                catArray[groupName]?.append(product!)
+                catArray[groupname1]![groupname2]!.append(product)
                 
               }
               
@@ -191,9 +203,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     productsLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
     productsLayout.itemSize = CGSizeMake(150, 150)
+    productsLayout.headerReferenceSize = CGSizeMake(310, 60)
     
     productsCollection = UICollectionView(frame: CGRectMake(0, 0, 10, 10), collectionViewLayout: productsLayout)
     productsCollection.registerClass(ProductCell.self, forCellWithReuseIdentifier: productReuseIdentifier)
+    productsCollection.registerClass(ProductsSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: productSectionHeaerReuseIdentifier)
     productsCollection.contentInset = UIEdgeInsetsMake(10, 10, 10, 10)
     
     basketLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -213,7 +227,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinsCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     
     // Payment buttons initialization
-    scanCardButton = PaymentButton(icon: "ScanCard", action: Selector("didTapScanCard"))
     showLogButton = PaymentButton(icon: "Log", action: Selector("didTapShowLog"))
     settingsButton = PaymentButton(icon: "Settings", action: Selector("didTapShowSettings"))
     
@@ -222,8 +235,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // call super initialization
     super.init(nibName: nil, bundle: nil)
     
-    
-    scanCardButton.target = self
     showLogButton.target = self
     settingsButton.target = self
     
@@ -261,13 +272,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // security
     
-    let serverTrustPolicies: [String: ServerTrustPolicy] = [
-      "connect.secucard.com": .DisableEvaluation
-    ]
+//    let serverTrustPolicies: [String: ServerTrustPolicy] = [
+//      "connect.secucard.com": .DisableEvaluation
+//    ]
     
-    manager = Manager(
-      serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-    )
+//    manager = Manager(
+//      serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
+//    )
     
   }
   
@@ -404,6 +415,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.height.equalTo(50)
     }
     
+    transactionInfoButton.setTitle("i", forState: UIControlState.Normal)
+    transactionInfoButton.addTarget(self, action: "didTapTransactionInformation", forControlEvents: UIControlEvents.TouchUpInside)
+    transactionInfoButton.backgroundColor = Constants.tintColor
+    sumView.addSubview(transactionInfoButton)
+    
+    transactionInfoButton.snp_makeConstraints { (make) -> Void in
+      make.right.equalTo(emptyButton.snp_left).offset(-10)
+      make.centerY.equalTo(sumView)
+      make.width.height.equalTo(50)
+    }
+    
     topBorder.backgroundColor = Constants.brightGreyColor
     sumView.addSubview(topBorder)
     topBorder.snp_makeConstraints { (make) -> Void in
@@ -486,23 +508,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.equalTo(120)
     }
     
-    // scan card button
-    
-    bottomBar.addSubview(scanCardButton)
-    
-    scanCardButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(connectionButton.snp_right).offset(10)
-      make.centerY.equalTo(bottomBar)
-      make.width.equalTo(50)
-      make.height.equalTo(50)
-    }
-    
     // show log button
     
     bottomBar.addSubview(showLogButton)
     
     showLogButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(scanCardButton.snp_right).offset(10)
+      make.left.equalTo(connectionButton.snp_right).offset(10)
       make.centerY.equalTo(bottomBar)
       make.width.equalTo(50)
       make.height.equalTo(50)
@@ -531,7 +542,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     calcPrice()
     CheckTransactionReady()
-      
+    
   }
   
   override func didReceiveMemoryWarning() {
@@ -571,11 +582,31 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
+  func didTapTransactionInformation() {
+  
+    let infoView = TransactionInfoInputView(transactionRef: currentTransaction.transactionRef, merchantRef: currentTransaction.merchantRef)
+    infoView.delegate = self
+    infoView.alpha = 0
+
+    view.addSubview(infoView)
+    infoView.snp_makeConstraints { (make) -> Void in
+      make.edges.equalTo(view)
+    }
+    
+    UIView.animateWithDuration(0.4) { () -> Void in
+      infoView.alpha = 1
+    }
+    
+  }
+  
   // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
   
   func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
     
     switch identifierForCollection(collectionView) {
+      
+    case CollectionType.Product:
+      return Array(Array(productCategories.values)[currentCategory].keys).count
       
     case CollectionType.Basket:
       return 2
@@ -596,7 +627,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory] {
+      let subCatKey = Array(Array(productCategories.values)[currentCategory].keys)[section]
+      
+      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory][subCatKey] {
         return items.count
       } else {
         return 0
@@ -646,7 +679,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory] {
+      let subCatKey = Array(Array(productCategories.values)[currentCategory].keys)[indexPath.section]
+      
+      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory][subCatKey] {
         
         if let cell = collectionView.dequeueReusableCellWithReuseIdentifier(productReuseIdentifier, forIndexPath: indexPath) as? ProductCell {
           cell.data = items[indexPath.row]
@@ -707,7 +742,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.Product:
       
-      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory] {
+      let subCatKey = Array(Array(productCategories.values)[currentCategory].keys)[indexPath.section]
+      
+      if let items:[SCSmartProduct] = Array(productCategories.values)[currentCategory][subCatKey] {
         
         let item = items[indexPath.row]
         let basketItem: BasketItem = BasketItem(product: item)
@@ -738,14 +775,48 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-    
-    if collectionView == basketCollection {
+  
+    if collectionView == productsCollection {
+      
+      if (kind == UICollectionElementKindSectionHeader) {
+        
+        let headerView: ProductsSectionHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: productSectionHeaerReuseIdentifier, forIndexPath: indexPath) as! ProductsSectionHeaderView
+        let subCatKey = Array(Array(productCategories.values)[currentCategory].keys)[indexPath.section]
+        
+        headerView.label.text = subCatKey
+        
+        return headerView
+
+      }
+      
+    } else if collectionView == basketCollection {
       
       if (kind == UICollectionElementKindSectionHeader) {
         
         let headerView: SectionheaderView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: basketSectionHeaerReuseIdentifier, forIndexPath: indexPath) as! SectionheaderView
         
-        headerView.label.text = (indexPath.section == 0) ? "Produkte" : "Käufer"
+        let button = UIButton(type: UIButtonType.Custom)
+        button.backgroundColor = Constants.tintColor
+        button.setTitle("+", forState: UIControlState.Normal)
+        
+        if indexPath.section == 0 {
+          
+          headerView.label.text = "Produkte"
+          button.addTarget(self, action: Selector("didTapAddProduct"), forControlEvents: UIControlEvents.TouchUpInside)
+          
+        } else {
+          
+          headerView.label.text = "Idents"
+          button.addTarget(self, action: Selector("didTapAddIdent"), forControlEvents: UIControlEvents.TouchUpInside)
+          
+        }
+        
+        headerView.addSubview(button)
+        button.snp_makeConstraints(closure: { (make) -> Void in
+          make.right.equalTo(headerView)
+          make.centerY.equalTo(headerView)
+          make.width.height.equalTo(30)
+        })
         
         return headerView
         
@@ -756,6 +827,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     return SectionheaderView()
     
   }
+  
+  
   
   
   // MARK: - ModifyPriceViewDelegate
@@ -831,6 +904,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     currentTransaction.basketInfo = basketInfo
     
     saveTransaction({ (success, error) -> Void in
+
       if let error = error {
         SCLogManager.error(error)
       }
@@ -934,7 +1008,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func sendTransaction(method: PayMethod) {
     
     // if not created yet, create it and try again
-    if currentTransaction.id == nil {
+    guard currentTransaction.id != nil else {
       saveTransaction({ (success, error) -> Void in
         if success {
           self.sendTransaction(method)
@@ -985,7 +1059,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if let error = error {
           
           SCLogManager.error(error)
-          statusView.addStatus("Transaktionsabbruch: \(error.localizedDescription)")
+          statusView.addStatus("\(error.localizedDescription)\nFehler: \(error.domain) \nGrund: \(error.localizedFailureReason!)\nSupport-ID: \(error.localizedRecoverySuggestion!)")
           
         } else {
           
@@ -993,9 +1067,16 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             // check results
             if result.status == "ok" {
+              
               statusView.addStatus("Transaktion erfolgreich durchgeführt")
+              
+              self.basket = [BasketItem]()
+              self.customerUsed = nil
+              
             } else if result.status == "failed" {
+              
               statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
+              
             }
             
             if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
@@ -1013,11 +1094,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 constraint = make.height.equalTo(0).offset(0).constraint
               })
               
-              for line in receiptLines {
-                
-                receiptView.addReceiptLine(line)
-                
-              }
+              receiptView.receiptLines = receiptLines
               
               if let constraint = constraint {
               
@@ -1034,12 +1111,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
               }
               
             }
+            
           }
         }
         
         self.currentTransaction = SCSmartTransaction()
-        self.basket = [BasketItem]()
-        self.customerUsed = nil
+        
         
       })
       
@@ -1057,8 +1134,25 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func didTapScanCard() {
+  func didTapAddIdent() {
     showScanCardView()
+  }
+  
+  func didTapAddProduct() {
+    
+    let addProductView = AddProductView()
+    addProductView.alpha = 0
+    addProductView.delegate = self
+    
+    view.addSubview(addProductView)
+    addProductView.snp_makeConstraints { (make) -> Void in
+      make.edges.equalTo(self.view)
+    }
+    
+    UIView.animateWithDuration(0.4) { () -> Void in
+      addProductView.alpha = 1
+    }
+    
   }
   
   func didTapShowLog() {
@@ -1165,13 +1259,45 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //        alert.show()
 //      })
       
-      logView.addToLog("ERROR: \(message.message)")
+      var logString = "< ERROR > \n\(message.message)"
+      
+      if let error = message.error {
+        
+        logString += "\nDomain: \(error.domain)"
+        
+        if let reason = error.localizedFailureReason, suggestion = error.localizedRecoverySuggestion {
+        
+          logString += "\nReason: \(reason)\nsupport id: \(suggestion)"
+          
+        }
+        
+      }
+      
+      logView.addToLog(logString)
       
     } else {
     
       logView.addToLog(message.message)
       
     }
+    
+  }
+  
+  // MARK: - TransactionInfoInputViewDelegate
+  func didAddTransactionInput(transactionRef: String, merchantRef: String) {
+    
+    currentTransaction.transactionRef = transactionRef
+    currentTransaction.merchantRef = merchantRef
+    
+  }
+  
+  // MARK: - AddProductViewDelegate
+  
+  func didAddProduct(product: SCSmartProduct) {
+
+    let basketItem: BasketItem = BasketItem(product: product)
+    basket.append(basketItem)
+    calcPrice()
     
   }
   
@@ -1186,9 +1312,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let p = sender.locationInView(productsCollection)
     
     let indexPath = productsCollection.indexPathForItemAtPoint(p)
+    
     if let indexPath = indexPath {
+      
       if sender.state == UIGestureRecognizerState.Began {
-        let item = Array(productCategories.values)[currentCategory][indexPath.row]
+        
+        let subCatKey = Array(Array(productCategories.values)[currentCategory].keys)[indexPath.section]
+        let item = Array(productCategories.values)[currentCategory][subCatKey]![indexPath.row]
         
         let detailView = ProductDetailView()
         view.addSubview(detailView)
@@ -1203,6 +1333,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         UIView.animateWithDuration(0.4, animations: { () -> Void in
           detailView.alpha = 1
         })
+        
       }
     }
     
