@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */; };
+		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; };
 		AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */; settings = {ASSET_TAGS = (); }; };
 		AA125E431BC28C1700C70DB2 /* TransactionInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */; settings = {ASSET_TAGS = (); }; };
 		AA125E451BC2A89100C70DB2 /* receipt.json in Resources */ = {isa = PBXBuildFile; fileRef = AA125E441BC2A89100C70DB2 /* receipt.json */; settings = {ASSET_TAGS = (); }; };

@@ -530,6 +530,19 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(50)
     }
     
+    // version strings
+    
+    let versionLabel = UILabel()
+    versionLabel.font = UIFont.systemFontOfSize(12)
+    let infoStr = "CFBundleShortVersionString"
+    versionLabel.text = "APP Version: \(NSBundle.mainBundle().objectForInfoDictionaryKey(infoStr)!) - SDK: \(SCConnectClient.sharedInstance().myApiVersion())"
+    
+    bottomBar.addSubview(versionLabel)
+    
+    versionLabel.snp_makeConstraints { (make) -> Void in
+      make.bottom.right.equalTo(bottomBar).offset(-3)
+    }
+    
     // log view
     
     view.addSubview(logView)
