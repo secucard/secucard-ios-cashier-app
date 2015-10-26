@@ -81,6 +81,12 @@
     
     func connectCashier( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
       
+      // if still connected return fail gracefully
+      guard !SCConnectClient.sharedInstance().connected else {
+        handler(success: true, error: nil)
+        return
+      }
+      
       // check if all information for initialization ist there
       let clientId = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.ClientId.rawValue)
       let clientSecret = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.ClientSecret.rawValue)
@@ -92,7 +98,7 @@
         NSUserDefaults.standardUserDefaults().setObject(server, forKey: DefaultsKeys.Server.rawValue)
       }
       
-      
+      // if there are missing credientials, show the view and fail gracefully
       guard clientId != nil && clientSecret != nil && uuid != nil && server != nil else {
         
         let initView = InitializationView()
@@ -100,7 +106,7 @@
         
         if let window = window  {
           window.addSubview(initView)
-          
+          initView.somethingChanged = true
           initView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(window)
           }
@@ -109,7 +115,6 @@
         return;
         
       }
-      
       
       // initialize connect client
       
@@ -121,16 +126,13 @@
       
       let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: "\(server!)", clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: uuid, authType: "device")
       
-      // TEMP: add to always call device auth
-      // SCAccountManager.sharedManager().killToken()
-      
       // connect to server and try to login
       if let client = SCConnectClient.sharedInstance() {
         
         client.initWithConfiguration(clientConfig)
         
         // only when connecting we request auth code, so we have to do that directly
-        if !SCAccountManager.sharedManager().accessTokenValid() {
+        if SCAccountManager.sharedManager().accessToken == nil {
           
           SCAccountManager.sharedManager().requestTokenWithDeviceAuth({ (token: String!, error: NSError!) -> Void in
             
@@ -140,7 +142,11 @@
           
         } else {
           
-          self.connectWhenSave(handler)
+          SCAccountManager.sharedManager().token({ (token: String!, error: NSError!) -> Void in
+            
+            self.connectWhenSave(handler)
+            
+          })
           
         }
         
@@ -313,12 +319,12 @@
           NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
         }
         
-        //        self.connectCashier { (success, error) -> Void in
-        //
-        //          if let error = error {
-        //            SCLogManager.error(error)
-        //          }
-        //        }
+                self.connectCashier { (success, error) -> Void in
+        
+                  if let error = error {
+                    SCLogManager.error(error)
+                  }
+                }
         
       }
       
