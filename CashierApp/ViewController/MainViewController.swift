@@ -291,6 +291,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     super.viewDidLoad()
     
     view.backgroundColor = UIColor.whiteColor()
+    UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
     
     // top bar
     let topBar:UIView = UIView()
@@ -302,6 +303,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(50)
     }
     
+    let topLabel = UILabel()
+    topLabel.text = "secuconnect Kasse"
+    topLabel.textColor = Constants.textColorBright
+    topLabel.font = Constants.headlineFont
+    
+    topBar.addSubview(topLabel);
+    
+    topLabel.snp_makeConstraints { (make) -> Void in
+      make.centerX.equalTo(topBar)
+      make.centerY.equalTo(topBar).offset(10)
+    }
     
     bottomBar.backgroundColor = UIColor.whiteColor()
     view.addSubview(bottomBar);
@@ -1138,7 +1150,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func CheckTransactionReady() {
     
-    let ready = (basket.count > 0)
+    let ready = (basket.count > 0 && SCConnectClient.sharedInstance().connected)
     
     for button in availableButtons {
       button.enabled = ready
@@ -1191,6 +1203,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func didTapConnect() {    
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       appDelegate.connectCashier({ (success: Bool, error: NSError?) -> Void in
+        
       })
     }
   }

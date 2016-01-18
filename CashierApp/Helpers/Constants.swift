@@ -36,14 +36,15 @@ class Constants: NSObject {
   
   static let clientIdAppSample: String = "app.mobile.secucard"
   static let clientSecretAppSample: String = "dc1f422dde755f0b1c4ac04e7efbd6c4c78870691fe783266d7d6c89439925eb"
-  static let deviceIdCashierSample: String = "/vendor/vendor_name/cashier/iostest1"
   
   static let usernameCashierSample: String = "secucard.dresden"
   static let passwordCashierSample: String = "Kasse12345"
-  static let clientIdCashierSample: String = "611c00ec6b2be6c77c2338774f50040b"
-  static let clientSecretCashierSample: String = "dc1f422dde755f0b1c4ac04e7efbd6c4c78870691fe783266d7d6c89439925eb"
-  
-  //static let UUIDCashierSample: String = "/vendor/unknown/cashier/iostest1"
+  static let clientIdCashierSample: String = ""
+//  static let clientIdCashierSample: String = "611c00ec6b2be6c77c2338774f50040b"
+  static let deviceIdCashierSample: String = ""
+//  static let deviceIdCashierSample: String = "/vendor/vendor_name/cashier/iostest1"
+  static let clientSecretCashierSample: String = ""
+//  static let clientSecretCashierSample: String = "dc1f422dde755f0b1c4ac04e7efbd6c4c78870691fe783266d7d6c89439925eb"
   
   static let contactForename: String = "DeviD"
   static let contactSurname: String = "Testermann"

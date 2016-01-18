@@ -54,7 +54,7 @@
         }
       }
       
-    
+      
       // initialize view
       mainController = MainViewController()
       
@@ -136,12 +136,28 @@
           
           SCAccountManager.sharedManager().requestTokenWithDeviceAuth({ (token: String!, error: NSError!) -> Void in
             
+            
+            
+            guard let _ = token else {
+              
+              dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                UIAlertView(title: "Anmeldefehler", message: "Sie konnten nicht angemeldet werden. Überprüfen Sie die Einstellungen für den Server.", delegate: self, cancelButtonTitle: "OK").show()
+                self.mainController.logView.addToLog("Error retrieving token using device auth. Check credentials.")
+                
+                handler(success: false, error: error)
+                
+              })
+              return
+            }
+            
             self.connectWhenSave(handler)
             
           })
           
         } else {
           
+          // token might not be fresh, so refresh if necessary
           SCAccountManager.sharedManager().token({ (token: String!, error: NSError!) -> Void in
             
             self.connectWhenSave(handler)
@@ -161,7 +177,16 @@
         client.connect({ (success: Bool, error: NSError?) -> Void in
           
           if let error = error {
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+              if !success {
+                UIAlertView(title: "Anmeldefehler", message: "Sie konnten nicht angemeldet werden. Überprüfen Sie die Einstellungen für den Server.", delegate: self, cancelButtonTitle: "OK").show()
+                self.mainController.logView.addToLog("Error connecting with token. \(error.localizedDescription)")
+              }
+            })
+            
             handler(success: false, error: error)
+            return
           }
           
           if success {
@@ -196,15 +221,24 @@
               
             })
             
-            
-            
             NSNotificationCenter.defaultCenter().postNotificationName("clientDidConnect", object: nil)
             
             handler(success: true, error: nil)
             
           } else {
             
-            handler(success: false, error: nil)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+              
+              if !success {
+                UIAlertView(title: "Anmeldefehler", message: "Sie konnten nicht angemeldet werden. Überprüfen Sie die Einstellungen für den Server.", delegate: self, cancelButtonTitle: "OK").show()
+                self.mainController.logView.addToLog("Error connecting with token. No error given.")
+              }
+              
+              handler(success: false, error: nil)
+              
+            })
+            
+            
             
           }
           
@@ -229,6 +263,10 @@
         SCLogManager.warn("STOMP: Disconnected")
         //reconnectStomp()
         
+      }
+      
+      dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        self.mainController.CheckTransactionReady()
       }
       
     }
@@ -319,12 +357,12 @@
           NSNotificationCenter.defaultCenter().postNotificationName("clientDidDisconnect", object: nil)
         }
         
-                self.connectCashier { (success, error) -> Void in
-        
-                  if let error = error {
-                    SCLogManager.error(error)
-                  }
-                }
+        self.connectCashier { (success, error) -> Void in
+          
+          if let error = error {
+            SCLogManager.error(error)
+          }
+        }
         
       }
       
