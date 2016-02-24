@@ -39,12 +39,14 @@ class Constants: NSObject {
   
   static let usernameCashierSample: String = "secucard.dresden"
   static let passwordCashierSample: String = "Kasse12345"
-  static let clientIdCashierSample: String = ""
-//  static let clientIdCashierSample: String = "611c00ec6b2be6c77c2338774f50040b"
-  static let deviceIdCashierSample: String = ""
-//  static let deviceIdCashierSample: String = "/vendor/vendor_name/cashier/iostest1"
-  static let clientSecretCashierSample: String = ""
-//  static let clientSecretCashierSample: String = "dc1f422dde755f0b1c4ac04e7efbd6c4c78870691fe783266d7d6c89439925eb"
+  
+//  static let clientIdCashierSample: String = ""
+//  static let deviceIdCashierSample: String = ""
+//  static let clientSecretCashierSample: String = ""
+  
+    static let clientIdCashierSample: String = "611c00ec6b2be6c77c2338774f50040b"
+    static let deviceIdCashierSample: String = "/vendor/vendor_name/cashier/iostest1"
+    static let clientSecretCashierSample: String = "dc1f422dde755f0b1c4ac04e7efbd6c4c78870691fe783266d7d6c89439925eb"
   
   static let contactForename: String = "DeviD"
   static let contactSurname: String = "Testermann"
@@ -56,7 +58,20 @@ class Constants: NSObject {
   
   static let merchantRef: String = "KundeXY"
   
-  static let serverData = ["https://connect.secucard.com/","https://connect-dev1.secupay-ag.de/","https://connect-dev2.secupay-ag.de/","https://connect-dev3.secupay-ag.de/","https://connect-dev4.secupay-ag.de/","https://connect-dev5.secupay-ag.de/","https://connect-dev6.secupay-ag.de/","https://connect-dev7.secupay-ag.de/","https://connect-dev8.secupay-ag.de/","https://connect-dev9.secupay-ag.de/","https://connect-dev10.secupay-ag.de/"]
+  static let serverData = [
+    "https://connect.secucard.com/",
+    "https://connect-dev1.secupay-ag.de/",
+    "https://connect-dev2.secupay-ag.de/",
+    "https://connect-dev3.secupay-ag.de/",
+    "https://connect-dev4.secupay-ag.de/",
+    "https://connect-dev5.secupay-ag.de/",
+    "https://connect-dev6.secupay-ag.de/",
+    "https://connect-dev7.secupay-ag.de/",
+    "https://connect-dev8.secupay-ag.de/",
+    "https://connect-dev9.secupay-ag.de/",
+    "https://connect-dev10.secupay-ag.de/",
+    "https://connect-testing.secupay-ag.de/"
+  ]
   
   // Colors
   static let tintColor: UIColor = UIColor(red: 63/255, green: 116/255, blue: 164/255, alpha: 1)

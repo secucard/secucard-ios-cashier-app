@@ -213,8 +213,8 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
 
     toolBar.items = [cancelBarButton, flexibleBarSpace, doneBarButton]
     
-//    serverField.inputAccessoryView = toolBar
-//    serverField.inputView = serverPicker
+    serverField.inputAccessoryView = toolBar
+    serverField.inputView = serverPicker
     serverField.text = server
     
     centerView.addSubview(serverField)

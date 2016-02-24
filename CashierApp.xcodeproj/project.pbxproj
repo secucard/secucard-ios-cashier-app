@@ -46,6 +46,8 @@
 		AA6390531B300AE400782582 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63903E1B300AE400782582 /* ScanViewController.swift */; };
 		AA6390551B300FAA00782582 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA6390541B300FAA00782582 /* CoreGraphics.framework */; };
 		AA9A32001B075AD100CCF6B4 /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = AA9A31FF1B075AD100CCF6B4 /* products.json */; };
+		AA9D39231C4CD58D00C32E3E /* CashierApp_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D39221C4CD58D00C32E3E /* CashierApp_UITests.swift */; };
+		AA9D392B1C4CD76200C32E3E /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D391A1C4CCD1F00C32E3E /* SnapshotHelper.swift */; };
 		AA9DCD8A1B0738F20070022E /* CashierAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD891B0738F20070022E /* CashierAppTests.swift */; };
 		AAC9FFDA1BC0095700397F54 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FFD91BC0095700397F54 /* AddProductView.swift */; };
 		AAC9FFDC1BC00E8800397F54 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */; };
@@ -59,6 +61,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AA9D39251C4CD58D00C32E3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA9DCD661B0738F20070022E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA9DCD6D1B0738F20070022E;
+			remoteInfo = CashierApp;
+		};
 		AA9DCD841B0738F20070022E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AA9DCD661B0738F20070022E /* Project object */;
@@ -113,6 +122,10 @@
 		AA63903E1B300AE400782582 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		AA6390541B300FAA00782582 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AA9A31FF1B075AD100CCF6B4 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		AA9D391A1C4CCD1F00C32E3E /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = ../CashierApp/SnapshotHelper.swift; sourceTree = "<group>"; };
+		AA9D39201C4CD58D00C32E3E /* CashierApp UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CashierApp UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA9D39221C4CD58D00C32E3E /* CashierApp_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierApp_UITests.swift; sourceTree = "<group>"; };
+		AA9D39241C4CD58D00C32E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9DCD6E1B0738F20070022E /* CashierApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashierApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA9DCD721B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA9DCD831B0738F20070022E /* CashierAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashierAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +148,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AA9D391D1C4CD58D00C32E3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA9DCD6B1B0738F20070022E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,11 +262,22 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		AA9D39211C4CD58D00C32E3E /* CashierApp UITests */ = {
+			isa = PBXGroup;
+			children = (
+				AA9D39221C4CD58D00C32E3E /* CashierApp_UITests.swift */,
+				AA9D391A1C4CCD1F00C32E3E /* SnapshotHelper.swift */,
+				AA9D39241C4CD58D00C32E3E /* Info.plist */,
+			);
+			path = "CashierApp UITests";
+			sourceTree = "<group>";
+		};
 		AA9DCD651B0738F20070022E = {
 			isa = PBXGroup;
 			children = (
 				AA9DCD701B0738F20070022E /* CashierApp */,
 				AA9DCD861B0738F20070022E /* CashierAppTests */,
+				AA9D39211C4CD58D00C32E3E /* CashierApp UITests */,
 				AA9DCD6F1B0738F20070022E /* Products */,
 				D64ECBCF0DDCB0E63BB2F602 /* Frameworks */,
 				6CC2FED32AB37249456528F0 /* Pods */,
@@ -258,6 +289,7 @@
 			children = (
 				AA9DCD6E1B0738F20070022E /* CashierApp.app */,
 				AA9DCD831B0738F20070022E /* CashierAppTests.xctest */,
+				AA9D39201C4CD58D00C32E3E /* CashierApp UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,6 +382,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AA9D391F1C4CD58D00C32E3E /* CashierApp UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA9D39271C4CD58E00C32E3E /* Build configuration list for PBXNativeTarget "CashierApp UITests" */;
+			buildPhases = (
+				AA9D391C1C4CD58D00C32E3E /* Sources */,
+				AA9D391D1C4CD58D00C32E3E /* Frameworks */,
+				AA9D391E1C4CD58D00C32E3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA9D39261C4CD58D00C32E3E /* PBXTargetDependency */,
+			);
+			name = "CashierApp UITests";
+			productName = "CashierApp UITests";
+			productReference = AA9D39201C4CD58D00C32E3E /* CashierApp UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		AA9DCD6D1B0738F20070022E /* CashierApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA9DCD8D1B0738F20070022E /* Build configuration list for PBXNativeTarget "CashierApp" */;
@@ -397,10 +447,14 @@
 		AA9DCD661B0738F20070022E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = secucard;
 				TargetAttributes = {
+					AA9D391F1C4CD58D00C32E3E = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = AA9DCD6D1B0738F20070022E;
+					};
 					AA9DCD6D1B0738F20070022E = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = QWAPQRA564;
@@ -426,11 +480,19 @@
 			targets = (
 				AA9DCD6D1B0738F20070022E /* CashierApp */,
 				AA9DCD821B0738F20070022E /* CashierAppTests */,
+				AA9D391F1C4CD58D00C32E3E /* CashierApp UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		AA9D391E1C4CD58D00C32E3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA9DCD6C1B0738F20070022E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,6 +606,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AA9D391C1C4CD58D00C32E3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA9D39231C4CD58D00C32E3E /* CashierApp_UITests.swift in Sources */,
+				AA9D392B1C4CD76200C32E3E /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AA9DCD6A1B0738F20070022E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -594,6 +665,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AA9D39261C4CD58D00C32E3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA9DCD6D1B0738F20070022E /* CashierApp */;
+			targetProxy = AA9D39251C4CD58D00C32E3E /* PBXContainerItemProxy */;
+		};
 		AA9DCD851B0738F20070022E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AA9DCD6D1B0738F20070022E /* CashierApp */;
@@ -602,6 +678,49 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		AA9D39281C4CD58E00C32E3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "CashierApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.secucard.CashierApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				TEST_TARGET_NAME = CashierApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		AA9D39291C4CD58E00C32E3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "CashierApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.secucard.CashierApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				TEST_TARGET_NAME = CashierApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+		AA9D392A1C4CD58E00C32E3E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "CashierApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.secucard.CashierApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				TEST_TARGET_NAME = CashierApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = AdHoc;
+		};
 		AA9DCD8B1B0738F20070022E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -909,6 +1028,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AA9D39271C4CD58E00C32E3E /* Build configuration list for PBXNativeTarget "CashierApp UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA9D39281C4CD58E00C32E3E /* Debug */,
+				AA9D39291C4CD58E00C32E3E /* Release */,
+				AA9D392A1C4CD58E00C32E3E /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AA9DCD691B0738F20070022E /* Build configuration list for PBXProject "CashierApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
