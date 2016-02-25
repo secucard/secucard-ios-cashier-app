@@ -3,72 +3,72 @@
   <testsuite name="fastlane.lanes">
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.00034">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000384">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000229">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000257">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: Switch to ios versioning lane" time="0.000264">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios versioning lane" time="0.000243">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: increment_build_number" time="1.409452">
+      <testcase classname="fastlane.lanes" name="3: increment_build_number" time="0.829479">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: increment_version_number" time="0.820641">
+      <testcase classname="fastlane.lanes" name="4: increment_version_number" time="0.79306">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: Switch to ios certstuff lane" time="0.000956">
+      <testcase classname="fastlane.lanes" name="5: Switch to ios certstuff lane" time="0.000238">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: cert" time="13.307125">
+      <testcase classname="fastlane.lanes" name="6: cert" time="13.369778">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: sigh" time="11.162939">
+      <testcase classname="fastlane.lanes" name="7: sigh" time="11.766947">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: Switch to ios gym_beta lane" time="0.000971">
+      <testcase classname="fastlane.lanes" name="8: Switch to ios gym_beta lane" time="0.000313">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="9: gym" time="87.047892">
+      <testcase classname="fastlane.lanes" name="9: gym" time="81.508795">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: Switch to ios hockey_beta lane" time="0.000797">
+      <testcase classname="fastlane.lanes" name="10: Switch to ios hockey_beta lane" time="0.000604">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: hockey" time="49.058141">
+      <testcase classname="fastlane.lanes" name="11: hockey" time="48.364544">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="12: Switch to ios slack_beta lane" time="0.00039">
+      <testcase classname="fastlane.lanes" name="12: Switch to ios slack_beta lane" time="0.000387">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="13: slack" time="0.83847">
+      <testcase classname="fastlane.lanes" name="13: slack" time="0.585619">
         
       </testcase>
     

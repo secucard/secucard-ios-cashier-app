@@ -69,21 +69,28 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   var basket = [BasketItem]() {
     didSet {
+      
       CheckTransactionReady()
       basketCollection.reloadData()
       calcPrice()
-      updateTransactionBasket { (success, error) -> Void in
-        if let error = error {
-          SCLogManager.error(error)
+      
+      if basket.count > 0 {
+        updateTransactionBasket { (success, error) -> Void in
+          if let error = error {
+            SCLogManager.error(error)
+          }
         }
       }
+      
     }
   }
   
   var customerUsed: SCSmartIdent? {
     didSet {
+      
       CheckTransactionReady()
       basketCollection.reloadData()
+      
     }
   }
   
@@ -154,11 +161,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
               if catArray[groupname1]!["Normal"] == nil {
                 catArray[groupname1]!["Normal"] = [SCSmartProduct]()
               }
-
+              
               catArray[groupname1]!["Normal"]!.append(product)
               
             } else {
-            
+              
               if let groupname2 = product.groups[1].desc {
                 if catArray[groupname1]![groupname2] == nil {
                   catArray[groupname1]![groupname2] = [SCSmartProduct]()
@@ -175,7 +182,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         // order by key
-//        let sortedCats = catArray.sort { $0.0 < $1.0 }
+        //        let sortedCats = catArray.sort { $0.0 < $1.0 }
         
         self.productCategories = catArray
         self.productCategoriesCollection.reloadData()
@@ -187,7 +194,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  var currentTransaction: SCSmartTransaction = SCSmartTransaction()
+  var currentTransaction: SCSmartTransaction?
   
   init() {
     
@@ -272,13 +279,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // security
     
-//    let serverTrustPolicies: [String: ServerTrustPolicy] = [
-//      "connect.secucard.com": .DisableEvaluation
-//    ]
+    //    let serverTrustPolicies: [String: ServerTrustPolicy] = [
+    //      "connect.secucard.com": .DisableEvaluation
+    //    ]
     
-//    manager = Manager(
-//      serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-//    )
+    //    manager = Manager(
+    //      serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
+    //    )
     
   }
   
@@ -384,7 +391,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.right.equalTo(view)
       make.height.equalTo(50)
     }
-
+    
     view.addSubview(basketCollection)
     
     basketCollection.backgroundColor = UIColor.whiteColor()
@@ -566,7 +573,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     logView.hidden = true
     
     calcPrice()
-    CheckTransactionReady() 
+    CheckTransactionReady()
     
   }
   
@@ -603,16 +610,21 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func didTapEmptyButton() {
     
     sum = 0
+    self.currentTransaction = nil
     basket = [BasketItem]()
     
   }
   
   func didTapTransactionInformation() {
-  
+    
+    guard let currentTransaction = currentTransaction else {
+      SCLogManager.errorWithDescription("Transaction Info: There is no current transaction")
+      return
+    }
     let infoView = TransactionInfoInputView(transactionRef: currentTransaction.transactionRef, merchantRef: currentTransaction.merchantRef)
     infoView.delegate = self
     infoView.alpha = 0
-
+    
     view.addSubview(infoView)
     infoView.snp_makeConstraints { (make) -> Void in
       make.edges.equalTo(view)
@@ -648,7 +660,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.ProductCategories:
       
-        return productCategories.count
+      return productCategories.count
       
     case CollectionType.Product:
       
@@ -693,14 +705,14 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     case CollectionType.ProductCategories:
       
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
-        
-        cell.title = Array(productCategories.keys)[indexPath.row]
-        cell.data = Array(productCategories.values)[indexPath.row]
-        
-        cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : Constants.brightGreyColor
-        
-        return cell
+      let cell = collectionView.dequeueReusableCellWithReuseIdentifier(categoryReuseIdentifier, forIndexPath: indexPath) as! ProductCategoryCell
+      
+      cell.title = Array(productCategories.keys)[indexPath.row]
+      cell.data = Array(productCategories.values)[indexPath.row]
+      
+      cell.backgroundColor = (indexPath.row == currentCategory) ? UIColor.whiteColor() : Constants.brightGreyColor
+      
+      return cell
       
     case CollectionType.Product:
       
@@ -800,7 +812,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-  
+    
     if collectionView == productsCollection {
       
       if (kind == UICollectionElementKindSectionHeader) {
@@ -811,7 +823,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         headerView.label.text = subCatKey
         
         return headerView
-
+        
       }
       
     } else if collectionView == basketCollection {
@@ -880,13 +892,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   // MARK: - Payment actions
   
   // payment actions
-
+  
   func didTapPayButton(button: PaymentButton) {
     sendTransaction(button.payMethod)
   }
-
+  
   func showScanCardView() {
-
+    
     if TARGET_IPHONE_SIMULATOR == 1 {
       scanCardView = ScanCardView()
       scanCardView.delegate = self
@@ -906,117 +918,143 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func updateTransactionBasket(handler: (success: Bool,error: SecuError?) -> Void) {
     
-    // create a basket
-    let basket = SCSmartBasket()
+    checkTransaction { (success, error) -> Void in
+      
+      if let error = error {
+        SCLogManager.errorWithDescription("Update Transaction Basket: There is no current transaction")
+        SCLogManager.error(error)
+      } else if success {
+
+        // create a basket
+        let basket = SCSmartBasket()
+        
+        var productList = [AnyObject]()
+        for basketItem:BasketItem in self.basket {
+          if let productData = basketItem.product {
+            productList.append(productData)
+            //productList.append(productData.stringValue)
+          }
+        }
+        
+        basket.products = productList
+        
+        self.currentTransaction!.basket = basket
+        
+        // create a basket info
+        
+        let basketInfo = SCSmartBasketInfo()
+        basketInfo.sum = Int(self.sum)
+        basketInfo.currency = "EUR"
+        self.currentTransaction!.basketInfo = basketInfo
+        
+        self.updateTransaction({ (success, error) -> Void in
+          
+          if let error = error {
+            SCLogManager.error(error)
+          }
+          
+          handler(success: success, error: error)
+          
+        })
+        
+      } else {
+        
+        SCLogManager.errorWithDescription("Update Transaction Basket: somthing went wrong")
+        
+      }
+      
+    }
+
+  }
+  
+  func updateTransactionIdent(handler: (success: Bool,error: SecuError?) -> Void) {
     
-    var productList = [AnyObject]()
-    for basketItem:BasketItem in self.basket {
-      if let productData = basketItem.product {
-        productList.append(productData)
-        //productList.append(productData.stringValue)
+    checkTransaction { (success, error) -> Void in
+      
+      if let error = error {
+        SCLogManager.errorWithDescription("Update Transaction Ident: There is no current transaction")
+        SCLogManager.error(error)
+      } else if success {
+        
+        // create the ident
+        if let ident = self.customerUsed {
+          self.currentTransaction!.idents = [ident]
+          self.updateTransaction({ (success, error) -> Void in
+            
+            if let error = error {
+              SCLogManager.error(error)
+            }
+            
+            if let resolvedIdent = self.currentTransaction!.idents[0] as? SCSmartIdent {
+              
+              dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                if !resolvedIdent.valid {
+                  SCLogManager.errorWithDescription("Identifizierung fehlgeschlagen")
+                  self.customerUsed = nil
+                } else {
+                  self.customerUsed = resolvedIdent
+                }
+                
+                handler(success: success, error: error)
+                
+              })
+            }
+            
+          })
+        }
+        
+      } else {
+        
+        SCLogManager.errorWithDescription("Update Transaction Ident: somthing went wrong")
+        
       }
     }
     
-    basket.products = productList
+  }
+  
+  func checkTransaction(handler: (success: Bool,error: SecuError?) -> Void) {
+   
+    guard let _ = currentTransaction else {
+      createTransaction(handler)
+      return
+    }
     
-    currentTransaction.basket = basket
+    handler(success: true, error: nil)
     
-    // create a basket info
+  }
+  
+  func createTransaction(handler: (success: Bool,error: SecuError?) -> Void) {
     
-    let basketInfo = SCSmartBasketInfo()
-    basketInfo.sum = Int(sum)
-    basketInfo.currency = "EUR"
-    currentTransaction.basketInfo = basketInfo
+    currentTransaction = SCSmartTransaction()
     
-    saveTransaction({ (success, error) -> Void in
-
-      if let error = error {
-        SCLogManager.error(error)
-      }
+    currentTransaction!.merchantRef = Constants.merchantRef
+    currentTransaction!.transactionRef = "\(Constants.merchantRef)_\(NSDate().timeIntervalSince1970)"
+    
+    SCSmartTransactionService.sharedService().createTransaction(currentTransaction!, completionHandler: { (createdTransaction: SCSmartTransaction?, error: SecuError?) -> Void in
       
-      handler(success: success, error: error)
+      if let error = error {
+        
+        handler(success: false, error: error)
+        return
+        
+      } else {
+        
+        if let createdTransaction = createdTransaction {
+          self.currentTransaction = createdTransaction
+        }
+        
+      }
       
     })
     
   }
   
-  func updateTransactionIdent(handler: (success: Bool,error: SecuError?) -> Void) {
+  func updateTransaction(handler: (success: Bool,error: SecuError?) -> Void) {
     
-    // create the ident
-    if let ident = customerUsed {
-      currentTransaction.idents = [ident]
-      saveTransaction({ (success, error) -> Void in
-        
-        if let error = error {
-          SCLogManager.error(error)
-        }
-        
-        if let resolvedIdent = self.currentTransaction.idents[0] as? SCSmartIdent {
-          
-          dispatch_async(dispatch_get_main_queue(), { () -> Void in
-
-            if !resolvedIdent.valid {
-              SCLogManager.errorWithDescription("Identifizierung fehlgeschlagen")
-              self.customerUsed = nil
-            } else {
-              self.customerUsed = resolvedIdent
-            }
-            
-            handler(success: success, error: error)
-          
-          })
-        }
-        
-      })
-    }
+    checkTransaction { (success, error) -> Void in
     
-  }
-  
-  func saveTransaction(handler: (success: Bool,error: SecuError?) -> Void) {
-    
-    currentTransaction.merchantRef = Constants.merchantRef
-    currentTransaction.transactionRef = "\(Constants.merchantRef)_\(NSDate().timeIntervalSince1970)"
-    
-    if currentTransaction.id == nil {
-      SCSmartTransactionService.sharedService().createTransaction(currentTransaction, completionHandler: { (createdTransaction: SCSmartTransaction?, error: SecuError?) -> Void in
-        
-        if let error = error {
-          
-          handler(success: false, error: error)
-          return
-          
-        } else {
-        
-          if let createdTransaction = createdTransaction {
-            self.currentTransaction = createdTransaction
-          }
-          
-        }
-        
-        self.updateTransactionBasket({ (success, error) -> Void in
-        
-          if let error = error {
-            
-            handler(success: false, error: error)
-            return
-            
-          } else {
-          
-            self.updateTransactionIdent({ (success, error) -> Void in
-              
-              handler(success: createdTransaction != nil, error: error)
-              
-            })
-            
-          }
-          
-        })
-        
-      })
-      
-    } else {
-      
-      SCSmartTransactionService.sharedService().updateTransaction(currentTransaction, completionHandler: { (updatedTransaction: SCSmartTransaction?, error: SecuError?) -> Void in
+      SCSmartTransactionService.sharedService().updateTransaction(self.currentTransaction, completionHandler: { (updatedTransaction: SCSmartTransaction?, error: SecuError?) -> Void in
         
         if let updatedTransaction = updatedTransaction {
           self.currentTransaction = updatedTransaction
@@ -1032,157 +1070,164 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func sendTransaction(method: PayMethod) {
     
-    // if not created yet, create it and try again
-    guard currentTransaction.id != nil else {
-      saveTransaction({ (success, error) -> Void in
-        if success {
-          self.sendTransaction(method)
-        }
-      })
-      return
-    }
-    
-    let statusView = TransactionStatusView();
-    view.addSubview(statusView)
-    
-    statusView.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(view)
-    }
-    
-    
-    
-    SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
+    checkTransaction { (success, error) -> Void in
       
-      if let event = event {
+      if let error = error {
         
-        if event.target == SCGeneralNotification.object().lowercaseString {
+        SCLogManager.errorWithDescription("Update Transaction Ident: There is no current transaction")
+        SCLogManager.error(error)
+        
+      } else if success {
+       
+        let statusView = TransactionStatusView();
+        self.view.addSubview(statusView)
+        
+        statusView.snp_makeConstraints { (make) -> Void in
+          make.edges.equalTo(self.view)
+        }
+        
+        SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
           
-          // TODO: what to do if data is array ???
-          if let _ = event.data as? [AnyObject] {
+          if let event = event {
             
-          } else if let eventDataDict = event.data as? [NSObject:AnyObject] {
+            if event.target == SCGeneralNotification.object().lowercaseString {
+              
+              // TODO: what to do if data is array ???
+              if let _ = event.data as? [AnyObject] {
+                
+              } else if let eventDataDict = event.data as? [NSObject:AnyObject] {
+                
+                do {
+                  let notification = try MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: eventDataDict) as? SCGeneralNotification
+                  statusView.addStatus(notification!.text)
+                } catch let error as NSError {
+                  SCLogManager.error(SecuError.withError(error))
+                }
+                
+              }
+              
+            }
+            
+          }
           
-            if let notification = try? MTLJSONAdapter.modelOfClass(SCGeneralNotification.self, fromJSONDictionary: eventDataDict) as? SCGeneralNotification {
-              statusView.addStatus(notification!.text)
+        })
+        
+        statusView.addStatus("Transaktion wird durchgeführt")
+        
+        // start
+        SCSmartTransactionService.sharedService().startTransaction(self.currentTransaction!.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: SecuError?) -> Void in
+          
+          dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            
+            if let error = error {
+              
+              SCLogManager.error(error)
+              statusView.addStatus("\(error.localizedDescription)\nFehler: \(error.domain) \nGrund: \(error.localizedFailureReason!)\nSupport-ID: \(error.localizedRecoverySuggestion!)")
+              self.currentTransaction = nil
+              
             } else {
-              //SCLogManager.error(<#T##error: NSError!##NSError!#>)
+              
+              if let result = transactionResult {
+                
+                // check results
+                if result.status == "ok" {
+                  
+                  statusView.addStatus("Transaktion erfolgreich durchgeführt")
+                  
+                  self.basket = [BasketItem]()
+                  self.customerUsed = nil
+                  
+                } else if result.status == "failed" {
+                  
+                  statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
+                  
+                }
+                
+                // receiptView to show
+                let receiptView = ReceiptView(title: "Kundenbeleg", print: false)
+                
+                var receiptCenterX: Constraint!
+                var merchReceiptCenterX: Constraint!
+                var receiptHeight: Constraint!
+                var merchReceiptHeight: Constraint!
+                
+                if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
+                  
+                  statusView.addSubview(receiptView)
+                  
+                  receiptView.snp_makeConstraints(closure: { (make) -> Void in
+                    receiptCenterX = make.centerX.equalTo(statusView).offset(0).constraint
+                    make.width.equalTo(300)
+                    make.bottom.equalTo(statusView)
+                    receiptHeight = make.height.equalTo(0).offset(0).constraint
+                  })
+                  
+                  receiptView.receiptLines = receiptLines
+                  
+                  let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                  dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    
+                    UIView.animateWithDuration(0.4, animations: { () -> Void in
+                      receiptHeight.updateOffset(self.view.frame.size.height-100)
+                      self.view.layoutIfNeeded()
+                    })
+                    
+                  }
+                  
+                }
+                
+                // merch receiptView to show
+                if let receiptLinesMerchant = result.receiptLinesMerchant as? [SCSmartReceiptLine] {
+                  
+                  // show receiptView
+                  let receiptViewMerchant = ReceiptView(title: "Händlerbeleg", print: result.receiptLinesMerchantPrint)
+                  statusView.addSubview(receiptViewMerchant)
+                  
+                  receiptViewMerchant.snp_makeConstraints(closure: { (make) -> Void in
+                    merchReceiptCenterX = make.centerX.equalTo(statusView).offset(0).constraint
+                    make.width.equalTo(300)
+                    make.bottom.equalTo(statusView)
+                    merchReceiptHeight = make.height.equalTo(0).offset(0).constraint
+                  })
+                  
+                  receiptViewMerchant.receiptLines = receiptLinesMerchant
+                  
+                  let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                  dispatch_after(delayTime, dispatch_get_main_queue()) {
+                    
+                    UIView.animateWithDuration(0.4, animations: { () -> Void in
+                      merchReceiptHeight.updateOffset(self.view.frame.size.height-100)
+                      merchReceiptCenterX.updateOffset(200)
+                      receiptCenterX.updateOffset(-200)
+                      self.view.layoutIfNeeded()
+                    })
+                    
+                  }
+                  
+                }
+                
+              }
             }
             
-          }
+            self.currentTransaction = nil
+            
+            
+          })
           
-        }
+        })
         
+      } else {
+        SCLogManager.errorWithDescription("Update Transaction Ident: Something went wrong")
+        self.currentTransaction = nil
       }
-      
-    })
+    }
     
-    statusView.addStatus("Transaktion wird durchgeführt")
     
-    // start
-    SCSmartTransactionService.sharedService().startTransaction(currentTransaction.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: SecuError?) -> Void in
-      
-      dispatch_async(dispatch_get_main_queue(), { () -> Void in
-      
-        if let error = error {
-          
-          SCLogManager.error(error)
-          statusView.addStatus("\(error.localizedDescription)\nFehler: \(error.domain) \nGrund: \(error.localizedFailureReason!)\nSupport-ID: \(error.localizedRecoverySuggestion!)")
-          
-        } else {
-          
-          if let result = transactionResult {
-            
-            // check results
-            if result.status == "ok" {
-              
-              statusView.addStatus("Transaktion erfolgreich durchgeführt")
-              
-              self.basket = [BasketItem]()
-              self.customerUsed = nil
-              
-            } else if result.status == "failed" {
-              
-              statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
-              
-            }
-            
-            // receiptView to show
-            let receiptView = ReceiptView(title: "Kundenbeleg", print: false)
-            
-            var receiptCenterX: Constraint!
-            var merchReceiptCenterX: Constraint!
-            var receiptHeight: Constraint!
-            var merchReceiptHeight: Constraint!
-            
-            if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
-            
-              statusView.addSubview(receiptView)
-              
-              receiptView.snp_makeConstraints(closure: { (make) -> Void in
-                receiptCenterX = make.centerX.equalTo(statusView).offset(0).constraint
-                make.width.equalTo(300)
-                make.bottom.equalTo(statusView)
-                receiptHeight = make.height.equalTo(0).offset(0).constraint
-              })
-              
-              receiptView.receiptLines = receiptLines
-              
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                  
-                  UIView.animateWithDuration(0.4, animations: { () -> Void in
-                    receiptHeight.updateOffset(self.view.frame.size.height-100)
-                    self.view.layoutIfNeeded()
-                  })
-                  
-                }
-              
-            }
-            
-            // merch receiptView to show
-            if let receiptLinesMerchant = result.receiptLinesMerchant as? [SCSmartReceiptLine] {
-              
-              // show receiptView
-              let receiptViewMerchant = ReceiptView(title: "Händlerbeleg", print: result.receiptLinesMerchantPrint)
-              statusView.addSubview(receiptViewMerchant)
-              
-              receiptViewMerchant.snp_makeConstraints(closure: { (make) -> Void in
-                merchReceiptCenterX = make.centerX.equalTo(statusView).offset(0).constraint
-                make.width.equalTo(300)
-                make.bottom.equalTo(statusView)
-                merchReceiptHeight = make.height.equalTo(0).offset(0).constraint
-              })
-              
-              receiptViewMerchant.receiptLines = receiptLinesMerchant
-              
-                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
-                dispatch_after(delayTime, dispatch_get_main_queue()) {
-                  
-                  UIView.animateWithDuration(0.4, animations: { () -> Void in
-                    merchReceiptHeight.updateOffset(self.view.frame.size.height-100)
-                    merchReceiptCenterX.updateOffset(200)
-                    receiptCenterX.updateOffset(-200)
-                    self.view.layoutIfNeeded()
-                  })
-                  
-                }
-              
-            }
-            
-          }
-        }
-        
-        self.currentTransaction = SCSmartTransaction()
-        
-        
-      })
-      
-    })
   }
   
   func CheckTransactionReady() {
     
-    let ready = (basket.count > 0 && SCConnectClient.sharedInstance().connected)
+    let ready = basket.count > 0 && SCConnectClient.sharedInstance().connected
     
     for button in availableButtons {
       button.enabled = ready
@@ -1232,7 +1277,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   // MARK: - ConnectButtonDelegate
-  func didTapConnect() {    
+  func didTapConnect() {
     if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
       appDelegate.connectCashier({ (success: Bool, error: NSError?) -> Void in
         
@@ -1267,7 +1312,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func identRemoveTapped() {
-
+    
     customerUsed = nil
     updateTransactionIdent { (success, error) -> Void in
       
@@ -1278,7 +1323,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func scanViewReturnCode(code: String) {
     
     self.dismissViewControllerAnimated(true, completion: nil)
-   
+    
     let ident = SCSmartIdent()
     ident.type = "card"
     ident.value = code
@@ -1287,7 +1332,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     updateTransactionIdent { (success, error) -> Void in
       
     }
-
+    
   }
   
   // MARK: - Notification handlers
@@ -1324,7 +1369,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       logView.addToLog(logString)
       
     } else {
-    
+      
       print(message.message)
       logView.addToLog(message.message)
       
@@ -1335,6 +1380,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   // MARK: - TransactionInfoInputViewDelegate
   func didAddTransactionInput(transactionRef: String, merchantRef: String) {
     
+    guard let currentTransaction = currentTransaction else {
+      SCLogManager.errorWithDescription("Add TRansaction Input: There is no current transaction")
+      return
+    }
+    
     currentTransaction.transactionRef = transactionRef
     currentTransaction.merchantRef = merchantRef
     
@@ -1343,7 +1393,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   // MARK: - AddProductViewDelegate
   
   func didAddProduct(product: SCSmartProduct) {
-
+    
     let basketItem: BasketItem = BasketItem(product: product)
     basket.append(basketItem)
     calcPrice()
