@@ -1,5 +1,9 @@
 ## 1.0.3
 
+* fixed transaction lifecycle
+
+## 1.0.3
+
 * Fix login after host change
 
 ## 1.0.2

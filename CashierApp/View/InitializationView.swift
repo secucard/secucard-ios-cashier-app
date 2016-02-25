@@ -46,9 +46,13 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
   }
   
   var newServer: AvailableHosts? {
-    didSet {
-      if let newServer = newServer {
-        serverField.text = newServer.string
+    get {
+      return Constants.currentHost
+    }
+    set {
+      if let newValue = newValue {
+        Constants.currentHost = newValue
+        serverField.text = newValue.string
       }
     }
   }
@@ -293,7 +297,6 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     
     if (checkFields()) {
       
-      Constants.currentHost = newServer!
       NSUserDefaults.standardUserDefaults().setObject(clientIdField.text, forKey: DefaultsKeys.ClientId.rawValue)
       NSUserDefaults.standardUserDefaults().setObject(clientSecretField.text, forKey: DefaultsKeys.ClientSecret.rawValue)
       NSUserDefaults.standardUserDefaults().setObject(uuidField.text, forKey: DefaultsKeys.UUID.rawValue)
