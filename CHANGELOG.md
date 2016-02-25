@@ -1,6 +1,7 @@
 ## 1.0.3
 
 * fixed transaction lifecycle
+* fix crashing after editing any server setting without setting the server again
 
 ## 1.0.3
 
