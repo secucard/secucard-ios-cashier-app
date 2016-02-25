@@ -8,20 +8,134 @@
 
 import UIKit
 
-enum DefaultsKeys : String {
+public enum DefaultsKeys : String {
   case ClientId = "clientId"
   case ClientSecret = "clientSecret"
   case UUID = "uuid"
   case Server = "server"
 }
 
+public enum ProtocolType : String {
+  case Https = "https://"
+  case Http = "http://"
+  
+  var string: String {
+    return self.rawValue
+  }
+  
+}
+
+public enum DeviceAuthHosts : String {
+  case Live       = "http://www.secuoffice.com/"
+  case Dev1       = "core-dev1.secupay-ag.de/app.main"
+  case Dev2       = "core-dev2.secupay-ag.de/app.main"
+  case Dev3       = "core-dev3.secupay-ag.de/app.main"
+  case Dev4       = "core-dev4.secupay-ag.de/app.main"
+  case Dev5       = "core-dev5.secupay-ag.de/app.main"
+  case Dev6       = "core-dev6.secupay-ag.de/app.main"
+  case Dev7       = "core-dev7.secupay-ag.de/app.main"
+  case Dev8       = "core-dev8.secupay-ag.de/app.main"
+  case Dev9       = "core-dev9.secupay-ag.de/app.main"
+  case Dev10      = "core-dev10.secupay-ag.de/app.main"
+  case Testing    = "core-testing.secupay-ag.de/app.main"
+  
+  static var all: [DeviceAuthHosts] {
+    return [.Live, .Dev1, .Dev2, .Dev3, .Dev4, .Dev5, .Dev6, .Dev7, .Dev8, .Dev9, .Dev10, .Testing]
+  }
+  
+  static var allStrings: [String] {
+    return [DeviceAuthHosts.Live.string, DeviceAuthHosts.Dev1.string, DeviceAuthHosts.Dev2.string, DeviceAuthHosts.Dev3.string, DeviceAuthHosts.Dev4.string, DeviceAuthHosts.Dev5.string, DeviceAuthHosts.Dev6.string, DeviceAuthHosts.Dev7.string, DeviceAuthHosts.Dev8.string, DeviceAuthHosts.Dev9.string, DeviceAuthHosts.Dev10.string, DeviceAuthHosts.Testing.string]
+  }
+  
+  var string: String {
+    return self.rawValue
+  }
+  
+  
+}
+
+
+public enum AvailableHosts : String {
+  case Live       = "connect.secucard.com"
+  case Dev1       = "connect-dev1.secupay-ag.de"
+  case Dev2       = "connect-dev2.secupay-ag.de"
+  case Dev3       = "connect-dev3.secupay-ag.de"
+  case Dev4       = "connect-dev4.secupay-ag.de"
+  case Dev5       = "connect-dev5.secupay-ag.de"
+  case Dev6       = "connect-dev6.secupay-ag.de"
+  case Dev7       = "connect-dev7.secupay-ag.de"
+  case Dev8       = "connect-dev8.secupay-ag.de"
+  case Dev9       = "connect-dev9.secupay-ag.de"
+  case Dev10      = "connect-dev10.secupay-ag.de"
+  case Testing    = "connect-testing.secupay-ag.de"
+  
+  static var all: [AvailableHosts] {
+    return [.Live, .Dev1, .Dev2, .Dev3, .Dev4, .Dev5, .Dev6, .Dev7, .Dev8, .Dev9, .Dev10, .Testing]
+  }
+  
+  static var allStrings: [String] {
+    return [AvailableHosts.Live.string, AvailableHosts.Dev1.string, AvailableHosts.Dev2.string, AvailableHosts.Dev3.string, AvailableHosts.Dev4.string, AvailableHosts.Dev5.string, AvailableHosts.Dev6.string, AvailableHosts.Dev7.string, AvailableHosts.Dev8.string, AvailableHosts.Dev9.string, AvailableHosts.Dev10.string, AvailableHosts.Testing.string]
+  }
+  
+  var string: String {
+    return self.rawValue
+  }
+  
+  var deviceAuthHost: String {
+    
+    for var i = 0; i < AvailableHosts.all.count; i++ {
+      if AvailableHosts.all[i] == self {
+        return DeviceAuthHosts.allStrings[i]
+      }
+    }
+    
+    return ""
+    
+  }
+  
+  static func byString(string:String) -> AvailableHosts {
+    
+    for var i = 0; i < AvailableHosts.allStrings.count; i++ {
+      if AvailableHosts.allStrings[i] == string {
+        return AvailableHosts.all[i]
+      }
+    }
+    
+    return .Live
+    
+  }
+}
+
+
 class Constants: NSObject {
   
   // API Settings
-  static let baseUrl: String = "https://connect.secucard.com/"
+  
+  static var baseUrl:String {
+    return currentProtocol.string + currentHost.string + "/"
+  }
+  
+  static var apiBaseUrl:String {
+    return currentProtocol.string + currentHost.string + "/" + apiString
+  }
+  
+  static var currentProtocol: ProtocolType = .Https
+  static var currentHost: AvailableHosts {
+    get {
+      var serverName = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.Server.rawValue)
+      if serverName == nil {
+        serverName = AvailableHosts.allStrings[0]
+        NSUserDefaults.standardUserDefaults().setObject(serverName, forKey: DefaultsKeys.Server.rawValue)
+      }
+      return AvailableHosts.byString(serverName!)
+    }
+    set {
+      NSUserDefaults.standardUserDefaults().setObject(newValue.string, forKey: DefaultsKeys.Server.rawValue)
+    }
+  }
+  
   static let apiString: String = "api/v2/"
   
-  static let stompHost: String = "connect.secucard.com"
   static let stompVHost: String = "/"
   static let stompPort: Int32 = 61614
   static let replyQueue: String = "/temp-queue/main"
@@ -58,21 +172,6 @@ class Constants: NSObject {
   
   static let merchantRef: String = "KundeXY"
   
-  static let serverData = [
-    "https://connect.secucard.com/",
-    "https://connect-dev1.secupay-ag.de/",
-    "https://connect-dev2.secupay-ag.de/",
-    "https://connect-dev3.secupay-ag.de/",
-    "https://connect-dev4.secupay-ag.de/",
-    "https://connect-dev5.secupay-ag.de/",
-    "https://connect-dev6.secupay-ag.de/",
-    "https://connect-dev7.secupay-ag.de/",
-    "https://connect-dev8.secupay-ag.de/",
-    "https://connect-dev9.secupay-ag.de/",
-    "https://connect-dev10.secupay-ag.de/",
-    "https://connect-testing.secupay-ag.de/"
-  ]
-  
   // Colors
   static let tintColor: UIColor = UIColor(red: 63/255, green: 116/255, blue: 164/255, alpha: 1)
   static let tintColorBright: UIColor = UIColor(red: 146/255, green: 186/255, blue: 224/255, alpha: 1)
@@ -94,6 +193,7 @@ class Constants: NSObject {
   static let settingFont = UIFont.systemFontOfSize(14.0)
   static let sumFont = UIFont.systemFontOfSize(18.0)
   static let statusFont = UIFont.systemFontOfSize(28.0)
+  static let pinFont = UIFont.systemFontOfSize(40.0)
   
 //  static let receiptHeadingFont = UIFont.init(name: "HiraKakuProN-W3", size: 16)
 //  static let receiptRegularFont = UIFont.init(name: "HiraKakuProN-W3", size: 14)

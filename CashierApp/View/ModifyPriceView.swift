@@ -17,7 +17,7 @@ enum PriceChangeType {
 
 protocol ModifyPriceViewDelegate {
   
-  func priceViewChangedPrice(price: Float)
+  func priceViewChangedPrice(price: Int)
   func priceViewAddedDiscount(discount: Float)
   
 }
@@ -140,13 +140,17 @@ class ModifyPriceView: UIView {
       switch theType {
         
       case PriceChangeType.Price:
-        if let theDelegate = delegate {
-          theDelegate.priceViewChangedPrice((self.priceField.text! as NSString).floatValue*100)
+        if let cent = self.priceField.text?.withCommaToCent() {
+          if let theDelegate = delegate {
+            theDelegate.priceViewChangedPrice(cent)
+          }
         }
         
       case PriceChangeType.Discount:
-        if let theDelegate = delegate {
-          theDelegate.priceViewAddedDiscount((self.priceField.text! as NSString).floatValue)
+        if let percent = self.priceField.text?.withCommaToFloat() {
+          if let theDelegate = delegate {
+            theDelegate.priceViewAddedDiscount(percent)
+          }
         }
       }
       

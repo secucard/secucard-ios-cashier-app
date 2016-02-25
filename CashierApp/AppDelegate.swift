@@ -47,7 +47,7 @@
           
           if let parsingError = parsingError {
             
-            SCLogManager.error(parsingError)
+            SCLogManager.error(SecuError.withError(parsingError))
             
           }
           
@@ -68,7 +68,7 @@
       window?.rootViewController = self.mainController
       window?.makeKeyAndVisible()
       
-      connectCashier { (success: Bool, error: NSError?) -> Void in
+      connectCashier { (success: Bool, error: SecuError?) -> Void in
         
         if let error = error {
           SCLogManager.error(error)
@@ -79,7 +79,7 @@
       return true
     }
     
-    func connectCashier( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
+    func connectCashier( handler: (success: Bool, error: SecuError?) -> Void ) -> Void {
       
       // if still connected return fail gracefully
       guard !SCConnectClient.sharedInstance().connected else {
@@ -92,14 +92,8 @@
       let clientSecret = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.ClientSecret.rawValue)
       let uuid = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.UUID.rawValue)
       
-      var server = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.Server.rawValue)
-      if server == nil {
-        server = Constants.serverData[0]
-        NSUserDefaults.standardUserDefaults().setObject(server, forKey: DefaultsKeys.Server.rawValue)
-      }
-      
       // if there are missing credientials, show the view and fail gracefully
-      guard clientId != nil && clientSecret != nil && uuid != nil && server != nil else {
+      guard clientId != nil && clientSecret != nil && uuid != nil else {
         
         let initView = InitializationView()
         initView.delegate = self
@@ -116,15 +110,20 @@
         
       }
       
+      SCLogManager.info("Login -----")
+      SCLogManager.info("API \(Constants.apiBaseUrl)")
+      SCLogManager.info("Auth \(Constants.baseUrl)")
+      SCLogManager.info("Stomp-Host \(Constants.currentHost.string)")
+
       // initialize connect client
       
-      let restConfig: SCRestConfiguration = SCRestConfiguration(baseUrl: "\(server!)\(Constants.apiString)", andAuthUrl: "\(server!)")
+      let restConfig: SCRestConfiguration = SCRestConfiguration(baseUrl: Constants.apiBaseUrl, andAuthUrl: Constants.baseUrl)
       
-      let stompConfig: SCStompConfiguration = SCStompConfiguration(host: Constants.stompHost, andVHost: Constants.stompVHost, port: Constants.stompPort, userId: "", password: "", useSSL: true, replyQueue: Constants.replyQueue, connectionTimeoutSec: Constants.connectionTimeoutSec, socketTimeoutSec: Constants.socketTimeoutSec, heartbeatMs: Constants.heartbeatMs, basicDestination: Constants.basicDestination)
+      let stompConfig: SCStompConfiguration = SCStompConfiguration(host: Constants.currentHost.string, andVHost: Constants.stompVHost, port: Constants.stompPort, userId: "", password: "", useSSL: true, replyQueue: Constants.replyQueue, connectionTimeoutSec: Constants.connectionTimeoutSec, socketTimeoutSec: Constants.socketTimeoutSec, heartbeatMs: Constants.heartbeatMs, basicDestination: Constants.basicDestination)
       
       let clientCredentials: SCClientCredentials = SCClientCredentials(clientId: clientId, clientSecret: clientSecret)
       
-      let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: "\(server!)", clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: uuid, authType: "device")
+      let clientConfig: SCClientConfiguration = SCClientConfiguration(restConfiguration: restConfig, stompConfiguration: stompConfig, defaultChannel: OnDemandChannel, stompEnabled: true, oauthUrl: Constants.baseUrl, clientCredentials: clientCredentials, userCredentials: SCUserCredentials(), deviceId: uuid, authType: "device")
       
       // connect to server and try to login
       if let client = SCConnectClient.sharedInstance() {
@@ -134,7 +133,7 @@
         // only when connecting we request auth code, so we have to do that directly
         if SCAccountManager.sharedManager().accessToken == nil {
           
-          SCAccountManager.sharedManager().requestTokenWithDeviceAuth({ (token: String!, error: NSError!) -> Void in
+          SCAccountManager.sharedManager().requestTokenWithDeviceAuth({ (token: String!, error: SecuError!) -> Void in
             
             
             
@@ -170,11 +169,11 @@
       
     }
     
-    func connectWhenSave( handler: (success: Bool, error: NSError?) -> Void ) -> Void {
+    func connectWhenSave( handler: (success: Bool, error: SecuError?) -> Void ) -> Void {
       
       if let client = SCConnectClient.sharedInstance() {
         
-        client.connect({ (success: Bool, error: NSError?) -> Void in
+        client.connect({ (success: Bool, error: SecuError?) -> Void in
           
           if let error = error {
             

@@ -107,9 +107,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   let sumLabel = UILabel()
   
-  var sum:Float = 0.0 {
+  var sum:Int = 0 {
     didSet {
-      sumLabel.text = String(format: "%.2f €", sum/100)
+      sumLabel.text = sum.toEuro()
     }
   }
   
@@ -566,7 +566,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     logView.hidden = true
     
     calcPrice()
-    CheckTransactionReady()
+    CheckTransactionReady() 
     
   }
   
@@ -591,10 +591,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   }
   
   func calcPrice() {
-    sum = 0.0
+    sum = 0
     for bi:BasketItem in basket {
       if (bi.type == BasketItemType.Product) {
-        let newVal = sum + (Float(bi.price) * bi.discount * Float(bi.amount))
+        let newVal = sum + Int(roundf((Float(bi.price) * bi.discount * Float(bi.amount))))
         sum = newVal
       }
     }
@@ -602,7 +602,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func didTapEmptyButton() {
     
-    sum = 0.0
+    sum = 0
     basket = [BasketItem]()
     
   }
@@ -904,7 +904,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func updateTransactionBasket(handler: (success: Bool,error: NSError?) -> Void) {
+  func updateTransactionBasket(handler: (success: Bool,error: SecuError?) -> Void) {
     
     // create a basket
     let basket = SCSmartBasket()
@@ -940,7 +940,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func updateTransactionIdent(handler: (success: Bool,error: NSError?) -> Void) {
+  func updateTransactionIdent(handler: (success: Bool,error: SecuError?) -> Void) {
     
     // create the ident
     if let ident = customerUsed {
@@ -972,13 +972,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  func saveTransaction(handler: (success: Bool,error: NSError?) -> Void) {
+  func saveTransaction(handler: (success: Bool,error: SecuError?) -> Void) {
     
     currentTransaction.merchantRef = Constants.merchantRef
     currentTransaction.transactionRef = "\(Constants.merchantRef)_\(NSDate().timeIntervalSince1970)"
     
     if currentTransaction.id == nil {
-      SCSmartTransactionService.sharedService().createTransaction(currentTransaction, completionHandler: { (createdTransaction: SCSmartTransaction?, error: NSError?) -> Void in
+      SCSmartTransactionService.sharedService().createTransaction(currentTransaction, completionHandler: { (createdTransaction: SCSmartTransaction?, error: SecuError?) -> Void in
         
         if let error = error {
           
@@ -1016,7 +1016,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
     } else {
       
-      SCSmartTransactionService.sharedService().updateTransaction(currentTransaction, completionHandler: { (updatedTransaction: SCSmartTransaction?, error: NSError?) -> Void in
+      SCSmartTransactionService.sharedService().updateTransaction(currentTransaction, completionHandler: { (updatedTransaction: SCSmartTransaction?, error: SecuError?) -> Void in
         
         if let updatedTransaction = updatedTransaction {
           self.currentTransaction = updatedTransaction
@@ -1049,6 +1049,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.edges.equalTo(view)
     }
     
+    
+    
     SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
       
       if let event = event {
@@ -1077,7 +1079,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     statusView.addStatus("Transaktion wird durchgeführt")
     
     // start
-    SCSmartTransactionService.sharedService().startTransaction(currentTransaction.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: NSError?) -> Void in
+    SCSmartTransactionService.sharedService().startTransaction(currentTransaction.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: SecuError?) -> Void in
       
       dispatch_async(dispatch_get_main_queue(), { () -> Void in
       
@@ -1104,36 +1106,66 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
               
             }
             
+            // receiptView to show
+            let receiptView = ReceiptView(title: "Kundenbeleg", print: false)
+            
+            var receiptCenterX: Constraint!
+            var merchReceiptCenterX: Constraint!
+            var receiptHeight: Constraint!
+            var merchReceiptHeight: Constraint!
+            
             if let receiptLines = result.receiptLines as? [SCSmartReceiptLine] {
-              
-              // show receiptView
-              let receiptView = ReceiptView()
+            
               statusView.addSubview(receiptView)
               
-              var constraint: Constraint?
-              
               receiptView.snp_makeConstraints(closure: { (make) -> Void in
-                make.centerX.equalTo(statusView)
+                receiptCenterX = make.centerX.equalTo(statusView).offset(0).constraint
                 make.width.equalTo(300)
                 make.bottom.equalTo(statusView)
-                constraint = make.height.equalTo(0).offset(0).constraint
+                receiptHeight = make.height.equalTo(0).offset(0).constraint
               })
               
               receiptView.receiptLines = receiptLines
-              
-              if let constraint = constraint {
               
                 let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
                 dispatch_after(delayTime, dispatch_get_main_queue()) {
                   
                   UIView.animateWithDuration(0.4, animations: { () -> Void in
-                    constraint.updateOffset(self.view.frame.size.height-100)
+                    receiptHeight.updateOffset(self.view.frame.size.height-100)
                     self.view.layoutIfNeeded()
                   })
                   
                 }
-                
-              }
+              
+            }
+            
+            // merch receiptView to show
+            if let receiptLinesMerchant = result.receiptLinesMerchant as? [SCSmartReceiptLine] {
+              
+              // show receiptView
+              let receiptViewMerchant = ReceiptView(title: "Händlerbeleg", print: result.receiptLinesMerchantPrint)
+              statusView.addSubview(receiptViewMerchant)
+              
+              receiptViewMerchant.snp_makeConstraints(closure: { (make) -> Void in
+                merchReceiptCenterX = make.centerX.equalTo(statusView).offset(0).constraint
+                make.width.equalTo(300)
+                make.bottom.equalTo(statusView)
+                merchReceiptHeight = make.height.equalTo(0).offset(0).constraint
+              })
+              
+              receiptViewMerchant.receiptLines = receiptLinesMerchant
+              
+                let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+                dispatch_after(delayTime, dispatch_get_main_queue()) {
+                  
+                  UIView.animateWithDuration(0.4, animations: { () -> Void in
+                    merchReceiptHeight.updateOffset(self.view.frame.size.height-100)
+                    merchReceiptCenterX.updateOffset(200)
+                    receiptCenterX.updateOffset(-200)
+                    self.view.layoutIfNeeded()
+                  })
+                  
+                }
               
             }
             
@@ -1277,32 +1309,23 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   func logManagerHandleLogging(message: SCLogMessage!) {
     
     
-    
     if (message.level.rawValue == LogLevelError.rawValue) {
-    
-//      dispatch_async(dispatch_get_main_queue(), { () -> Void in
-//        let alert:UIAlertView = UIAlertView(title: "Fehler", message: message.message, delegate: nil, cancelButtonTitle: "OK")
-//        alert.show()
-//      })
       
       var logString = "< ERROR > \n\(message.message)"
       
-      if let error = message.error {
-        
-        logString += "\nDomain: \(error.domain)"
-        
-        if let reason = error.localizedFailureReason, suggestion = error.localizedRecoverySuggestion {
-        
-          logString += "\nReason: \(reason)\nsupport id: \(suggestion)"
-          
-        }
-        
-      }
+      logString += "Status: \(message.error.scStatus)\n"
+      logString += "Code: \(message.error.scCode)\n"
+      logString += "Type: \(message.error.scError)\n"
+      logString += "Error: \(message.error.scErrorUser)\n"
+      logString += "Details: \(message.error.scErrorDetails)\n"
+      logString += "SupportId: \(message.error.scSupportId)\n"
+      
       
       logView.addToLog(logString)
       
     } else {
     
+      print(message.message)
       logView.addToLog(message.message)
       
     }

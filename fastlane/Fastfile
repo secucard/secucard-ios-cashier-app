@@ -24,93 +24,128 @@ default_platform :ios
 platform :ios do
   before_all do
     # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
-    cocoapods
+    # cocoapods
     
     # increment_build_number
 
     # xctool # run the tests of your app
   end
 
-  desc "Runs all the tests"
-  lane :test do
-    snapshot
+  lane :gitclean do 
+
+    ensure_git_status_clean
+
   end
 
-  desc "Submit a new Beta Build to Apple TestFlight"
-  desc "This will also make sure the profile is up to date"
+  lane :versioning do
+
+    # Increment build number to current date
+    build_number = Time.new.strftime("%Y.%m.%d.%H.%M")
+    increment_build_number build_number: build_number
+
+    # Set version number to the one at the top of the CHANGELOG
+    readme = File.read("../CHANGELOG.md")
+
+    latest_version = readme.split("\n## ").first
+
+    first_line = latest_version.split("\n").first
+    version_number = first_line.split(" ")[1]
+
+    increment_version_number(
+      version_number: version_number
+      )
+
+  end
+
+  lane :certstuff do 
+
+    cert(
+      output_path: "cert/"
+      )
+    sigh(
+      force: true,
+      adhoc: true,
+      output_path: "cert/",
+      filename: "secuconnectKasse_AdHoc.mobileprovision"
+      )
+
+  end
+
+  desc "Deploys a beta version of the app"
   lane :beta do
-    cert(
-      output_path: "codesign/"
-      )
-    sigh(
-      force: true, 
-      output_path: "codesign/",
-      filename: "AdHoc_com.secucard.app.ios.secucard.cashierapp.mobileprovision"
-      )
-    gym(
-      scheme: "CashierApp AdHoc", 
-      provisioning_profile_path: "codesign/AdHoc_com.secucard.app.ios.secucard.cashierapp.mobileprovision", 
-      clean: true,
-      silent: true,
-      output_name: "secuconnectKasse_AdHoc.ipa",
-      output_directory: "deploy/"
-      )
-    #pilot
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+    # gitclean
+
+    versioning
+
+    certstuff
+
+    gym_beta
+
+    hockey_beta
+
+    slack_beta
+
   end
 
-  desc "Deploy a new version to the App Store"
-  lane :deploy do
-    # snapshot
-    cert(
-      output_path: "codesign/"
-      )
-    sigh(
-      force: true, 
-      output_path: "codesign/",
-      filename: "AppStore_com.secucard.app.ios.secucard.cashierapp.mobileprovision"
-      )
+  desc "Build Beta version"
+  lane :gym_beta do
+
     gym(
-      scheme: "CashierApp", 
-      provisioning_profile_path: "codesign/AppStore_com.secucard.app.ios.secucard.cashierapp.mobileprovision", 
-      clean: true,
+      workspace: "CashierApp.xcworkspace",
+      configuration: "AdHoc",
+      include_symbols: true,
+      include_bitcode: true,
+      scheme: "CashierApp AdHoc",
       silent: true,
-      output_name: "secuconnectKasse.ipa",
-      output_directory: "deploy/"
+      clean: false,
+      output_directory: "./deploy/",
+      output_name: "secuconnectKasse_beta.ipa",
+      export_team_id: "QWAPQRA564",
+      use_legacy_build_api: true,
+      include_bitcode: false,
+      provisioning_profile_path: "./cert/secuconnectKasse_AdHoc.mobileprovision"
       )
-    deliver(
-      ipa: "deploy/secuconnectKasse.ipa"
-      )
-    # frameit
+
   end
 
-  desc "just build adhoc"
-  lane :betabuild do
-    gym(
-      scheme: "CashierApp AdHoc", 
-      provisioning_profile_path: "AdHoc_com.secucard.app.ios.secucard.cashierapp.mobileprovision", 
-      clean: true,
-      silent: true,
-      output_name: "secuconnectKasse.ipa",
-      output_directory: "deploy/"
-      )
-    #pilot
+  desc "Deploy a new version BETA App to hockey"
+  lane :hockey_beta do
 
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
-  end  
+# Set version number to the one at the top of the CHANGELOG
+readme = File.read("../CHANGELOG.md")
+
+latest_version = readme.split("\n## ").first
+
+    # Generate release notes from CHANGELOG
+    release_notes = latest_version.split("\n")[1..-1].join("\n")
+
+    hockey(
+      api_token: '128b13ed670f4aed99374edc0b2d426e',
+      ipa: './deploy/secuconnectKasse_beta.ipa',
+      dsym: './deploy/secuconnectKasse_beta.app.dSYM.zip',
+      notes_type: "1",
+      notes: release_notes,
+      notify: "0"
+      )
+
+  end
+
+  lane :slack_beta do
+
+    slack(
+          slack_url: "https://hooks.slack.com/services/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",
+          message: "Successfully deployed new App Update."
+      )
+
+  end
 
   # You can define as many lanes as you want
 
   after_all do |lane|
     # This block is called, only if the executed lane was successful
     
-    slack(
-      slack_url: "https://hooks.slack.com/services/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",
-      message: "Successfully deployed new App Update."
-    )
+    
   end
 
   error do |lane, exception|
@@ -118,7 +153,7 @@ platform :ios do
       slack_url: "https://hooks.slack.com/services/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",
       message: exception.message,
       success: false
-    )
+      )
   end
 end
 

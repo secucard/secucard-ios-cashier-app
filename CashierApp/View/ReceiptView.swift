@@ -13,7 +13,7 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
 
   var receiptLines: [SCSmartReceiptLine]? {
     didSet {
-      if let receiptLines = receiptLines {
+      if let _ = receiptLines {
         tableView.reloadData()
       }
     }
@@ -21,8 +21,21 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
   
   let tableView = UITableView()
   
-  init() {
+  var print = false
+  
+  let titleLabel = UILabel()
+  
+  var title: String? {
+    didSet {
+      titleLabel.text = title
+    }
+  }
+  
+  init(title:String, print:Bool) {
+    
     super.init(frame: CGRectNull)
+    
+    self.print = print
     
     backgroundColor = UIColor.whiteColor()
     
@@ -30,6 +43,15 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
     layer.shadowColor = UIColor.blackColor().CGColor
     layer.shadowOffset = CGSizeMake(0.0, 20.0)
     layer.shadowOpacity = 1
+    
+    titleLabel.textAlignment = NSTextAlignment.Center
+    titleLabel.numberOfLines = 0
+    titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    addSubview(titleLabel)
+    titleLabel.snp_makeConstraints { (make) -> Void in
+      make.left.top.equalTo(10)
+      make.right.equalTo(-10)
+    }
     
     tableView.dataSource = self
     tableView.delegate = self
@@ -42,7 +64,16 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     addSubview(tableView)
     tableView.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(self).inset(10)
+      make.top.equalTo(titleLabel.snp_bottom).offset(10)
+      make.left.equalTo(10)
+      make.right.bottom.equalTo(-10)
+    }
+    
+    if print {
+      self.titleLabel.text = title + "\n- Druck -"
+      self.titleLabel.textColor = UIColor.redColor()
+    } else {
+      self.titleLabel.text = title + "\n"
     }
     
   }
@@ -60,7 +91,6 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
   }
   
   func addReceiptLine(line: SCSmartReceiptLine) {
-    
     
   }
   
@@ -87,15 +117,15 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
     let line = receiptLines![indexPath.row]
     var cell: ReceiptCell?
     
-    if line.type == "separator" {
+    if line.type == ReceiptLineType.Separator.rawValue {
       
       cell = tableView.dequeueReusableCellWithIdentifier("headingCell", forIndexPath: indexPath) as! ReceiptHeadingCell
 
-    } else if line.type == "name-value" {
+    } else if line.type == ReceiptLineType.NameValue.rawValue {
       
       cell = tableView.dequeueReusableCellWithIdentifier("keyValueCell", forIndexPath: indexPath) as! ReceiptKeyValueCell
       
-    } else if line.type == "textline" {
+    } else if line.type == ReceiptLineType.Textline.rawValue {
       
       cell = tableView.dequeueReusableCellWithIdentifier("textCell", forIndexPath: indexPath) as! ReceiptTextCell
       
@@ -110,4 +140,10 @@ class ReceiptView: UIView, UITableViewDelegate, UITableViewDataSource {
   }
   
 
+}
+
+public enum ReceiptLineType:String {
+  case Separator = "separator"
+  case NameValue = "name-value"
+  case Textline = "textline"
 }

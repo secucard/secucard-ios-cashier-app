@@ -27,7 +27,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
         
         // properties
         theData.discount = 1.0
-        theData.price = Float(theData.product.priceOne)
+        theData.price = Int(theData.product.priceOne)
         
         setLabels()
       }
@@ -192,7 +192,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
     
       countLabel.text = "\(theData.amount)"
       nameLabel.text = theData.product.desc
-      infoLabel.text = "\(theData.product.articleNumber) - \(theData.price/100)€"
+      infoLabel.text = "\(theData.product.articleNumber) - \(theData.price.toEuro())"
       if (theData.discount != 1) {
           infoLabel.text = infoLabel.text?.stringByAppendingString(" - \(Int((1-theData.discount)*100))%")
       }
@@ -284,9 +284,9 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
   
   //- Mark
   
-  func priceViewChangedPrice(price: Float) {
+  func priceViewChangedPrice(cent: Int) {
     if let theData = data {
-      theData.price = price
+      theData.price = cent
       setLabels()
       delegate?.basketItemChanged(theData)
     }

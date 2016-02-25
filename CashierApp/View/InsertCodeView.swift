@@ -15,7 +15,6 @@ class InsertCodeView: UIView {
   var authCode: SCAuthDeviceAuthCode?
   
   let centerView = UIView()
-  let titleLabel = UILabel()
   let subtitleLabel = UITextView()
   let cancelButton = UIButton(type: UIButtonType.Custom)
   
@@ -46,29 +45,24 @@ class InsertCodeView: UIView {
       make.centerX.equalTo(self)
       make.centerY.equalTo(self)
       make.width.equalTo(500)
-      make.height.equalTo(250)
+      make.height.equalTo(220)
     }
     
-    titleLabel.text = "Geräteverifikation"
-    titleLabel.font = UIFont.systemFontOfSize(24)
-    centerView.addSubview(titleLabel)
+    let paragraph = NSMutableParagraphStyle()
+    paragraph.lineSpacing = 40
+    paragraph.alignment = NSTextAlignment.Center
     
-    titleLabel.snp_makeConstraints { (make) -> Void in
-      make.top.left.equalTo(10)
-      make.right.equalTo(-10)
-      make.height.equalTo(30)
-    }
+    let helpText = NSMutableAttributedString(string: "Bitte verifizieren Sie das Gerät mit dem Code\n", attributes: [NSFontAttributeName: Constants.headlineFont])
+    helpText.appendAttributedString(NSAttributedString(string: authCode!.userCode, attributes: [NSFontAttributeName: Constants.pinFont]))
+    helpText.appendAttributedString(NSAttributedString(string: "\nunter der Website \(authCode!.verificationUrl)", attributes: [NSFontAttributeName: Constants.headlineFont]))
+    helpText.addAttribute(NSParagraphStyleAttributeName, value: paragraph, range: NSMakeRange(0, helpText.length))
     
     subtitleLabel.editable = false
-    subtitleLabel.text = "Bitte verifizieren Sie das Gerät mit dem Code \(authCode!.userCode) unter der Website \(authCode!.verificationUrl)"
-    subtitleLabel.font = Constants.headlineFont
+    subtitleLabel.attributedText = helpText
     centerView.addSubview(subtitleLabel)
     
     subtitleLabel.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(10)
-      make.top.equalTo(titleLabel.snp_bottom).offset(20)
-      make.right.equalTo(-10)
-      make.height.equalTo(100)
+      make.edges.equalTo(centerView).inset(UIEdgeInsetsMake(10, 10, 10, 10))
     }
     
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
@@ -78,10 +72,10 @@ class InsertCodeView: UIView {
     self.addSubview(cancelButton)
     
     cancelButton.snp_makeConstraints { (make) -> Void in
-      make.left.equalTo(10)
+      make.left.equalTo(centerView)
       make.width.equalTo(100)
       make.height.equalTo(50)
-      make.bottom.equalTo(-10)
+      make.top.equalTo(centerView.snp_bottom).offset(10)
     }
     
     UIView.animateWithDuration(0.4, animations: { () -> Void in

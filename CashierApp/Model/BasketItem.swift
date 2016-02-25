@@ -23,7 +23,7 @@ class BasketItem: MTLModel, MTLJSONSerializing {
   
   var amount: Int = 1
   var discount: Float = 1.0
-  var price: Float = 0.0
+  var price: Int = 0
   var expanded: Bool = false
   
   convenience init(product : SCSmartProduct) {
@@ -31,7 +31,7 @@ class BasketItem: MTLModel, MTLJSONSerializing {
     self.init()
     self.type = BasketItemType.Product
     self.product = product
-    self.price = Float(product.priceOne)
+    self.price = Int(product.priceOne)
     
   }
   

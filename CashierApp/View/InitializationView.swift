@@ -45,10 +45,10 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     }
   }
   
-  var newServer: String? {
+  var newServer: AvailableHosts? {
     didSet {
       if let newServer = newServer {
-        serverField.text = newServer
+        serverField.text = newServer.string
       }
     }
   }
@@ -186,7 +186,7 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     
     var server = NSUserDefaults.standardUserDefaults().stringForKey(DefaultsKeys.Server.rawValue)
     if server == nil {
-      server = Constants.serverData[0]
+      server = AvailableHosts.allStrings[0]
       NSUserDefaults.standardUserDefaults().setObject(server, forKey: DefaultsKeys.Server.rawValue)
     }
     
@@ -285,7 +285,7 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
   func didTapPickerOk() {
     self.somethingChanged = true
     let row = serverPicker.selectedRowInComponent(0)
-    self.newServer = Constants.serverData[row]
+    self.newServer = AvailableHosts.all[row]
     serverField.resignFirstResponder()
   }
   
@@ -293,10 +293,10 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     
     if (checkFields()) {
       
+      Constants.currentHost = newServer!
       NSUserDefaults.standardUserDefaults().setObject(clientIdField.text, forKey: DefaultsKeys.ClientId.rawValue)
       NSUserDefaults.standardUserDefaults().setObject(clientSecretField.text, forKey: DefaultsKeys.ClientSecret.rawValue)
       NSUserDefaults.standardUserDefaults().setObject(uuidField.text, forKey: DefaultsKeys.UUID.rawValue)
-      NSUserDefaults.standardUserDefaults().setObject(newServer, forKey: DefaultsKeys.Server.rawValue)
       
       delegate?.didSaveCredentials()
       
@@ -369,11 +369,11 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
   }
   
   func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    return Constants.serverData.count
+    return AvailableHosts.all.count
   }
   
   func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    return Constants.serverData[row]
+    return AvailableHosts.all[row].string
   }
   
   func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

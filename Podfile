@@ -5,8 +5,10 @@ use_frameworks!
 
 target 'CashierApp', :exclusive => true do
   
-  pod 'SecucardConnectSDK', '0.2.14'
-  
+  pod "SecucardConnectSDK", :path => "../SecucardConnectSDK"
+#  
+#  pod 'SecucardConnectSDK', '0.2.14'
+
   pod 'SwiftyJSON', '2.3.0'
   pod 'SnapKit', '0.15.0'
   pod 'Alamofire', '2.0.2'
@@ -17,8 +19,10 @@ end
 
 target 'CashierAppTests', :exclusive => true do
   
-  pod 'SecucardConnectSDK', '0.2.14'
+  pod "SecucardConnectSDK", :path => "../SecucardConnectSDK"
   
+#  pod 'SecucardConnectSDK', '0.2.14'
+
 #  pod 'Quick'
 #  pod 'Nimble', '= 2.0.0-rc.3'
 #  pod 'FBSnapshotTestCase'

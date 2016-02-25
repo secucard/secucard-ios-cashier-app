@@ -1,44 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="fastlane">
-  <testsuite name="run">
+<testsuites>
+  <testsuite name="fastlane.lanes">
     
       
-      <testcase name="0: Verifying required fastlane version" time="0.000242">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.00034">
         
       </testcase>
     
       
-      <testcase name="1: default_platform" time="0.000127">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000229">
         
       </testcase>
     
       
-      <testcase name="2: cocoapods" time="12.443875">
+      <testcase classname="fastlane.lanes" name="2: Switch to ios versioning lane" time="0.000264">
         
       </testcase>
     
       
-      <testcase name="3: cert" time="9.242218">
+      <testcase classname="fastlane.lanes" name="3: increment_build_number" time="1.409452">
         
       </testcase>
     
       
-      <testcase name="4: sigh" time="10.31803">
+      <testcase classname="fastlane.lanes" name="4: increment_version_number" time="0.820641">
         
       </testcase>
     
       
-      <testcase name="5: gym" time="97.998123">
+      <testcase classname="fastlane.lanes" name="5: Switch to ios certstuff lane" time="0.000956">
         
       </testcase>
     
       
-      <testcase name="6: deliver" time="773.688235">
+      <testcase classname="fastlane.lanes" name="6: cert" time="13.307125">
         
       </testcase>
     
       
-      <testcase name="7: slack" time="0.878117">
+      <testcase classname="fastlane.lanes" name="7: sigh" time="11.162939">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="8: Switch to ios gym_beta lane" time="0.000971">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="9: gym" time="87.047892">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: Switch to ios hockey_beta lane" time="0.000797">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: hockey" time="49.058141">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: Switch to ios slack_beta lane" time="0.00039">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="13: slack" time="0.83847">
         
       </testcase>
     

@@ -27,7 +27,7 @@ class ProductDetailView: UIView {
         informationView.text = ""
         informationView.text = informationView.text.stringByAppendingString("Artikelnummer: \(product.articleNumber)\n")
         informationView.text = informationView.text.stringByAppendingString("EAN: \(product.ean)\n")
-        informationView.text = informationView.text.stringByAppendingString("Preis: \(Float(product.priceOne)/100) €\n")
+        informationView.text = informationView.text.stringByAppendingString("Preis: \(Int(product.priceOne).toEuro())\n")
         informationView.text = informationView.text.stringByAppendingString("MwSt: \(product.tax) %\n")
         
         informationView.text = informationView.text.stringByAppendingString("\nWarengruppen\n")

@@ -44,7 +44,7 @@ class BasketUserCell: UICollectionViewCell {
           // get merchant card
           self.lockStatusLabel.text = "Status: \(merchantCard.lockStatus)"
           self.pointsLabel.text = "Punkte: \(merchantCard.points)"
-          self.balanceLabel.text = "Guthaben: \(Float(merchantCard.balance)/100) €"
+          self.balanceLabel.text = "Guthaben: \(Int(merchantCard.balance).toEuro())"
           
         }
         

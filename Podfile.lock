@@ -28,7 +28,7 @@ PODS:
   - Mantle (2.0.5):
     - Mantle/extobjc (= 2.0.5)
   - Mantle/extobjc (2.0.5)
-  - SecucardConnectSDK (0.2.14):
+  - SecucardConnectSDK (0.2.16):
     - AFNetworking (= 2.6.0)
     - CocoaAsyncSocket (= 7.4.2)
     - Mantle (= 2.0.5)
@@ -39,10 +39,14 @@ PODS:
 DEPENDENCIES:
   - Alamofire (= 2.0.2)
   - HockeySDK (= 3.8.2)
-  - SecucardConnectSDK (= 0.2.14)
+  - SecucardConnectSDK (from `../SecucardConnectSDK`)
   - SnapKit (= 0.15.0)
   - SwiftyJSON (= 2.3.0)
   - TFBarcodeScanner (= 1.1.0)
+
+EXTERNAL SOURCES:
+  SecucardConnectSDK:
+    :path: "../SecucardConnectSDK"
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
@@ -50,7 +54,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   HockeySDK: 9f4ac41263acf9d8a4d59491a7f17af16529b935
   Mantle: 1912395033f601de5adc8ee91e48f46e4c7051ad
-  SecucardConnectSDK: a1d4c4ddfb4c7401b3ff71099a8f6b540f21c386
+  SecucardConnectSDK: f07037c7a5ddd0bc00acfb3bdb58892c98be9871
   SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
   TFBarcodeScanner: d98a2f224d8176722a8e4bc7d3b9e3e110690fef
