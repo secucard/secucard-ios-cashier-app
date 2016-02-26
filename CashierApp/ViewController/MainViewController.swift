@@ -13,6 +13,15 @@ import SnapKit
 import SecucardConnectSDK
 import Alamofire
 
+/**
+ The type of collection
+ 
+ - Product:           The Products within a category
+ - ProductCategories: the categories (tabs)
+ - Basket:            the basket with its items
+ - Checkins:          the checkins nearby
+ - Unknown:           unknow
+ */
 enum CollectionType {
   case Product
   case ProductCategories
@@ -21,6 +30,17 @@ enum CollectionType {
   case Unknown
 }
 
+ /**
+ The Payment Method to use for transaction
+ 
+ - Unset:    the void state
+ - Demo:     Demo is just demo
+ - Cash:     Customer wants to use cash to pay
+ - Auto:     default logic if customer is secucard customer and has a defautl setting in his account
+ - Cashless: Card
+ - Loyalty:  Localty Card
+ - Paypal:   Paypal
+ */
 enum PayMethod : String {
   case Unset = "unset"
   case Demo = "demo"
@@ -31,44 +51,63 @@ enum PayMethod : String {
   case Paypal = "paypal"
 }
 
+/// The MainViewController is holding all GUI elements and is processing transaction logic
+// TODO: Break into several contollers
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, BasketProductCellDelegate, ScanViewControllerDelegate, BasketUserCellDelegate, SCLogManagerDelegate, ScanCardViewDelegate, UIGestureRecognizerDelegate, ConnectionButtonDelegate, AddProductViewDelegate, TransactionInfoInputViewDelegate {
+  
+  // CollectionViews cell idetifiers
+  // TODO: convert to string-enum
   
   let productReuseIdentifier = "ProductCell"
   let categoryReuseIdentifier = "CategoryCell"
   let basketProductReuseIdentifier = "BasketProductCell"
   let basketUserReuseIdentifier = "BasketUserCell"
   let checkinReuseIdentifier = "CheckinCell"
-  
   let basketSectionHeaerReuseIdentifier = "HeaderView"
   let productSectionHeaerReuseIdentifier = "ProductsHeaderView"
-  
+
+  /// The product categories collection
   var productCategoriesCollection: UICollectionView
+  
+  /// The layout for the product categories collection
+  let categoriesLayout = UICollectionViewFlowLayout()
+  
+  /// The products colelction
   var productsCollection: UICollectionView
+
+  /// The layout for products colelction
+  let productsLayout = UICollectionViewFlowLayout()
+  
+  /// The basket collection
   var basketCollection: UICollectionView
+
+  /// The layout for the basket collection
+  let basketLayout = UICollectionViewFlowLayout()
+  
+  /// The checkins collection
   var checkinsCollection: UICollectionView
   
-  let categoriesLayout = UICollectionViewFlowLayout()
-  let productsLayout = UICollectionViewFlowLayout()
-  let basketLayout = UICollectionViewFlowLayout()
+  /// The layout for checkins collection
   let checkinLayout = UICollectionViewFlowLayout()
   
-  var longPress:UILongPressGestureRecognizer!
-  
-  var topBorder = UIView()
-  var sumView = UIView()
-  let bottomBar = UIView()
-  
+  /// semaphore to check whether card scanning is in progress because the component is firing the event a couple of times
   var cardScanInProgress = false
   
+  /// alamofire manager
   var manager: Manager?
   
+  /// the categories
+  
   var productCategories = [String:[String:[SCSmartProduct]]]()
+  
+  /// the checkins
   var checkins = [SCSmartCheckin]() {
     didSet {
       checkinsCollection.reloadData()
     }
   }
   
+  /// the basket
   var basket = [BasketItem]() {
     didSet {
       
@@ -87,6 +126,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
+  /// the currently used ident
   var customerUsed: SCSmartIdent? {
     didSet {
       
@@ -96,10 +136,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
+  /// A view letting the user scan a card
   var scanCardView = ScanCardView()
   
+  /// The button showing connection state and letting the user connect or disconnect
   let connectionButton = ConnectionButton()
   
+  ///
   let showLogButton: PaymentButton
   let settingsButton: PaymentButton
   
@@ -267,7 +310,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     self.productsCollection.delegate = self
     self.productsCollection.dataSource = self
     
-    longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+    let longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
     longPress.minimumPressDuration = 1.0
     longPress.delegate = self
     longPress.cancelsTouchesInView  = true
@@ -332,6 +375,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.centerY.equalTo(topBar).offset(10)
     }
     
+    let bottomBar = UIView()
     bottomBar.backgroundColor = UIColor.whiteColor()
     view.addSubview(bottomBar);
     
@@ -414,6 +458,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     // sum field
+    var sumView = UIView()
     sumView.backgroundColor = Constants.brightGreyColor
     
     view.addSubview(sumView)
@@ -455,6 +500,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.height.equalTo(50)
     }
     
+    var topBorder = UIView()
     topBorder.backgroundColor = Constants.brightGreyColor
     sumView.addSubview(topBorder)
     topBorder.snp_makeConstraints { (make) -> Void in
@@ -1154,6 +1200,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 } else if result.status == "failed" {
                   
                   statusView.addStatus("Transaktion konnte nicht erfolgreich durchgeführt werden")
+                  statusView.showLogButton(true)
                   
                 }
                 
@@ -1211,8 +1258,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     
                     UIView.animateWithDuration(0.4, animations: { () -> Void in
                       merchReceiptHeight.updateOffset(self.view.frame.size.height-100)
-                      merchReceiptCenterX.updateOffset(200)
-                      receiptCenterX.updateOffset(-200)
+                      if let receiptCenterX = receiptCenterX {
+                       receiptCenterX.updateOffset(-200)
+                        merchReceiptCenterX.updateOffset(200)
+                      }
                       self.view.layoutIfNeeded()
                     })
                     

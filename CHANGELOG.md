@@ -1,3 +1,7 @@
+## 1.0.8
+
+* fix merchant receipt
+
 ## 1.0.7
 
 * fix behaviour of card scanning library to send the code more than once

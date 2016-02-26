@@ -22,3 +22,6 @@ DerivedData
 Pods/
 
 doc/
+
+deploy/
+cert/
