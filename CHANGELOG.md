@@ -1,3 +1,15 @@
+## 1.0.6
+
+* fix emptying basket and ident used for transaction after transaction error
+
+## 1.0.5
+
+* fix bug where all exceptions would lead to a crash
+
+## 1.0.4
+
+* fix crash not updating basket on create transaction
+
 ## 1.0.3
 
 * fixed transaction lifecycle

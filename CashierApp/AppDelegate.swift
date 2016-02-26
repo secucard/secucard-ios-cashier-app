@@ -265,6 +265,7 @@
       }
       
       dispatch_async(dispatch_get_main_queue()) { () -> Void in
+        self.mainController.connectionButton.hostConnected = SCConnectClient.sharedInstance().connected
         self.mainController.CheckTransactionReady()
       }
       

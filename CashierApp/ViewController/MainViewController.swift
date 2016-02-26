@@ -194,7 +194,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  var currentTransaction: SCSmartTransaction?
+  var currentTransaction: SCSmartTransaction? {
+    didSet {
+      guard let _ = currentTransaction else {
+        self.basket = [BasketItem]()
+        self.customerUsed = nil
+        return
+      }
+    }
+  }
   
   init() {
     
@@ -621,17 +629,22 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       SCLogManager.errorWithDescription("Transaction Info: There is no current transaction")
       return
     }
-    let infoView = TransactionInfoInputView(transactionRef: currentTransaction.transactionRef, merchantRef: currentTransaction.merchantRef)
-    infoView.delegate = self
-    infoView.alpha = 0
     
-    view.addSubview(infoView)
-    infoView.snp_makeConstraints { (make) -> Void in
-      make.edges.equalTo(view)
-    }
+    dispatch_async(dispatch_get_main_queue()) { () -> Void in
     
-    UIView.animateWithDuration(0.4) { () -> Void in
-      infoView.alpha = 1
+      let infoView = TransactionInfoInputView(transactionRef: currentTransaction.transactionRef, merchantRef: currentTransaction.merchantRef, transactionId:currentTransaction.id)
+      infoView.delegate = self
+      infoView.alpha = 0
+      
+      self.view.addSubview(infoView)
+      infoView.snp_makeConstraints { (make) -> Void in
+        make.edges.equalTo(self.view)
+      }
+      
+      UIView.animateWithDuration(0.4) { () -> Void in
+        infoView.alpha = 1
+      }
+      
     }
     
   }
@@ -959,7 +972,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
       } else {
         
-        SCLogManager.errorWithDescription("Update Transaction Basket: somthing went wrong")
+        SCLogManager.errorWithDescription("Update Transaction Basket: something went wrong")
         
       }
       
@@ -1042,6 +1055,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if let createdTransaction = createdTransaction {
           self.currentTransaction = createdTransaction
+          handler(success: true, error: nil)
         }
         
       }
@@ -1122,7 +1136,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             if let error = error {
               
               SCLogManager.error(error)
-              statusView.addStatus("\(error.localizedDescription)\nFehler: \(error.domain) \nGrund: \(error.localizedFailureReason!)\nSupport-ID: \(error.localizedRecoverySuggestion!)")
+              statusView.addStatus("Transaktion nicht erfolgreich:\n\(error.localizedDescription)")
+              statusView.showLogButton(true)
               self.currentTransaction = nil
               
             } else {
@@ -1133,9 +1148,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 if result.status == "ok" {
                   
                   statusView.addStatus("Transaktion erfolgreich durchgeführt")
-                  
-                  self.basket = [BasketItem]()
-                  self.customerUsed = nil
                   
                 } else if result.status == "failed" {
                   
@@ -1358,13 +1370,31 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       
       var logString = "< ERROR > \n\(message.message)"
       
-      logString += "Status: \(message.error.scStatus)\n"
-      logString += "Code: \(message.error.scCode)\n"
-      logString += "Type: \(message.error.scError)\n"
-      logString += "Error: \(message.error.scErrorUser)\n"
-      logString += "Details: \(message.error.scErrorDetails)\n"
-      logString += "SupportId: \(message.error.scSupportId)\n"
+      logString += "Original Error: \(message.error.localizedDescription)\n"
       
+      if let status = message.error.scStatus {
+        logString += "Status: \(status)\n"
+      }
+      
+      if let code = message.error.scCode {
+        logString += "Code: \(code)\n"
+      }
+      
+      if let type = message.error.scError {
+        logString += "Type: \(type)\n"
+      }
+      
+      if let erroruser = message.error.scErrorUser {
+        logString += "Error: \(erroruser)\n"
+      }
+      
+      if let details = message.error.scErrorDetails {
+        logString += "Details: \(details)\n"
+      }
+      
+      if let supportId = message.error.scSupportId {
+        logString += "SupportId: \(supportId)\n"
+      }
       
       logView.addToLog(logString)
       

@@ -12,6 +12,7 @@ class TransactionStatusView: UIView {
 
   let logView = UILabel()
   let cancelButton = UIButton(type: UIButtonType.Custom)
+  let logButton = UIButton(type: UIButtonType.Custom)
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -54,10 +55,35 @@ class TransactionStatusView: UIView {
       make.bottom.equalTo(-10)
     }
     
+    logButton.hidden = true
+    logButton.setTitle("Log", forState: UIControlState.Normal)
+    logButton.addTarget(self, action: "didTapLog", forControlEvents: UIControlEvents.TouchUpInside)
+    logButton.backgroundColor = Constants.brightGreyColor
+    logButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
+    self.addSubview(logButton)
+    
+    logButton.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(cancelButton.snp_right).offset(10)
+      make.width.equalTo(100)
+      make.height.equalTo(50)
+      make.bottom.equalTo(-10)
+    }
+    
     UIView.animateWithDuration(0.2, animations: { () -> Void in
       self.alpha = 1
     })
     
+  }
+  
+  func showLogButton(show:Bool) {
+    logButton.hidden = !show
+  }
+  
+  func didTapLog() {
+    if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+      hide()
+      appDelegate.mainController.didTapShowLog()
+    }
   }
   
   func addStatus(string: String) {

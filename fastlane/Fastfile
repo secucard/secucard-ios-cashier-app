@@ -126,7 +126,7 @@ latest_version = readme.split("\n## ").first
       dsym: './deploy/secuconnectKasse_beta.app.dSYM.zip',
       notes_type: "1",
       notes: release_notes,
-      notify: "0"
+      notify: "2"
       )
 
   end

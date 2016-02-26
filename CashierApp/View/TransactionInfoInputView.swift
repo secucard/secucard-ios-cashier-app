@@ -26,6 +26,8 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
   let merchantRefLabel = UILabel()
   let merchantRefField = TextInputField()
   
+  let transactionIdLabel = UILabel()
+  
   var delegate: TransactionInfoInputViewDelegate?
   
   override init(frame: CGRect) {
@@ -37,7 +39,7 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
     fatalError("This class does not support NSCoding")
   }
   
-  convenience init(transactionRef:String?, merchantRef: String?) {
+  convenience init(transactionRef:String?, merchantRef: String?, transactionId: String?) {
     
     self.init()
     
@@ -47,6 +49,10 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
     
     if let merchantRef = merchantRef {
       self.merchantRefField.text = merchantRef
+    }
+    
+    if let transactionId = transactionId {
+      self.transactionIdLabel.text = "Transaktion: ID \(transactionId)"
     }
     
   }
@@ -77,13 +83,24 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
     
     // description field
     
+    transactionIdLabel.text = "Transaktions-Id"
+    centerView.addSubview(transactionIdLabel)
+    transactionIdLabel.snp_makeConstraints { (make) -> Void in
+      make.left.equalTo(20)
+      make.width.equalTo(400)
+      make.height.equalTo(30)
+      make.top.equalTo(titleLabel.snp_bottom).offset(10)
+    }
+    
+    // description field
+    
     transactionRefLabel.text = "Transaktion"
     centerView.addSubview(transactionRefLabel)
     transactionRefLabel.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(20)
       make.width.equalTo(150)
       make.height.equalTo(30)
-      make.top.equalTo(titleLabel.snp_bottom).offset(10)
+      make.top.equalTo(transactionIdLabel.snp_bottom).offset(10)
     }
     
     transactionRefField.delegate = self
@@ -98,6 +115,8 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
       make.height.equalTo(30)
       make.top.equalTo(transactionRefLabel)
     }
+    
+    
     
     // article number field
     
