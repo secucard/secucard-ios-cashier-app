@@ -1,3 +1,12 @@
+## 1.0.10
+
+* fix transaction change on price change (individual)
+* fix double tap product, now increases product amount
+
+## 1.0.9
+
+* fix id cut off in transaction information window
+
 ## 1.0.8
 
 * fix merchant receipt

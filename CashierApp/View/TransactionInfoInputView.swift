@@ -87,7 +87,6 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
     centerView.addSubview(transactionIdLabel)
     transactionIdLabel.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(20)
-      make.width.equalTo(400)
       make.height.equalTo(30)
       make.top.equalTo(titleLabel.snp_bottom).offset(10)
     }

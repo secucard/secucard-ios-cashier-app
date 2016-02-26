@@ -111,9 +111,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var basket = [BasketItem]() {
     didSet {
       
+      // update gui
+      
       CheckTransactionReady()
       basketCollection.reloadData()
       calcPrice()
+      
+      // if basket is not empty, update transaction
       
       if basket.count > 0 {
         updateTransactionBasket { (success, error) -> Void in
@@ -129,6 +133,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   /// the currently used ident
   var customerUsed: SCSmartIdent? {
     didSet {
+      
+      // update gui
       
       CheckTransactionReady()
       basketCollection.reloadData()
@@ -847,8 +853,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let item = items[indexPath.row]
         let basketItem: BasketItem = BasketItem(product: item)
         
+        // check if in basket already
+        for itemInBasket in basket {
+          if itemInBasket.product.id == basketItem.product.id {
+            
+            itemInBasket.amount++
+            basketItemChanged(itemInBasket)
+            
+            return
+          }
+        }
+        
         basket.append(basketItem)
-        calcPrice()
         
       }
       
@@ -948,6 +964,10 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func basketItemChanged(basketItem: BasketItem) {
     calcPrice()
+    basketCollection.reloadData()
+    updateTransactionBasket { (success, error) -> Void in
+      
+    }
   }
   
   // MARK: - Payment actions
@@ -992,6 +1012,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         var productList = [AnyObject]()
         for basketItem:BasketItem in self.basket {
           if let productData = basketItem.product {
+            productData.priceOne = basketItem.price
             productList.append(productData)
             //productList.append(productData.stringValue)
           }
@@ -1148,6 +1169,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
           make.edges.equalTo(self.view)
         }
         
+        statusView.addStatus("Transaktion wird durchgeführt")
+        
         SCSmartTransactionService.sharedService().addEventHandler({ (event: SCGeneralEvent?) -> Void in
           
           if let event = event {
@@ -1173,8 +1196,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
           }
           
         })
-        
-        statusView.addStatus("Transaktion wird durchgeführt")
         
         // start
         SCSmartTransactionService.sharedService().startTransaction(self.currentTransaction!.id, type: method.rawValue, completionHandler: { (transactionResult: SCSmartTransaction?, error: SecuError?) -> Void in
