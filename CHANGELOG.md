@@ -1,3 +1,8 @@
+## 1.0.7
+
+* fix behaviour of card scanning library to send the code more than once
+
+
 ## 1.0.6
 
 * fix emptying basket and ident used for transaction after transaction error

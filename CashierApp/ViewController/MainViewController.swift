@@ -58,6 +58,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   var sumView = UIView()
   let bottomBar = UIView()
   
+  var cardScanInProgress = false
+  
   var manager: Manager?
   
   var productCategories = [String:[String:[SCSmartProduct]]]()
@@ -1334,14 +1336,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   func scanViewReturnCode(code: String) {
     
-    self.dismissViewControllerAnimated(true, completion: nil)
+    if !cardScanInProgress {
     
-    let ident = SCSmartIdent()
-    ident.type = "card"
-    ident.value = code
-    
-    customerUsed = ident
-    updateTransactionIdent { (success, error) -> Void in
+      cardScanInProgress = true
+      
+      self.dismissViewControllerAnimated(true, completion: nil)
+      
+      let ident = SCSmartIdent()
+      ident.type = "card"
+      ident.value = code
+      
+      customerUsed = ident
+      updateTransactionIdent { (success, error) -> Void in
+        self.cardScanInProgress = false
+      }
       
     }
     
