@@ -11,7 +11,7 @@ target 'CashierApp', :exclusive => true do
 
   pod 'SwiftyJSON', '2.3.0'
   pod 'SnapKit', '0.15.0'
-  pod 'Alamofire', '2.0.2'
+  pod 'Alamofire'
   pod 'TFBarcodeScanner', '1.1.0'
   pod 'HockeySDK', '3.8.2'
   
