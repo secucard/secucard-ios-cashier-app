@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Alamofire (3.2.1)
+  - Alamofire (2.0.2)
   - CocoaAsyncSocket (7.4.2)
   - HockeySDK (3.8.2):
     - HockeySDK/AllFeaturesLib (= 3.8.2)
@@ -37,7 +37,7 @@ PODS:
   - TFBarcodeScanner (1.1.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (= 2.0.2)
   - HockeySDK (= 3.8.2)
   - SecucardConnectSDK (from `../SecucardConnectSDK`)
   - SnapKit (= 0.15.0)
@@ -50,7 +50,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
-  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  Alamofire: 8edbab00802a752bb5240cc2abe70e7e881488ad
   CocoaAsyncSocket: f5783bdedd232d91b89769bc4b5a1580aed518ad
   HockeySDK: 9f4ac41263acf9d8a4d59491a7f17af16529b935
   Mantle: 1912395033f601de5adc8ee91e48f46e4c7051ad
