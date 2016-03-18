@@ -15,12 +15,20 @@
   @UIApplicationMain
   class AppDelegate: UIResponder, UIApplicationDelegate, InitializationViewDelegate {
     
+    /// window
     var window: UIWindow?
+    
+    /// products shown in chooser
     var products: JSON?
+    
+    /// the main controller basically wraps all logic for this test case
     var mainController: MainViewController!
+    
+    /// the connect sdk (connect client)
     var connectClient: SCConnectClient?
+    
+    /// the view showing the verification code
     var verificationView: InsertCodeView?
-    var pollingTimer: NSTimer?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
       
@@ -33,7 +41,6 @@
       // notification oberservers
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "showDeviceAuthInformation:", name: "deviceAuthCodeRequesting", object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: "logAnyEvent:", name: "notificationStompEvent", object: nil)
-      
       NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stompConnectionChanged"), name: "stompConnected", object: nil)
       NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stompConnectionChanged"), name: "stompDisconnected", object: nil)
       
@@ -68,6 +75,7 @@
       window?.rootViewController = self.mainController
       window?.makeKeyAndVisible()
       
+      // connect to connect sdk
       connectCashier { (success: Bool, error: SecuError?) -> Void in
         
         if let error = error {
@@ -79,6 +87,11 @@
       return true
     }
     
+    /**
+     connect the cashier as centralized entry point. This function basically sets all credentials and settings and thus calls connectWhenSave when save for connecting
+     
+     - parameter handler: completion handler
+     */
     func connectCashier( handler: (success: Bool, error: SecuError?) -> Void ) -> Void {
       
       // if still connected return fail gracefully
@@ -110,6 +123,7 @@
         
       }
       
+      // write login information data
       SCLogManager.info("Login -----")
       SCLogManager.info("API \(Constants.apiBaseUrl)")
       SCLogManager.info("Auth \(Constants.baseUrl)")
@@ -169,10 +183,17 @@
       
     }
     
+    /**
+     function to connect with the connect sdk. Must be save to connect, meaning the sdk has to be initialized
+     
+     - parameter handler: the completion handler
+     */
     func connectWhenSave( handler: (success: Bool, error: SecuError?) -> Void ) -> Void {
       
+      // get instance
       if let client = SCConnectClient.sharedInstance() {
         
+        // connect
         client.connect({ (success: Bool, error: SecuError?) -> Void in
           
           if let error = error {
@@ -247,10 +268,18 @@
       
     }
     
+    /**
+     checks if client is connected
+     
+     - returns: if connected
+     */
     func clientConnected() -> Bool {
       return SCConnectClient.sharedInstance().connected
     }
     
+    /**
+     handler to be called when the stomp connection did change
+     */
     func stompConnectionChanged() {
       
       if clientConnected() {
@@ -271,6 +300,9 @@
       
     }
     
+    /**
+     reconnects to stomp server
+     */
     func reconnectStomp() {
       
       if !SCConnectClient.sharedInstance().connected {
@@ -278,9 +310,7 @@
         SCLogManager.warn("STOMP: Needs reconnect, log back in")
         
         connectCashier({ (success, error) -> Void in
-          
           SCLogManager.warn("STOMP: did log back in")
-          
         })
         
       } else {
@@ -293,6 +323,9 @@
       
     }
     
+    /**
+     function which to get the current checkins, usually used for polling
+     */
     func pollCheckins() {
       
       // check for checkins
@@ -315,6 +348,11 @@
       
     }
     
+    /**
+     shows the verification view that is showing the code to be entered in the secuoffice backend
+     
+     - parameter notification: the notification
+     */
     func showDeviceAuthInformation(notification : NSNotification) {
       
       if let code: SCAuthDeviceAuthCode = notification.userInfo?["code"] as? SCAuthDeviceAuthCode {
@@ -339,6 +377,11 @@
       
     }
     
+    /**
+     adds an event to the log. The event should be a secucard event which lies in the notifications userInfo["event"]
+     
+     - parameter notification: the notification sent
+     */
     func logAnyEvent(notification: NSNotification) {
       
       if let event = notification.userInfo?["event"] as? SCGeneralEvent {
@@ -349,6 +392,9 @@
       
     }
     
+    /**
+     handler to get called when user saved new credentials, disconnects and reconnects client
+     */
     func didSaveCredentials() {
       
       SCConnectClient.sharedInstance().logoff { (success: Bool, error: NSError!) -> Void in

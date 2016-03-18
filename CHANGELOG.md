@@ -1,3 +1,7 @@
+## 1.0.11
+
+* update code documentation, add ConnectSDK as cocoapods-source
+
 ## 1.0.10
 
 * fix transaction change on price change (individual)

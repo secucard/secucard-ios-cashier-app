@@ -148,33 +148,53 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   /// The button showing connection state and letting the user connect or disconnect
   let connectionButton = ConnectionButton()
   
-  ///
+  /// button to show the log
   let showLogButton: PaymentButton
+  
+  /// button to show the settings
   let settingsButton: PaymentButton
   
+  /// auto payment button
   let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: Selector("didTapPayButton:"))
+  
+  /// demo payment button
   let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: Selector("didTapPayButton:"))
+  
+  /// paypal payment button
   let payPaypalButton = PaymentButton(payMethod: PayMethod.Paypal, action: Selector("didTapPayButton:"))
+  
+  /// localty payment button
   let payLoyaltyButton = PaymentButton(payMethod: PayMethod.Loyalty, action: Selector("didTapPayButton:"))
+  
+  /// cashless payment button
   let payCashlessButton = PaymentButton(payMethod: PayMethod.Cashless, action: Selector("didTapPayButton:"))
+  
+  ///  cash payment button
   let payCashButton = PaymentButton(payMethod: PayMethod.Cash, action: Selector("didTapPayButton:"))
   
+  /// all buttons available, needed for iterating the buttons
   let availableButtons: [PaymentButton]
   
+  /// the view with the log
   let logView = LogView()
   
+   /// the label summing up the basket
   let sumLabel = UILabel()
   
+  /// the sum of the basket
   var sum:Int = 0 {
     didSet {
       sumLabel.text = sum.toEuro()
     }
   }
   
+  /// the button for emptying the basket
   let emptyButton = UIButton(type: UIButtonType.Custom)
   
+  /// the button to show the transaction information
   let transactionInfoButton = UIButton(type: UIButtonType.Custom)
   
+  ///  the shown category of products
   var currentCategory = 0 {
     didSet {
       self.productsCollection.reloadData()
@@ -182,7 +202,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
-  
+  /// a json structure to build the categories and products navigation
   var json: JSON = nil {
     
     didSet {
@@ -245,6 +265,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
+  /// the current transaction
   var currentTransaction: SCSmartTransaction? {
     didSet {
       guard let _ = currentTransaction else {
@@ -255,8 +276,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
+  /**
+   initializer
+   */
   init() {
     
+    // init lists layouts and collections
     self.checkins = [SCSmartCheckin]()
     self.basket = [BasketItem]()
     
@@ -301,21 +326,24 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // call super initialization
     super.init(nibName: nil, bundle: nil)
     
-    showLogButton.target = self
-    settingsButton.target = self
+    // initilizing using self
     
-    SCLogManager.sharedManager().delegate = self
-    
+    // notification handling
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidDisconnect:"), name: "clientDidDisconnect", object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidConnect:"), name: "clientDidConnect", object: nil)
     
-    // add delegates to collections
+    // add self as target and delegates
+    showLogButton.target = self
+    settingsButton.target = self
+    SCLogManager.sharedManager().delegate = self
+    
     self.productCategoriesCollection.delegate = self
     self.productCategoriesCollection.dataSource = self
     
     self.productsCollection.delegate = self
     self.productsCollection.dataSource = self
     
+    // long pressing the product
     let longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
     longPress.minimumPressDuration = 1.0
     longPress.delegate = self
@@ -336,22 +364,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     payPaypalButton.target = self
     payDemoButton.target = self
     
-    // security
-    
-    //    let serverTrustPolicies: [String: ServerTrustPolicy] = [
-    //      "connect.secucard.com": .DisableEvaluation
-    //    ]
-    
-    //    manager = Manager(
-    //      serverTrustPolicyManager: ServerTrustPolicyManager(policies: serverTrustPolicies)
-    //    )
-    
   }
   
   required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
+  /**
+   layouting
+   */
   override func viewDidLoad() {
     
     super.viewDidLoad()
@@ -359,7 +380,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     view.backgroundColor = UIColor.whiteColor()
     UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
     
-    // top bar
+    // TOP BAR
+    
     let topBar:UIView = UIView()
     topBar.backgroundColor = Constants.darkGreyColor
     view.addSubview(topBar)
@@ -381,6 +403,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.centerY.equalTo(topBar).offset(10)
     }
     
+    // BOTTOM BAR
+    
     let bottomBar = UIView()
     bottomBar.backgroundColor = UIColor.whiteColor()
     view.addSubview(bottomBar);
@@ -390,7 +414,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(100)
     }
     
-    // tabs
+    // TABS FOR PRODUCT CATEGORY
+    
     view.addSubview(productCategoriesCollection)
     
     productCategoriesCollection.backgroundColor = UIColor.darkGrayColor()
@@ -402,6 +427,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(50)
     }
     
+    // COLLECTION VOR PRODUCTS
+    
     view.addSubview(productsCollection)
     
     productsCollection.backgroundColor = UIColor.whiteColor()
@@ -412,6 +439,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.top.equalTo(productCategoriesCollection.snp_bottom)
       make.width.equalTo(productCategoriesCollection)
     }
+    
+    // CHECKINS
     
     let checkinHeader = UILabel()
     checkinHeader.text = "   Check-ins"
@@ -438,6 +467,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.bottom.equalTo(bottomBar.snp_top)
     }
     
+    // BASKET
+    
     let basketHeader = UILabel()
     basketHeader.text = "   Warenkorb"
     basketHeader.textColor = Constants.textColorBright
@@ -463,8 +494,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.right.equalTo(view)
     }
     
-    // sum field
-    var sumView = UIView()
+    // SUM FIELD
+    
+    let sumView = UIView()
     sumView.backgroundColor = Constants.brightGreyColor
     
     view.addSubview(sumView)
@@ -474,7 +506,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.height.equalTo(80)
     }
     
-    // sum label
+    // SUM LABEL
     sumLabel.font = Constants.sumFont
     sumView.addSubview(sumLabel)
     
@@ -506,7 +538,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       make.width.height.equalTo(50)
     }
     
-    var topBorder = UIView()
+    let topBorder = UIView()
     topBorder.backgroundColor = Constants.brightGreyColor
     sumView.addSubview(topBorder)
     topBorder.snp_makeConstraints { (make) -> Void in
@@ -639,12 +671,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
-  
+  /**
+   retrieve identifiers for a specific collection
+   
+   - parameter collection: the collection
+   
+   - returns: the identifier (CollectionType)
+   */
   func identifierForCollection(collection: UICollectionView) -> CollectionType {
     if collection == productCategoriesCollection {
       return CollectionType.ProductCategories
@@ -659,6 +692,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
+  /**
+   calculate the current price of the basket
+   */
   func calcPrice() {
     sum = 0
     for bi:BasketItem in basket {
@@ -669,6 +705,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
   }
   
+  /**
+   Empty the basket (by tapping the trash icon)
+   */
   func didTapEmptyButton() {
     
     sum = 0
@@ -677,6 +716,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
+  /**
+   show transaction information (by tapping i icon)
+   */
   func didTapTransactionInformation() {
     
     guard let currentTransaction = currentTransaction else {
@@ -947,6 +989,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   // MARK: - ModifyPriceViewDelegate
   
+  /**
+  removes a basket item from the basket
+  
+  - parameter basketItem: the item
+  */
   func removeBasketItem(basketItem: BasketItem) {
     
     for (index, basketItemTest) in basket.enumerate() {
@@ -958,10 +1005,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   }
   
+  /**
+   basketitem tells collection to change its layout (expand/collapse)
+   
+   - parameter basketItem: the item
+   */
   func basketItemLayoutChanged(basketItem: BasketItem) {
     basketCollection.collectionViewLayout.invalidateLayout()
   }
   
+  /**
+   the delegate method of the basket item telling the collection that it changed
+   
+   - parameter basketItem: the item
+   */
   func basketItemChanged(basketItem: BasketItem) {
     calcPrice()
     basketCollection.reloadData()
@@ -974,10 +1031,18 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   // payment actions
   
+  /**
+  did tap a payment button
+  
+  - parameter button: the button used
+  */
   func didTapPayButton(button: PaymentButton) {
     sendTransaction(button.payMethod)
   }
   
+  /**
+   show the view to scan a card
+   */
   func showScanCardView() {
     
     if TARGET_IPHONE_SIMULATOR == 1 {
@@ -994,9 +1059,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
       self.presentViewController(view, animated: true, completion: nil)
     }
     
-    
   }
   
+  /**
+   tell the app to update the transaction's basket
+   
+   - parameter handler: completion handler
+   */
   func updateTransactionBasket(handler: (success: Bool,error: SecuError?) -> Void) {
     
     checkTransaction { (success, error) -> Void in
@@ -1014,7 +1083,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
           if let productData = basketItem.product {
             productData.priceOne = basketItem.price
             productList.append(productData)
-            //productList.append(productData.stringValue)
           }
         }
         
@@ -1049,6 +1117,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
   }
   
+  /**
+   <#Description#>
+   
+   - parameter handler: <#handler description#>
+   */
   func updateTransactionIdent(handler: (success: Bool,error: SecuError?) -> Void) {
     
     checkTransaction { (success, error) -> Void in
