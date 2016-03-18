@@ -26,4 +26,4 @@ From there you have access to other information material.
 
 ## License
 
-SecucardConnectSDK is available under the MIT license. See the LICENSE file for more info.
+SecucardConnectSDK is available under the Apache 2 license. See the LICENSE file for more info.

@@ -25,3 +25,4 @@ doc/
 
 deploy/
 cert/
+Podfile.lock
