@@ -5,7 +5,7 @@ use_frameworks!
 
 target 'CashierApp', :exclusive => true do
   
-  pod 'SecucardConnectSDK', '0.2.14'
+  pod 'SecucardConnectSDK', '0.2.18'
   pod 'SwiftyJSON', '2.3.0'
   pod 'SnapKit', '0.15.0'
   pod 'Alamofire', '2.0.2'
