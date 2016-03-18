@@ -1,5 +1,4 @@
 source 'https://github.com/CocoaPods/Specs.git'
-source 'https://git.devid.net/ios-pods/ios-private-pod-repo.git'
 
 use_frameworks!
 
