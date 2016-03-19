@@ -1,6 +1,6 @@
 # Secuconnect CashierApp
 
-This Swift app is a demonstration how to integrate the SecucardConnectSDK for iOS to use all available secuconnect functionality.
+This Swift app is a demonstration how to integrate the [secucard connect iOS SDK](https://github.com/secucard/secucard-connect-ios-sdk) to use all available secuconnect functionality.
 
 
 ## Requirements
