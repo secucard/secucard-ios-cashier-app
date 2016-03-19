@@ -12,13 +12,9 @@ This Swift app is a demonstration how to integrate the [secucard connect iOS SDK
 ## Install
 
 1. clone from repositoriy: `git clone https://github.com/secucard/secucard-ios-cashier-app.git CashierApp`
-
 2. cd into `CashierApp`
-
 3. run `pod install`
-
 4. run `open CashierApp.xcworkspace`
-
 5. Build or run the CashierApp Scheme
 
 
