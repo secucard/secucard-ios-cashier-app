@@ -1,0 +1,163 @@
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/docs
+# All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# By default, fastlane will send which actions are used
+# No personal data is shared, more information on https://github.com/fastlane/enhancer
+# Uncomment the following line to opt out
+# opt_out_usage
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "1.51.0"
+
+default_platform :ios
+
+
+platform :ios do
+  before_all do
+    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    # cocoapods
+    
+    # increment_build_number
+
+    # xctool # run the tests of your app
+  end
+
+  lane :gitclean do 
+
+    ensure_git_status_clean
+
+  end
+
+  lane :versioning do
+
+    # Increment build number to current date
+    build_number = Time.new.strftime("%Y.%m.%d.%H.%M")
+    increment_build_number build_number: build_number
+
+    # Set version number to the one at the top of the CHANGELOG
+    readme = File.read("../CHANGELOG.md")
+
+    latest_version = readme.split("\n## ").first
+
+    first_line = latest_version.split("\n").first
+    version_number = first_line.split(" ")[1]
+
+    increment_version_number(
+      version_number: version_number
+      )
+
+  end
+
+  lane :certstuff do 
+
+    cert(
+      output_path: "cert/"
+      )
+    sigh(
+      force: true,
+      adhoc: true,
+      output_path: "cert/",
+      filename: "secuconnectKasse_AdHoc.mobileprovision"
+      )
+
+  end
+
+  desc "Deploys a beta version of the app"
+  lane :beta do
+
+    # gitclean
+
+    versioning
+
+    certstuff
+
+    gym_beta
+
+    hockey_beta
+
+    slack_beta
+
+  end
+
+  desc "Build Beta version"
+  lane :gym_beta do
+
+    gym(
+      workspace: "CashierApp.xcworkspace",
+      configuration: "AdHoc",
+      include_symbols: true,
+      include_bitcode: true,
+      scheme: "CashierApp AdHoc",
+      silent: true,
+      clean: false,
+      output_directory: "./deploy/",
+      output_name: "secuconnectKasse_beta.ipa",
+      export_team_id: "QWAPQRA564",
+      use_legacy_build_api: true,
+      include_bitcode: false,
+      provisioning_profile_path: "./cert/secuconnectKasse_AdHoc.mobileprovision"
+      )
+
+  end
+
+  desc "Deploy a new version BETA App to hockey"
+  lane :hockey_beta do
+
+# Set version number to the one at the top of the CHANGELOG
+readme = File.read("../CHANGELOG.md")
+
+latest_version = readme.split("\n## ").first
+
+    # Generate release notes from CHANGELOG
+    release_notes = latest_version.split("\n")[1..-1].join("\n")
+
+    hockey(
+      api_token: '128b13ed670f4aed99374edc0b2d426e',
+      ipa: './deploy/secuconnectKasse_beta.ipa',
+      dsym: './deploy/secuconnectKasse_beta.app.dSYM.zip',
+      notes_type: "1",
+      notes: release_notes,
+      notify: "2"
+      )
+
+  end
+
+  lane :slack_beta do
+
+    slack(
+          slack_url: "https://hooks.slack.com/services/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",
+          message: "Successfully deployed new App Update."
+      )
+
+  end
+
+  # You can define as many lanes as you want
+
+  after_all do |lane|
+    # This block is called, only if the executed lane was successful
+    
+    
+  end
+
+  error do |lane, exception|
+    slack(
+      slack_url: "https://hooks.slack.com/services/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",
+      message: exception.message,
+      success: false
+      )
+  end
+end
+
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/docs/Platforms.md
+# All available actions: https://github.com/fastlane/fastlane/blob/master/docs/Actions.md

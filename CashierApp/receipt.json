@@ -1,0 +1,108 @@
+{
+  "receipt": [
+              {
+              "type": "separator",
+              "value": {
+              "caption": "Heading 1"
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Normal textline1",
+              "decoration": []
+              }
+              },
+              {
+              "type": "separator",
+              "value": {
+              "caption": "Heading 2"
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Normal textline21",
+              "decoration": []
+              }
+              },
+              {
+              "type": "space"
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Normal textline22 with space before and longer to test auto word wrapping for different paper width.",
+              "decoration": []
+              }
+              },
+              {
+              "type": "separator",
+              "value": {
+              "caption": "Heading 3"
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Normal textline31",
+              "decoration": []
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Important textline32",
+              "decoration": [
+                             "important"
+                             ]
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Center textline32",
+              "decoration": [
+                             "align-center"
+                             ]
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Left textline33",
+              "decoration": [
+                             "align-left"
+                             ]
+              }
+              },
+              {
+              "type": "textline",
+              "value": {
+              "text": "Imp+center textline34",
+              "decoration": [
+                             "important",
+                             "align-center"
+                             ]
+              }
+              },
+              {
+              "type": "name-value",
+              "value": {
+              "name": "Name1",
+              "value": "Wert1",
+              "decoration": []
+              }
+              },
+              {
+              "type": "name-value",
+              "value": {
+              "name": "Name2",
+              "value": "Wert2",
+              "decoration": [
+                             "important"
+                             ]
+              }
+              }
+              ]
+}

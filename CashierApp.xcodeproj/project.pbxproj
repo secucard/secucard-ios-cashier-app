@@ -1,0 +1,1078 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */; };
+		55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */; };
+		AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */; };
+		AA07A3871C7EBE1700E4312C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07A3861C7EBE1700E4312C /* StringExtension.swift */; };
+		AA125E431BC28C1700C70DB2 /* TransactionInfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */; };
+		AA125E451BC2A89100C70DB2 /* receipt.json in Resources */ = {isa = PBXBuildFile; fileRef = AA125E441BC2A89100C70DB2 /* receipt.json */; };
+		AA125E471BC2B06000C70DB2 /* ReceiptHeadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E461BC2B06000C70DB2 /* ReceiptHeadingCell.swift */; };
+		AA125E491BC2B34100C70DB2 /* ReceiptTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E481BC2B34100C70DB2 /* ReceiptTextCell.swift */; };
+		AA125E4B1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E4A1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift */; };
+		AA125E4D1BC2B82700C70DB2 /* ReceiptSpaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E4C1BC2B82700C70DB2 /* ReceiptSpaceCell.swift */; };
+		AA125E4F1BC2B88600C70DB2 /* ReceiptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E4E1BC2B88600C70DB2 /* ReceiptCell.swift */; };
+		AA125E511BC2EE8E00C70DB2 /* ReceiptLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E501BC2EE8E00C70DB2 /* ReceiptLabel.swift */; };
+		AA125E611BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA125E601BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift */; };
+		AA1F10721BB8128900F869C0 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA1F10711BB8128900F869C0 /* HockeySDK.framework */; };
+		AA256A071BBFE8B800283963 /* ConnectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA256A061BBFE8B800283963 /* ConnectionButton.swift */; };
+		AA3561F51B24647A00CDECB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F41B24647A00CDECB9 /* UIKit.framework */; };
+		AA3561F71B24648500CDECB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA3561F61B24648500CDECB9 /* Foundation.framework */; };
+		AA53B3A31BB09E8500E831B4 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA53B3A21BB09E8500E831B4 /* ReceiptView.swift */; };
+		AA6390241B300AC900782582 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA6390231B300AC900782582 /* Images.xcassets */; };
+		AA63903F1B300AE400782582 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390251B300AE400782582 /* AppDelegate.swift */; };
+		AA6390411B300AE400782582 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390291B300AE400782582 /* Constants.swift */; };
+		AA6390421B300AE400782582 /* BasketItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902B1B300AE400782582 /* BasketItem.swift */; };
+		AA6390431B300AE400782582 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902C1B300AE400782582 /* Checkin.swift */; };
+		AA6390451B300AE400782582 /* BasketProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63902F1B300AE400782582 /* BasketProductCell.swift */; };
+		AA6390461B300AE400782582 /* BasketUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390301B300AE400782582 /* BasketUserCell.swift */; };
+		AA6390471B300AE400782582 /* CheckinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390311B300AE400782582 /* CheckinCell.swift */; };
+		AA6390481B300AE400782582 /* InitializationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390321B300AE400782582 /* InitializationView.swift */; };
+		AA6390491B300AE400782582 /* InsertCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390331B300AE400782582 /* InsertCodeView.swift */; };
+		AA63904A1B300AE400782582 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390341B300AE400782582 /* LogView.swift */; };
+		AA63904B1B300AE400782582 /* ModifyPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390351B300AE400782582 /* ModifyPriceView.swift */; };
+		AA63904C1B300AE400782582 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390361B300AE400782582 /* PaymentButton.swift */; };
+		AA63904D1B300AE400782582 /* ProductCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390371B300AE400782582 /* ProductCategoryCell.swift */; };
+		AA63904E1B300AE400782582 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390381B300AE400782582 /* ProductCell.swift */; };
+		AA63904F1B300AE400782582 /* ScanCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA6390391B300AE400782582 /* ScanCardView.swift */; };
+		AA6390501B300AE400782582 /* SectionheaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63903A1B300AE400782582 /* SectionheaderView.swift */; };
+		AA6390511B300AE400782582 /* TransactionStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63903B1B300AE400782582 /* TransactionStatusView.swift */; };
+		AA6390521B300AE400782582 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63903D1B300AE400782582 /* MainViewController.swift */; };
+		AA6390531B300AE400782582 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA63903E1B300AE400782582 /* ScanViewController.swift */; };
+		AA6390551B300FAA00782582 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA6390541B300FAA00782582 /* CoreGraphics.framework */; };
+		AA9A32001B075AD100CCF6B4 /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = AA9A31FF1B075AD100CCF6B4 /* products.json */; };
+		AA9D39231C4CD58D00C32E3E /* CashierApp_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D39221C4CD58D00C32E3E /* CashierApp_UITests.swift */; };
+		AA9D392B1C4CD76200C32E3E /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9D391A1C4CCD1F00C32E3E /* SnapshotHelper.swift */; };
+		AA9DCD8A1B0738F20070022E /* CashierAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9DCD891B0738F20070022E /* CashierAppTests.swift */; };
+		AAC9FFDA1BC0095700397F54 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FFD91BC0095700397F54 /* AddProductView.swift */; };
+		AAC9FFDC1BC00E8800397F54 /* TextInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */; };
+		AAD49A701B3A94C100DDC734 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A6F1B3A94C100DDC734 /* AssetsLibrary.framework */; };
+		AAD49A721B3A94CC00DDC734 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A711B3A94CC00DDC734 /* CoreText.framework */; };
+		AAD49A741B3A94D700DDC734 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A731B3A94D700DDC734 /* MobileCoreServices.framework */; };
+		AAD49A761B3A94E000DDC734 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A751B3A94E000DDC734 /* QuartzCore.framework */; };
+		AAD49A781B3A94E800DDC734 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A771B3A94E800DDC734 /* QuickLook.framework */; };
+		AAD49A7A1B3A94F000DDC734 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A791B3A94F000DDC734 /* Security.framework */; };
+		AAD49A7C1B3A94F700DDC734 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD49A7B1B3A94F700DDC734 /* SystemConfiguration.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA9D39251C4CD58D00C32E3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA9DCD661B0738F20070022E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA9DCD6D1B0738F20070022E;
+			remoteInfo = CashierApp;
+		};
+		AA9DCD841B0738F20070022E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA9DCD661B0738F20070022E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA9DCD6D1B0738F20070022E;
+			remoteInfo = CashierApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.release.xcconfig"; sourceTree = "<group>"; };
+		8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CashierApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		AA07A3861C7EBE1700E4312C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionInfoInputView.swift; sourceTree = "<group>"; };
+		AA125E441BC2A89100C70DB2 /* receipt.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = receipt.json; sourceTree = "<group>"; };
+		AA125E461BC2B06000C70DB2 /* ReceiptHeadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptHeadingCell.swift; sourceTree = "<group>"; };
+		AA125E481BC2B34100C70DB2 /* ReceiptTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptTextCell.swift; sourceTree = "<group>"; };
+		AA125E4A1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptKeyValueCell.swift; sourceTree = "<group>"; };
+		AA125E4C1BC2B82700C70DB2 /* ReceiptSpaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptSpaceCell.swift; sourceTree = "<group>"; };
+		AA125E4E1BC2B88600C70DB2 /* ReceiptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptCell.swift; sourceTree = "<group>"; };
+		AA125E501BC2EE8E00C70DB2 /* ReceiptLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptLabel.swift; sourceTree = "<group>"; };
+		AA125E601BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductsSectionHeaderView.swift; sourceTree = "<group>"; };
+		AA1F10711BB8128900F869C0 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HockeySDK.framework; path = "Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework/HockeySDK.framework"; sourceTree = "<group>"; };
+		AA256A061BBFE8B800283963 /* ConnectionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionButton.swift; sourceTree = "<group>"; };
+		AA3561F41B24647A00CDECB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AA3561F61B24648500CDECB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AA3561F81B2464D800CDECB9 /* Pods_CashierApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_CashierApp.framework; path = "Pods/../build/Debug-iphoneos/Pods_CashierApp.framework"; sourceTree = "<group>"; };
+		AA3561FA1B24662B00CDECB9 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		AA53B3A21BB09E8500E831B4 /* ReceiptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptView.swift; sourceTree = "<group>"; };
+		AA5C77DC1B334E80004ECCF7 /* CashierApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CashierApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		AA6390231B300AC900782582 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		AA6390251B300AE400782582 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA6390291B300AE400782582 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AA63902B1B300AE400782582 /* BasketItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketItem.swift; sourceTree = "<group>"; };
+		AA63902C1B300AE400782582 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
+		AA63902F1B300AE400782582 /* BasketProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketProductCell.swift; sourceTree = "<group>"; };
+		AA6390301B300AE400782582 /* BasketUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasketUserCell.swift; sourceTree = "<group>"; };
+		AA6390311B300AE400782582 /* CheckinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinCell.swift; sourceTree = "<group>"; };
+		AA6390321B300AE400782582 /* InitializationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitializationView.swift; sourceTree = "<group>"; };
+		AA6390331B300AE400782582 /* InsertCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertCodeView.swift; sourceTree = "<group>"; };
+		AA6390341B300AE400782582 /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		AA6390351B300AE400782582 /* ModifyPriceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyPriceView.swift; sourceTree = "<group>"; };
+		AA6390361B300AE400782582 /* PaymentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
+		AA6390371B300AE400782582 /* ProductCategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCategoryCell.swift; sourceTree = "<group>"; };
+		AA6390381B300AE400782582 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		AA6390391B300AE400782582 /* ScanCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCardView.swift; sourceTree = "<group>"; };
+		AA63903A1B300AE400782582 /* SectionheaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionheaderView.swift; sourceTree = "<group>"; };
+		AA63903B1B300AE400782582 /* TransactionStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionStatusView.swift; sourceTree = "<group>"; };
+		AA63903D1B300AE400782582 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AA63903E1B300AE400782582 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		AA6390541B300FAA00782582 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AA9A31FF1B075AD100CCF6B4 /* products.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		AA9D391A1C4CCD1F00C32E3E /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = ../CashierApp/SnapshotHelper.swift; sourceTree = "<group>"; };
+		AA9D39201C4CD58D00C32E3E /* CashierApp UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CashierApp UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA9D39221C4CD58D00C32E3E /* CashierApp_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierApp_UITests.swift; sourceTree = "<group>"; };
+		AA9D39241C4CD58D00C32E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA9DCD6E1B0738F20070022E /* CashierApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CashierApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA9DCD721B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA9DCD831B0738F20070022E /* CashierAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CashierAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA9DCD881B0738F20070022E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA9DCD891B0738F20070022E /* CashierAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashierAppTests.swift; sourceTree = "<group>"; };
+		AAC9FFD91BC0095700397F54 /* AddProductView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
+		AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputField.swift; sourceTree = "<group>"; };
+		AAD49A6F1B3A94C100DDC734 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		AAD49A711B3A94CC00DDC734 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		AAD49A731B3A94D700DDC734 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		AAD49A751B3A94E000DDC734 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AAD49A771B3A94E800DDC734 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		AAD49A791B3A94F000DDC734 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AAD49A7B1B3A94F700DDC734 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AAD49A7E1B3A991C00DDC734 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		AAD49A801B3A991C00DDC734 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
+		AAD49A811B3A991C00DDC734 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		BB399544EBC40ACCFD3DB676 /* Pods-CashierAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DAC65AD02C3169F4D14482F7 /* Pods-CashierApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CashierApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA9D391D1C4CD58D00C32E3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9DCD6B1B0738F20070022E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD49A7C1B3A94F700DDC734 /* SystemConfiguration.framework in Frameworks */,
+				AAD49A7A1B3A94F000DDC734 /* Security.framework in Frameworks */,
+				AAD49A781B3A94E800DDC734 /* QuickLook.framework in Frameworks */,
+				AAD49A761B3A94E000DDC734 /* QuartzCore.framework in Frameworks */,
+				AAD49A741B3A94D700DDC734 /* MobileCoreServices.framework in Frameworks */,
+				AAD49A721B3A94CC00DDC734 /* CoreText.framework in Frameworks */,
+				AAD49A701B3A94C100DDC734 /* AssetsLibrary.framework in Frameworks */,
+				AA6390551B300FAA00782582 /* CoreGraphics.framework in Frameworks */,
+				AA3561F51B24647A00CDECB9 /* UIKit.framework in Frameworks */,
+				AA3561F71B24648500CDECB9 /* Foundation.framework in Frameworks */,
+				55119865E2701100D598ABD0 /* Pods_CashierApp.framework in Frameworks */,
+				AA1F10721BB8128900F869C0 /* HockeySDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9DCD801B0738F20070022E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05730C75583AFAA6B8584374 /* Pods_CashierAppTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6CC2FED32AB37249456528F0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAC65AD02C3169F4D14482F7 /* Pods-CashierApp.debug.xcconfig */,
+				85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */,
+				BB399544EBC40ACCFD3DB676 /* Pods-CashierAppTests.debug.xcconfig */,
+				8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA6390261B300AE400782582 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		AA6390271B300AE400782582 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AA6390291B300AE400782582 /* Constants.swift */,
+				AA07A3861C7EBE1700E4312C /* StringExtension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AA63902A1B300AE400782582 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AA63902B1B300AE400782582 /* BasketItem.swift */,
+				AA63902C1B300AE400782582 /* Checkin.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AA63902E1B300AE400782582 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AA63902F1B300AE400782582 /* BasketProductCell.swift */,
+				AA6390301B300AE400782582 /* BasketUserCell.swift */,
+				AA6390311B300AE400782582 /* CheckinCell.swift */,
+				AA6390321B300AE400782582 /* InitializationView.swift */,
+				AA6390331B300AE400782582 /* InsertCodeView.swift */,
+				AA6390341B300AE400782582 /* LogView.swift */,
+				AA6390351B300AE400782582 /* ModifyPriceView.swift */,
+				AA6390361B300AE400782582 /* PaymentButton.swift */,
+				AA6390371B300AE400782582 /* ProductCategoryCell.swift */,
+				AA6390381B300AE400782582 /* ProductCell.swift */,
+				AA6390391B300AE400782582 /* ScanCardView.swift */,
+				AA63903A1B300AE400782582 /* SectionheaderView.swift */,
+				AA125E601BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift */,
+				AA63903B1B300AE400782582 /* TransactionStatusView.swift */,
+				AA53B3A21BB09E8500E831B4 /* ReceiptView.swift */,
+				AA00BED71BBB1D7800B83706 /* ProductDetailView.swift */,
+				AA256A061BBFE8B800283963 /* ConnectionButton.swift */,
+				AAC9FFD91BC0095700397F54 /* AddProductView.swift */,
+				AAC9FFDB1BC00E8800397F54 /* TextInputField.swift */,
+				AA125E421BC28C1700C70DB2 /* TransactionInfoInputView.swift */,
+				AA125E461BC2B06000C70DB2 /* ReceiptHeadingCell.swift */,
+				AA125E481BC2B34100C70DB2 /* ReceiptTextCell.swift */,
+				AA125E4C1BC2B82700C70DB2 /* ReceiptSpaceCell.swift */,
+				AA125E4A1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift */,
+				AA125E4E1BC2B88600C70DB2 /* ReceiptCell.swift */,
+				AA125E501BC2EE8E00C70DB2 /* ReceiptLabel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AA63903C1B300AE400782582 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AA63903D1B300AE400782582 /* MainViewController.swift */,
+				AA63903E1B300AE400782582 /* ScanViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AA9D39211C4CD58D00C32E3E /* CashierApp UITests */ = {
+			isa = PBXGroup;
+			children = (
+				AA9D39221C4CD58D00C32E3E /* CashierApp_UITests.swift */,
+				AA9D391A1C4CCD1F00C32E3E /* SnapshotHelper.swift */,
+				AA9D39241C4CD58D00C32E3E /* Info.plist */,
+			);
+			path = "CashierApp UITests";
+			sourceTree = "<group>";
+		};
+		AA9DCD651B0738F20070022E = {
+			isa = PBXGroup;
+			children = (
+				AA9DCD701B0738F20070022E /* CashierApp */,
+				AA9DCD861B0738F20070022E /* CashierAppTests */,
+				AA9D39211C4CD58D00C32E3E /* CashierApp UITests */,
+				AA9DCD6F1B0738F20070022E /* Products */,
+				D64ECBCF0DDCB0E63BB2F602 /* Frameworks */,
+				6CC2FED32AB37249456528F0 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		AA9DCD6F1B0738F20070022E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA9DCD6E1B0738F20070022E /* CashierApp.app */,
+				AA9DCD831B0738F20070022E /* CashierAppTests.xctest */,
+				AA9D39201C4CD58D00C32E3E /* CashierApp UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA9DCD701B0738F20070022E /* CashierApp */ = {
+			isa = PBXGroup;
+			children = (
+				AA6390251B300AE400782582 /* AppDelegate.swift */,
+				AA6390261B300AE400782582 /* Base.lproj */,
+				AA6390271B300AE400782582 /* Helpers */,
+				AA63902A1B300AE400782582 /* Model */,
+				AA63902E1B300AE400782582 /* View */,
+				AA63903C1B300AE400782582 /* ViewController */,
+				AA9DCD711B0738F20070022E /* Supporting Files */,
+			);
+			path = CashierApp;
+			sourceTree = "<group>";
+		};
+		AA9DCD711B0738F20070022E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA5C77DC1B334E80004ECCF7 /* CashierApp-Bridging-Header.h */,
+				AA6390231B300AC900782582 /* Images.xcassets */,
+				AA9DCD721B0738F20070022E /* Info.plist */,
+				AA9A31FF1B075AD100CCF6B4 /* products.json */,
+				AA3561FA1B24662B00CDECB9 /* PrefixHeader.pch */,
+				AA125E441BC2A89100C70DB2 /* receipt.json */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA9DCD861B0738F20070022E /* CashierAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA9DCD891B0738F20070022E /* CashierAppTests.swift */,
+				AA9DCD871B0738F20070022E /* Supporting Files */,
+			);
+			path = CashierAppTests;
+			sourceTree = "<group>";
+		};
+		AA9DCD871B0738F20070022E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA9DCD881B0738F20070022E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AAD49A7D1B3A991C00DDC734 /* HockeySDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				AAD49A7E1B3A991C00DDC734 /* HockeySDK.framework */,
+				AAD49A7F1B3A991C00DDC734 /* Resources */,
+			);
+			name = HockeySDK.embeddedframework;
+			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
+			sourceTree = "<group>";
+		};
+		AAD49A7F1B3A991C00DDC734 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AAD49A801B3A991C00DDC734 /* HockeySDK.xcconfig */,
+				AAD49A811B3A991C00DDC734 /* HockeySDKResources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D64ECBCF0DDCB0E63BB2F602 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA1F10711BB8128900F869C0 /* HockeySDK.framework */,
+				AAD49A7D1B3A991C00DDC734 /* HockeySDK.embeddedframework */,
+				AAD49A7B1B3A94F700DDC734 /* SystemConfiguration.framework */,
+				AAD49A791B3A94F000DDC734 /* Security.framework */,
+				AAD49A771B3A94E800DDC734 /* QuickLook.framework */,
+				AAD49A751B3A94E000DDC734 /* QuartzCore.framework */,
+				AAD49A731B3A94D700DDC734 /* MobileCoreServices.framework */,
+				AAD49A711B3A94CC00DDC734 /* CoreText.framework */,
+				AAD49A6F1B3A94C100DDC734 /* AssetsLibrary.framework */,
+				AA6390541B300FAA00782582 /* CoreGraphics.framework */,
+				AA3561F81B2464D800CDECB9 /* Pods_CashierApp.framework */,
+				AA3561F61B24648500CDECB9 /* Foundation.framework */,
+				AA3561F41B24647A00CDECB9 /* UIKit.framework */,
+				9CEC01DFD0D0AE0493C5FFBC /* Pods_CashierApp.framework */,
+				2055D2D41A6B48E97C205698 /* Pods_CashierAppTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA9D391F1C4CD58D00C32E3E /* CashierApp UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA9D39271C4CD58E00C32E3E /* Build configuration list for PBXNativeTarget "CashierApp UITests" */;
+			buildPhases = (
+				AA9D391C1C4CD58D00C32E3E /* Sources */,
+				AA9D391D1C4CD58D00C32E3E /* Frameworks */,
+				AA9D391E1C4CD58D00C32E3E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA9D39261C4CD58D00C32E3E /* PBXTargetDependency */,
+			);
+			name = "CashierApp UITests";
+			productName = "CashierApp UITests";
+			productReference = AA9D39201C4CD58D00C32E3E /* CashierApp UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		AA9DCD6D1B0738F20070022E /* CashierApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA9DCD8D1B0738F20070022E /* Build configuration list for PBXNativeTarget "CashierApp" */;
+			buildPhases = (
+				40AFBC4E04708BCDE22A109B /* Check Pods Manifest.lock */,
+				AA9DCD6A1B0738F20070022E /* Sources */,
+				AA9DCD6B1B0738F20070022E /* Frameworks */,
+				AA9DCD6C1B0738F20070022E /* Resources */,
+				C85955427AC6E67D7E2C7ED1 /* Copy Pods Resources */,
+				2AC358FE004819A17ABB7A8B /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CashierApp;
+			productName = CashierApp;
+			productReference = AA9DCD6E1B0738F20070022E /* CashierApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA9DCD821B0738F20070022E /* CashierAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA9DCD901B0738F20070022E /* Build configuration list for PBXNativeTarget "CashierAppTests" */;
+			buildPhases = (
+				55ACAB23D940FB83866B953B /* Check Pods Manifest.lock */,
+				AA9DCD7F1B0738F20070022E /* Sources */,
+				AA9DCD801B0738F20070022E /* Frameworks */,
+				AA9DCD811B0738F20070022E /* Resources */,
+				C4D266C38BAC297E0BE52AF1 /* Embed Pods Frameworks */,
+				BCF36B146C8C2621608CB10C /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA9DCD851B0738F20070022E /* PBXTargetDependency */,
+			);
+			name = CashierAppTests;
+			productName = CashierAppTests;
+			productReference = AA9DCD831B0738F20070022E /* CashierAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA9DCD661B0738F20070022E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = secucard;
+				TargetAttributes = {
+					AA9D391F1C4CD58D00C32E3E = {
+						CreatedOnToolsVersion = 7.2;
+						TestTargetID = AA9DCD6D1B0738F20070022E;
+					};
+					AA9DCD6D1B0738F20070022E = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = QWAPQRA564;
+					};
+					AA9DCD821B0738F20070022E = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = AA9DCD6D1B0738F20070022E;
+					};
+				};
+			};
+			buildConfigurationList = AA9DCD691B0738F20070022E /* Build configuration list for PBXProject "CashierApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA9DCD651B0738F20070022E;
+			productRefGroup = AA9DCD6F1B0738F20070022E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA9DCD6D1B0738F20070022E /* CashierApp */,
+				AA9DCD821B0738F20070022E /* CashierAppTests */,
+				AA9D391F1C4CD58D00C32E3E /* CashierApp UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA9D391E1C4CD58D00C32E3E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9DCD6C1B0738F20070022E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA9A32001B075AD100CCF6B4 /* products.json in Resources */,
+				AA125E451BC2A89100C70DB2 /* receipt.json in Resources */,
+				AA6390241B300AC900782582 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9DCD811B0738F20070022E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2AC358FE004819A17ABB7A8B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40AFBC4E04708BCDE22A109B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		55ACAB23D940FB83866B953B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BCF36B146C8C2621608CB10C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4D266C38BAC297E0BE52AF1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CashierAppTests/Pods-CashierAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C85955427AC6E67D7E2C7ED1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CashierApp/Pods-CashierApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA9D391C1C4CD58D00C32E3E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA9D39231C4CD58D00C32E3E /* CashierApp_UITests.swift in Sources */,
+				AA9D392B1C4CD76200C32E3E /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9DCD6A1B0738F20070022E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAC9FFDA1BC0095700397F54 /* AddProductView.swift in Sources */,
+				AA6390461B300AE400782582 /* BasketUserCell.swift in Sources */,
+				AA63904A1B300AE400782582 /* LogView.swift in Sources */,
+				AA125E431BC28C1700C70DB2 /* TransactionInfoInputView.swift in Sources */,
+				AA6390451B300AE400782582 /* BasketProductCell.swift in Sources */,
+				AA6390421B300AE400782582 /* BasketItem.swift in Sources */,
+				AA63903F1B300AE400782582 /* AppDelegate.swift in Sources */,
+				AA125E611BC3BEBE00C70DB2 /* ProductsSectionHeaderView.swift in Sources */,
+				AA125E4D1BC2B82700C70DB2 /* ReceiptSpaceCell.swift in Sources */,
+				AA125E471BC2B06000C70DB2 /* ReceiptHeadingCell.swift in Sources */,
+				AA6390411B300AE400782582 /* Constants.swift in Sources */,
+				AA6390511B300AE400782582 /* TransactionStatusView.swift in Sources */,
+				AAC9FFDC1BC00E8800397F54 /* TextInputField.swift in Sources */,
+				AA6390531B300AE400782582 /* ScanViewController.swift in Sources */,
+				AA00BED81BBB1D7800B83706 /* ProductDetailView.swift in Sources */,
+				AA125E4F1BC2B88600C70DB2 /* ReceiptCell.swift in Sources */,
+				AA6390501B300AE400782582 /* SectionheaderView.swift in Sources */,
+				AA63904D1B300AE400782582 /* ProductCategoryCell.swift in Sources */,
+				AA6390431B300AE400782582 /* Checkin.swift in Sources */,
+				AA6390471B300AE400782582 /* CheckinCell.swift in Sources */,
+				AA07A3871C7EBE1700E4312C /* StringExtension.swift in Sources */,
+				AA125E511BC2EE8E00C70DB2 /* ReceiptLabel.swift in Sources */,
+				AA6390481B300AE400782582 /* InitializationView.swift in Sources */,
+				AA63904C1B300AE400782582 /* PaymentButton.swift in Sources */,
+				AA63904E1B300AE400782582 /* ProductCell.swift in Sources */,
+				AA63904F1B300AE400782582 /* ScanCardView.swift in Sources */,
+				AA6390491B300AE400782582 /* InsertCodeView.swift in Sources */,
+				AA125E4B1BC2B36400C70DB2 /* ReceiptKeyValueCell.swift in Sources */,
+				AA53B3A31BB09E8500E831B4 /* ReceiptView.swift in Sources */,
+				AA256A071BBFE8B800283963 /* ConnectionButton.swift in Sources */,
+				AA125E491BC2B34100C70DB2 /* ReceiptTextCell.swift in Sources */,
+				AA63904B1B300AE400782582 /* ModifyPriceView.swift in Sources */,
+				AA6390521B300AE400782582 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA9DCD7F1B0738F20070022E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA9DCD8A1B0738F20070022E /* CashierAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA9D39261C4CD58D00C32E3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA9DCD6D1B0738F20070022E /* CashierApp */;
+			targetProxy = AA9D39251C4CD58D00C32E3E /* PBXContainerItemProxy */;
+		};
+		AA9DCD851B0738F20070022E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA9DCD6D1B0738F20070022E /* CashierApp */;
+			targetProxy = AA9DCD841B0738F20070022E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA9D39281C4CD58E00C32E3E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "CashierApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.secucard.CashierApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				TEST_TARGET_NAME = CashierApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		AA9D39291C4CD58E00C32E3E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "CashierApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.secucard.CashierApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				TEST_TARGET_NAME = CashierApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+		AA9D392A1C4CD58E00C32E3E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "CashierApp UITests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.secucard.CashierApp-UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				TEST_TARGET_NAME = CashierApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = AdHoc;
+		};
+		AA9DCD8B1B0738F20070022E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		AA9DCD8C1B0738F20070022E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA9DCD8E1B0738F20070022E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAC65AD02C3169F4D14482F7 /* Pods-CashierApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					$PODS_FRAMEWORK_BUILD_PATH,
+					"$(PROJECT_DIR)/Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				GCC_NO_COMMON_BLOCKS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CashierApp/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CashierApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a1b78fe6-fb94-4dcf-b829-a9ba4e316941";
+				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				VALID_ARCHS = "arm64 armv7s armv7";
+			};
+			name = Debug;
+		};
+		AA9DCD8F1B0738F20070022E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: hp.weber GmbH & Co secucard KG (QWAPQRA564)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					$PODS_FRAMEWORK_BUILD_PATH,
+					"$(PROJECT_DIR)/Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				GCC_NO_COMMON_BLOCKS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CashierApp/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CashierApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2fa91f00-e74f-4e4c-bd5f-e0f115725622";
+				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				VALID_ARCHS = "arm64 armv7s armv7";
+			};
+			name = Release;
+		};
+		AA9DCD911B0738F20070022E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB399544EBC40ACCFD3DB676 /* Pods-CashierAppTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CashierAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CashierApp.app/CashierApp";
+			};
+			name = Debug;
+		};
+		AA9DCD921B0738F20070022E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CashierAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CashierApp.app/CashierApp";
+			};
+			name = Release;
+		};
+		AAD49A611B3A825B00DDC734 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		AAD49A621B3A825B00DDC734 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85BDFBE62AAACCE3DE19A59E /* Pods-CashierApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: hp.weber GmbH & Co secucard KG (QWAPQRA564)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					$PODS_FRAMEWORK_BUILD_PATH,
+					"$(PROJECT_DIR)/Pods/HockeySDK/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
+				GCC_NO_COMMON_BLOCKS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = CashierApp/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CashierApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "939832ab-3b7c-4349-a737-a301b247b150";
+				SWIFT_OBJC_BRIDGING_HEADER = "CashierApp/CashierApp-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(inherited)";
+				VALID_ARCHS = "arm64 armv7s armv7";
+			};
+			name = AdHoc;
+		};
+		AAD49A631B3A825B00DDC734 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B28CDF5AC7601FA64924830 /* Pods-CashierAppTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CashierAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.secucard.app.ios.secucard.cashierapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CashierApp.app/CashierApp";
+			};
+			name = AdHoc;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA9D39271C4CD58E00C32E3E /* Build configuration list for PBXNativeTarget "CashierApp UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA9D39281C4CD58E00C32E3E /* Debug */,
+				AA9D39291C4CD58E00C32E3E /* Release */,
+				AA9D392A1C4CD58E00C32E3E /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA9DCD691B0738F20070022E /* Build configuration list for PBXProject "CashierApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA9DCD8B1B0738F20070022E /* Debug */,
+				AA9DCD8C1B0738F20070022E /* Release */,
+				AAD49A611B3A825B00DDC734 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA9DCD8D1B0738F20070022E /* Build configuration list for PBXNativeTarget "CashierApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA9DCD8E1B0738F20070022E /* Debug */,
+				AA9DCD8F1B0738F20070022E /* Release */,
+				AAD49A621B3A825B00DDC734 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA9DCD901B0738F20070022E /* Build configuration list for PBXNativeTarget "CashierAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA9DCD911B0738F20070022E /* Debug */,
+				AA9DCD921B0738F20070022E /* Release */,
+				AAD49A631B3A825B00DDC734 /* AdHoc */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA9DCD661B0738F20070022E /* Project object */;
+}
