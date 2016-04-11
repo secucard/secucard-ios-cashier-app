@@ -144,7 +144,7 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
     
     let cancelButton: UIButton = UIButton(type: UIButtonType.Custom)
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(TransactionInfoInputView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.tintColor
     cancelButton.setTitleColor(Constants.textColorBright, forState: UIControlState.Normal)
     centerView.addSubview(cancelButton)
@@ -158,7 +158,7 @@ class TransactionInfoInputView: UIView, UITextFieldDelegate {
     
     let okButton: UIButton = UIButton(type: UIButtonType.Custom)
     okButton.setTitle("Hinzufügen", forState: UIControlState.Normal)
-    okButton.addTarget(self, action: "didTapAdd", forControlEvents: UIControlEvents.TouchUpInside)
+    okButton.addTarget(self, action: #selector(TransactionInfoInputView.didTapAdd), forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
     okButton.setTitleColor(Constants.textColorBright, forState: UIControlState.Normal)
     centerView.addSubview(okButton)

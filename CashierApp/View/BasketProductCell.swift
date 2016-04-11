@@ -126,42 +126,42 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
       make.bottom.equalTo(countLabel)
     }
     
-    actionsButton.addTarget(self, action: "actionsButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    actionsButton.addTarget(self, action: #selector(BasketProductCell.actionsButtonTouched), forControlEvents: UIControlEvents.TouchUpInside)
     actionsButton.snp_makeConstraints { (make) -> Void in
       make.right.equalTo(-10)
       make.top.equalTo(10)
       make.width.height.equalTo(50)
     }
     
-    increaseButton.addTarget(self, action: "increaseButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    increaseButton.addTarget(self, action: #selector(BasketProductCell.increaseButtonTouched), forControlEvents: UIControlEvents.TouchUpInside)
     increaseButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(10)
       make.top.equalTo(actionsButton.snp_bottom).offset(10)
       make.width.height.equalTo(50)
     }
     
-    decreaseButton.addTarget(self, action: "decreaseButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    decreaseButton.addTarget(self, action: #selector(BasketProductCell.decreaseButtonTouched), forControlEvents: UIControlEvents.TouchUpInside)
     decreaseButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(increaseButton.snp_right).offset(10)
       make.top.equalTo(actionsButton.snp_bottom).offset(10)
       make.width.height.equalTo(50)
     }
     
-    changePriceButton.addTarget(self, action: "changePriceButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    changePriceButton.addTarget(self, action: #selector(BasketProductCell.changePriceButtonTouched), forControlEvents: UIControlEvents.TouchUpInside)
     changePriceButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(decreaseButton.snp_right).offset(10)
       make.top.equalTo(actionsButton.snp_bottom).offset(10)
       make.width.height.equalTo(50)
     }
     
-    addDiscountButton.addTarget(self, action: "addDiscountButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    addDiscountButton.addTarget(self, action: #selector(BasketProductCell.addDiscountButtonTouched), forControlEvents: UIControlEvents.TouchUpInside)
     addDiscountButton.snp_makeConstraints { (make) -> Void in
       make.left.equalTo(changePriceButton.snp_right).offset(10)
       make.top.equalTo(actionsButton.snp_bottom).offset(10)
       make.width.height.equalTo(50)
     }
     
-    removeButton.addTarget(self, action: "removeButtonTouched", forControlEvents: UIControlEvents.TouchUpInside)
+    removeButton.addTarget(self, action: #selector(BasketProductCell.removeButtonTouched), forControlEvents: UIControlEvents.TouchUpInside)
     removeButton.snp_makeConstraints { (make) -> Void in
       make.right.equalTo(-10)
       make.top.equalTo(actionsButton.snp_bottom).offset(10)
@@ -212,7 +212,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
   func increaseButtonTouched() {
     
     if let theData = data {
-      theData.amount++
+      theData.amount += 1
       countLabel.text = "\(theData.amount)"
       delegate?.basketItemChanged(theData)
     }
@@ -223,7 +223,7 @@ class BasketProductCell: UICollectionViewCell, ModifyPriceViewDelegate {
     
     if let theData = data {
       if (theData.amount > 1) {
-        theData.amount--
+        theData.amount -= 1
         countLabel.text = "\(theData.amount)"
         delegate?.basketItemChanged(theData)
       }

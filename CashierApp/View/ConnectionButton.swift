@@ -61,7 +61,7 @@ class ConnectionButton: UIView {
       make.centerY.equalTo(self)
     }
     
-    let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTap"))
+    let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ConnectionButton.didTap))
     userInteractionEnabled = true
     addGestureRecognizer(tapRecognizer)
     

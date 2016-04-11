@@ -2,18 +2,18 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 use_frameworks!
 
-target 'CashierApp', :exclusive => true do
+target 'CashierApp' do
   
   pod 'SecucardConnectSDK', '0.2.18'
-  pod 'SwiftyJSON', '2.3.0'
-  pod 'SnapKit', '0.15.0'
-  pod 'Alamofire', '2.0.2'
+  pod 'SwiftyJSON'
+  pod 'SnapKit'
+  pod 'Alamofire'
   pod 'TFBarcodeScanner', '1.1.0'
-  pod 'HockeySDK', '3.8.2'
+  pod 'HockeySDK'
   
 end
 
-target 'CashierAppTests', :exclusive => true do
+target 'CashierAppTests' do
   
 #  pod 'SecucardConnectSDK', '0.2.14'
 

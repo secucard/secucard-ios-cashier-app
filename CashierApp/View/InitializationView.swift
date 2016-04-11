@@ -68,8 +68,8 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
   
   func setupView() {
     
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("connectionChanged"), name: "clientDidDisconnect", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("connectionChanged"), name: "clientDidConnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InitializationView.connectionChanged), name: "clientDidDisconnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InitializationView.connectionChanged), name: "clientDidConnect", object: nil)
     
     alpha = 0;
     backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.7)
@@ -207,10 +207,10 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     
     let toolBar = UIToolbar(frame: CGRectMake(0, 0, self.frame.size.width, 50))
     
-    let cancelBarButton = UIBarButtonItem(title: "Abbrechen", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("didTapPickerCancel"))
+    let cancelBarButton = UIBarButtonItem(title: "Abbrechen", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(InitializationView.didTapPickerCancel))
     cancelBarButton.tintColor = UIColor.whiteColor()
 
-    let doneBarButton = UIBarButtonItem(title: "OK", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("didTapPickerOk"))
+    let doneBarButton = UIBarButtonItem(title: "OK", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(InitializationView.didTapPickerOk))
     doneBarButton.tintColor = UIColor.whiteColor()
     
     let flexibleBarSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
@@ -233,7 +233,7 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     // Buttons
     
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(InitializationView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.tintColor
     centerView.addSubview(cancelButton)
     
@@ -245,7 +245,7 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     }
     
     logoffButton.setTitle("Abmelden", forState: UIControlState.Normal)
-    logoffButton.addTarget(self, action: "didTapLogoff", forControlEvents: UIControlEvents.TouchUpInside)
+    logoffButton.addTarget(self, action: #selector(InitializationView.didTapLogoff), forControlEvents: UIControlEvents.TouchUpInside)
     logoffButton.backgroundColor = Constants.warningColor
     centerView.addSubview(logoffButton)
     
@@ -260,7 +260,7 @@ class InitializationView: UIView, UITextFieldDelegate, UIPickerViewDelegate, UIP
     logoffButton.alpha = SCConnectClient.sharedInstance().connected ? 1.0 : 0.5
     
     okButton.setTitle("Speichern", forState: UIControlState.Normal)
-    okButton.addTarget(self, action: "didTapSend", forControlEvents: UIControlEvents.TouchUpInside)
+    okButton.addTarget(self, action: #selector(InitializationView.didTapSend), forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
     centerView.addSubview(okButton)
     

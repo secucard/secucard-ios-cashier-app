@@ -66,7 +66,7 @@ class InsertCodeView: UIView {
     }
     
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(InsertCodeView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     self.addSubview(cancelButton)

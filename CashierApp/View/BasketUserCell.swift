@@ -149,7 +149,7 @@ class BasketUserCell: UICollectionViewCell {
     
     removeButton.backgroundColor = Constants.warningColor
     removeButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
-    removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
+    removeButton.addTarget(self, action: #selector(BasketUserCell.didTapRemove), forControlEvents: UIControlEvents.TouchUpInside)
     controls.addSubview(removeButton)
     
     removeButton.snp_makeConstraints { (make) -> Void in

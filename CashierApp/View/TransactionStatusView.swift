@@ -43,7 +43,7 @@ class TransactionStatusView: UIView {
     }
     
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(TransactionStatusView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     self.addSubview(cancelButton)
@@ -57,7 +57,7 @@ class TransactionStatusView: UIView {
     
     logButton.hidden = true
     logButton.setTitle("Log", forState: UIControlState.Normal)
-    logButton.addTarget(self, action: "didTapLog", forControlEvents: UIControlEvents.TouchUpInside)
+    logButton.addTarget(self, action: #selector(TransactionStatusView.didTapLog), forControlEvents: UIControlEvents.TouchUpInside)
     logButton.backgroundColor = Constants.brightGreyColor
     logButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     self.addSubview(logButton)

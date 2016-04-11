@@ -39,10 +39,10 @@
       BITHockeyManager.sharedHockeyManager().authenticator.authenticateInstallation()
       
       // notification oberservers
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: "showDeviceAuthInformation:", name: "deviceAuthCodeRequesting", object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: "logAnyEvent:", name: "notificationStompEvent", object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stompConnectionChanged"), name: "stompConnected", object: nil)
-      NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("stompConnectionChanged"), name: "stompDisconnected", object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.showDeviceAuthInformation(_:)), name: "deviceAuthCodeRequesting", object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.logAnyEvent), name: "notificationStompEvent", object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.stompConnectionChanged), name: "stompConnected", object: nil)
+      NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppDelegate.stompConnectionChanged), name: "stompDisconnected", object: nil)
       
       // read data
       if let path = NSBundle.mainBundle().pathForResource("products", ofType: "json") {

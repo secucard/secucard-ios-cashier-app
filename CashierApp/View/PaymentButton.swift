@@ -12,12 +12,16 @@ class PaymentButton: UIButton {
 
   var target: AnyObject? {
     didSet {
-      addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
+      
+      if let target = target, action = action {
+        addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
+      }
+      
     }
   }
   
   var payMethod:PayMethod = PayMethod.Unset
-  var action: Selector = ""
+  var action: Selector?
   
   init() {
     super.init(frame: CGRectNull)

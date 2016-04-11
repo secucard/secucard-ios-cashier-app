@@ -155,22 +155,22 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   let settingsButton: PaymentButton
   
   /// auto payment button
-  let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: Selector("didTapPayButton:"))
+  let payAutoButton = PaymentButton(payMethod: PayMethod.Auto, action: #selector(MainViewController.didTapPayButton(_:)))
   
   /// demo payment button
-  let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: Selector("didTapPayButton:"))
+  let payDemoButton = PaymentButton(payMethod: PayMethod.Demo, action: #selector(MainViewController.didTapPayButton(_:)))
   
   /// paypal payment button
-  let payPaypalButton = PaymentButton(payMethod: PayMethod.Paypal, action: Selector("didTapPayButton:"))
+  let payPaypalButton = PaymentButton(payMethod: PayMethod.Paypal, action: #selector(MainViewController.didTapPayButton(_:)))
   
   /// localty payment button
-  let payLoyaltyButton = PaymentButton(payMethod: PayMethod.Loyalty, action: Selector("didTapPayButton:"))
+  let payLoyaltyButton = PaymentButton(payMethod: PayMethod.Loyalty, action: #selector(MainViewController.didTapPayButton(_:)))
   
   /// cashless payment button
-  let payCashlessButton = PaymentButton(payMethod: PayMethod.Cashless, action: Selector("didTapPayButton:"))
+  let payCashlessButton = PaymentButton(payMethod: PayMethod.Cashless, action: #selector(MainViewController.didTapPayButton(_:)))
   
   ///  cash payment button
-  let payCashButton = PaymentButton(payMethod: PayMethod.Cash, action: Selector("didTapPayButton:"))
+  let payCashButton = PaymentButton(payMethod: PayMethod.Cash, action: #selector(MainViewController.didTapPayButton(_:)))
   
   /// all buttons available, needed for iterating the buttons
   let availableButtons: [PaymentButton]
@@ -318,8 +318,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     checkinsCollection.registerClass(CheckinCell.self, forCellWithReuseIdentifier: checkinReuseIdentifier)
     
     // Payment buttons initialization
-    showLogButton = PaymentButton(icon: "Log", action: Selector("didTapShowLog"))
-    settingsButton = PaymentButton(icon: "Settings", action: Selector("didTapShowSettings"))
+    showLogButton = PaymentButton(icon: "Log", action: #selector(MainViewController.didTapShowLog))
+    settingsButton = PaymentButton(icon: "Settings", action: #selector(MainViewController.didTapShowSettings))
     
     availableButtons = [payDemoButton, payPaypalButton, payLoyaltyButton, payCashlessButton, payAutoButton, payCashButton]
     
@@ -329,8 +329,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // initilizing using self
     
     // notification handling
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidDisconnect:"), name: "clientDidDisconnect", object: nil)
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("clientDidConnect:"), name: "clientDidConnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.clientDidDisconnect(_:)), name: "clientDidDisconnect", object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.clientDidConnect(_:)), name: "clientDidConnect", object: nil)
     
     // add self as target and delegates
     showLogButton.target = self
@@ -344,7 +344,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     self.productsCollection.dataSource = self
     
     // long pressing the product
-    let longPress = UILongPressGestureRecognizer(target: self, action: "handleLongPress:")
+    let longPress = UILongPressGestureRecognizer(target: self, action: #selector(MainViewController.handleLongPress(_:)))
     longPress.minimumPressDuration = 1.0
     longPress.delegate = self
     longPress.cancelsTouchesInView  = true
@@ -517,7 +517,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     emptyButton.setImage(UIImage(named: "Trash"), forState: UIControlState.Normal)
-    emptyButton.addTarget(self, action: "didTapEmptyButton", forControlEvents: UIControlEvents.TouchUpInside)
+    emptyButton.addTarget(self, action: #selector(MainViewController.didTapEmptyButton), forControlEvents: UIControlEvents.TouchUpInside)
     emptyButton.backgroundColor = Constants.warningColor
     sumView.addSubview(emptyButton)
     
@@ -528,7 +528,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     transactionInfoButton.setTitle("i", forState: UIControlState.Normal)
-    transactionInfoButton.addTarget(self, action: "didTapTransactionInformation", forControlEvents: UIControlEvents.TouchUpInside)
+    transactionInfoButton.addTarget(self, action: #selector(MainViewController.didTapTransactionInformation), forControlEvents: UIControlEvents.TouchUpInside)
     transactionInfoButton.backgroundColor = Constants.tintColor
     sumView.addSubview(transactionInfoButton)
     
@@ -899,7 +899,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         for itemInBasket in basket {
           if itemInBasket.product.id == basketItem.product.id {
             
-            itemInBasket.amount++
+            itemInBasket.amount += 1
             basketItemChanged(itemInBasket)
             
             return
@@ -958,12 +958,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if indexPath.section == 0 {
           
           headerView.label.text = "Produkte"
-          button.addTarget(self, action: Selector("didTapAddProduct"), forControlEvents: UIControlEvents.TouchUpInside)
+          button.addTarget(self, action: #selector(MainViewController.didTapAddProduct), forControlEvents: UIControlEvents.TouchUpInside)
           
         } else {
           
           headerView.label.text = "Idents"
-          button.addTarget(self, action: Selector("didTapAddIdent"), forControlEvents: UIControlEvents.TouchUpInside)
+          button.addTarget(self, action: #selector(MainViewController.didTapAddIdent), forControlEvents: UIControlEvents.TouchUpInside)
           
         }
         
@@ -1036,7 +1036,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
   
   - parameter button: the button used
   */
-  func didTapPayButton(button: PaymentButton) {
+  internal func didTapPayButton(button: PaymentButton) {
     sendTransaction(button.payMethod)
   }
   

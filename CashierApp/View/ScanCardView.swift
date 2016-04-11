@@ -72,7 +72,7 @@ class ScanCardView: UIView {
     }
     
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(ScanCardView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     centerView.addSubview(cancelButton)
@@ -85,7 +85,7 @@ class ScanCardView: UIView {
     }
     
     okButton.setTitle("OK", forState: UIControlState.Normal)
-    okButton.addTarget(self, action: "didTapOK", forControlEvents: UIControlEvents.TouchUpInside)
+    okButton.addTarget(self, action: #selector(ScanCardView.didTapOK), forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
     centerView.addSubview(okButton)
     

@@ -100,7 +100,7 @@ class ModifyPriceView: UIView {
     }
 
     cancelButton.setTitle("Abbrechen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(ModifyPriceView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     cancelButton.backgroundColor = Constants.brightGreyColor
     centerView.addSubview(cancelButton)
@@ -114,7 +114,7 @@ class ModifyPriceView: UIView {
     
     
     okButton.setTitle("OK", forState: UIControlState.Normal)
-    okButton.addTarget(self, action: "didTapOK", forControlEvents: UIControlEvents.TouchUpInside)
+    okButton.addTarget(self, action: #selector(ModifyPriceView.didTapOK), forControlEvents: UIControlEvents.TouchUpInside)
     okButton.backgroundColor = Constants.tintColor
     centerView.addSubview(okButton)
     

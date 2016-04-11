@@ -75,7 +75,7 @@ class CheckinCell: UICollectionViewCell {
     }
     
     removeButton.backgroundColor = Constants.warningColor
-    removeButton.addTarget(self, action: Selector("didTapRemove"), forControlEvents: UIControlEvents.TouchUpInside)
+    removeButton.addTarget(self, action: #selector(CheckinCell.didTapRemove), forControlEvents: UIControlEvents.TouchUpInside)
     controls.addSubview(removeButton)
     
     removeButton.snp_makeConstraints { (make) -> Void in
@@ -83,6 +83,10 @@ class CheckinCell: UICollectionViewCell {
       make.width.height.equalTo(50)
     }
     
+  }
+  
+  func didTapRemove() {
+    print("needs implementation")
   }
 
   required init(coder aDecoder: NSCoder) {

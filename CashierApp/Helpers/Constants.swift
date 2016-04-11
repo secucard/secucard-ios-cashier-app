@@ -106,7 +106,7 @@ public enum AvailableHosts : String {
   /// corresponding device auth host
   var deviceAuthHost: String {
     
-    for var i = 0; i < AvailableHosts.all.count; i++ {
+    for i in 0 ..< AvailableHosts.all.count {
       if AvailableHosts.all[i] == self {
         return DeviceAuthHosts.allStrings[i]
       }
@@ -125,7 +125,7 @@ public enum AvailableHosts : String {
    */
   static func byString(string:String) -> AvailableHosts {
     
-    for var i = 0; i < AvailableHosts.allStrings.count; i++ {
+    for i in 0 ..< AvailableHosts.allStrings.count {
       if AvailableHosts.allStrings[i] == string {
         return AvailableHosts.all[i]
       }

@@ -105,7 +105,7 @@ class ProductDetailView: UIView {
     
     let cancelButton: UIButton = UIButton(type: UIButtonType.Custom)
     cancelButton.setTitle("Schließen", forState: UIControlState.Normal)
-    cancelButton.addTarget(self, action: "didTapCancel", forControlEvents: UIControlEvents.TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(ProductDetailView.didTapCancel), forControlEvents: UIControlEvents.TouchUpInside)
     cancelButton.backgroundColor = Constants.brightGreyColor
     cancelButton.setTitleColor(Constants.textColor, forState: UIControlState.Normal)
     centerView.addSubview(cancelButton)
