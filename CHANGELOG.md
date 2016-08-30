@@ -1,3 +1,12 @@
+## 1.0.13
+
+* basket removed after successfull payment
+
+## 1.0.12
+
+* do not remove basket when transaction failed
+
+
 ## 1.0.11
 
 * update code documentation, add ConnectSDK as cocoapods-source

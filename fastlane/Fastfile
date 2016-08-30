@@ -57,20 +57,6 @@ platform :ios do
 
   end
 
-  lane :certstuff do 
-
-    cert(
-      output_path: "cert/"
-      )
-    sigh(
-      force: true,
-      adhoc: true,
-      output_path: "cert/",
-      filename: "secuconnectKasse_AdHoc.mobileprovision"
-      )
-
-  end
-
   desc "Deploys a beta version of the app"
   lane :beta do
 
@@ -78,13 +64,28 @@ platform :ios do
 
     versioning
 
-    certstuff
+    certstuff_beta
 
     gym_beta
 
     hockey_beta
 
     slack_beta
+
+  end
+
+  lane :certstuff_beta do 
+
+    cert(
+      output_path: "cert/"
+      )
+    sigh(
+      force: true,
+      adhoc: true,
+      app_identifier: "com.secucard.app.ios.secucard.cashierapp.beta",
+      output_path: "cert/",
+      filename: "secuconnectKasse_AdHoc.mobileprovision"
+      )
 
   end
 
@@ -96,15 +97,14 @@ platform :ios do
       configuration: "AdHoc",
       include_symbols: true,
       include_bitcode: true,
-      scheme: "CashierApp AdHoc",
       silent: true,
       clean: false,
       output_directory: "./deploy/",
       output_name: "secuconnectKasse_beta.ipa",
       export_team_id: "QWAPQRA564",
+      export_method: "ad-hoc",
       use_legacy_build_api: true,
       include_bitcode: false,
-      provisioning_profile_path: "./cert/secuconnectKasse_AdHoc.mobileprovision"
       )
 
   end
@@ -126,7 +126,7 @@ latest_version = readme.split("\n## ").first
       dsym: './deploy/secuconnectKasse_beta.app.dSYM.zip',
       notes_type: "1",
       notes: release_notes,
-      notify: "2"
+      notify: "0"
       )
 
   end
@@ -137,6 +137,94 @@ latest_version = readme.split("\n## ").first
           slack_url: "https://hooks.slack.com/services/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",
           message: "Successfully deployed new App Update."
       )
+
+  end
+
+  desc "do release provisioning"
+  lane :certstuff_release do 
+
+    cert(
+      output_path: "cert/"
+      )
+    sigh(
+      force: true,
+      output_path: "cert/",
+      app_identifier: "com.secucard.app.ios.secucard.cashierapp",
+      filename: "AppStore_com.secucard.app.ios.secucard.cashierapp.mobileprovision"
+      )
+
+  end
+
+  desc "Build Release version"
+  lane :gym_release do
+
+    gym(
+      workspace: "CashierApp.xcworkspace",
+      configuration: "Release",
+      include_symbols: true,
+      include_bitcode: true,
+      scheme: "CashierApp",
+      silent: true,
+      clean: true,
+      output_directory: "./deploy/",
+      output_name: "CashierApp_release.ipa",
+      export_team_id: "QWAPQRA564",
+      use_legacy_build_api: true,
+      include_bitcode: false,
+      provisioning_profile_path: "./cert/AppStore_com.secucard.app.ios.secucard.cashierapp.mobileprovision"
+      )
+
+  end
+
+  desc "deliver the release version of the app to itunes connect"
+  lane :deliver_release do
+
+    readme = File.read("../CHANGELOG.md")
+
+    latest_version = readme.split("\n## ").first
+    first_line = latest_version.split("\n").first
+    version_number = first_line.split(" ")[1]
+    
+    deliver(
+      app_identifier: "com.secucard.app.ios.secucard.cashierapp",
+      force: true,
+      submit_for_review: false,
+      skip_binary_upload: false,
+      skip_screenshots: true, 
+      skip_metadata: false,
+      app_version: version_number,
+      automatic_release: true,
+      ipa: "./deploy/CashierApp_release.ipa",
+      app: "1076235950",
+      username: "secucard@devid.net",
+      team_id: "QWAPQRA564"
+    )
+
+  end
+
+  lane :slack_release do
+
+    slack(
+      slack_url: "https://hooks.slack.com/services/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",
+      message: "Successfully deployed Secucard Cashier App Release"
+      )
+
+  end
+
+  desc "Deploys the release version of the app"
+  lane :release do
+
+    # gitclean
+
+    versioning
+
+    certstuff_release
+
+    gym_release
+
+    deliver_release
+
+    slack_release
 
   end
 

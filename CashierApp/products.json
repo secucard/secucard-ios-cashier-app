@@ -1,407 +1,407 @@
 {
-  "items": [
-            {
-            "id": 1,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4009900401937",
-            "articleNumber": "ART00001",
-            "desc": "Uhr Antik",
-            "priceOne": 100,
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 2,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 3799,
-            "ean": "4009900401937",
-            "articleNumber": "ART00002",
-            "desc": "Briefkasten",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 3,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4009900401937",
-            "articleNumber": "ART00003",
-            "desc": "Schlüsselkasten",
-            "priceOne": 6999,
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 4,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 31999,
-            "ean": "4009900401937",
-            "articleNumber": "ART00004",
-            "desc": "Kommode Shabby Chic",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 7499,
-            "ean": "4009900401937",
-            "articleNumber": "ART00005",
-            "desc": "Stuhl",
-            "quantity": 1,
-            "tax": 7,
-            "id": 5
-            },
-            {
-            "id": 6,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 10999,
-            "ean": "4009900401937",
-            "articleNumber": "ART00006",
-            "desc": "Regal Groß",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 7,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 24999,
-            "ean": "4009900401937",
-            "articleNumber": "ART00007",
-            "desc": "Esstisch",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 8,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 3995,
-            "ean": "4009900401937",
-            "articleNumber": "ART00008",
-            "desc": "Surfbrett",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 9,
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 4499,
-            "ean": "4009900401937",
-            "articleNumber": "ART00009",
-            "desc": "Strandtuch in mehreren Farben",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 2899,
-            "ean": "4009900401937",
-            "articleNumber": "ART00010",
-            "desc": "Strandbag",
-            "quantity": 1,
-            "tax": 7,
-            "id": 10
-            },
-            {
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 499,
-            "ean": "4009900401937",
-            "articleNumber": "ART00011",
-            "desc": "Flip Flop Sunshine",
-            "quantity": 1,
-            "tax": 7,
-            "id": 11
-            },
-            {
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 1495,
-            "ean": "4009900401937",
-            "articleNumber": "ART00012",
-            "desc": "Sonnenschirm Pendalex V+, 280cm",
-            "quantity": 1,
-            "tax": 7,
-            "id": 12
-            },
-            {
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 2399,
-            "ean": "4009900401937",
-            "articleNumber": "ART00013",
-            "desc": "Strohhut mit UV Schutz",
-            "quantity": 1,
-            "tax": 7,
-            "id": 13
-            },
-            {
-            "group": [
-                      {
-                      "id": "1",
-                      "desc": "Haushalt",
-                      "level": 1
-                      },
-                      {
-                      "id": "2",
-                      "desc": "Sommerartikel",
-                      "level": 2
-                      }
-                      ],
-            "priceOne": 249,
-            "ean": "4009900401937",
-            "articleNumber": "ART00014",
-            "desc": "Pilotenbrille Sunset Red",
-            "quantity": 1,
-            "tax": 7,
-            "id": 14
-            },
-            {
-            "id": 15,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4260447140080",
-            "articleNumber": "ART00301",
-            "desc": "EPlus 15€",
-            "priceOne": 1500,
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 16,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 2000,
-            "ean": "4260447140097",
-            "articleNumber": "ART00302",
-            "desc": "EPlus 20€",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 17,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4260447140103",
-            "articleNumber": "ART00303",
-            "desc": "EPlus 30€",
-            "priceOne": 3000,
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 16,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 1500,
-            "ean": "4260447140752",
-            "articleNumber": "ART00312",
-            "desc": "Vodafone 15€",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 17,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4260447140769",
-            "articleNumber": "ART00313",
-            "desc": "Vodafone 25€",
-            "priceOne": 2500,
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 15,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4260447140691",
-            "articleNumber": "ART00321",
-            "desc": "T-Mobile 15€",
-            "priceOne": 1500,
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 16,
-            "group": [
-                      {
-                      "id": "3",
-                      "desc": "Prepaid (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 3000,
-            "ean": "4260447140707",
-            "articleNumber": "ART00322",
-            "desc": "T-Mobile 30€",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 16,
-            "group": [
-                      {
-                      "id": "99",
-                      "desc": "Loyalty (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "priceOne": 1500,
-            "ean": "4009900401937",
-            "articleNumber": "ART00341",
-            "desc": "Gutscheinaufladung 15€",
-            "quantity": 1,
-            "tax": 7
-            },
-            {
-            "id": 17,
-            "group": [
-                      {
-                      "id": "99",
-                      "desc": "Loyalty (Smart)",
-                      "level": 1
-                      }
-                      ],
-            "ean": "4009900401937",
-            "articleNumber": "ART00342",
-            "desc": "Gutscheinaufladung 30€",
-            "priceOne": 3000,
-            "quantity": 1,
-            "tax": 7
-            }
-            ]
+    "items": [
+              {
+              "id": 1,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4009900401937",
+              "articleNumber": "ART00001",
+              "desc": "Uhr Antik",
+              "priceOne": 100,
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 2,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 3799,
+              "ean": "4009900401937",
+              "articleNumber": "ART00002",
+              "desc": "Briefkasten",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 3,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4009900401937",
+              "articleNumber": "ART00003",
+              "desc": "Schlüsselkasten",
+              "priceOne": 6999,
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 4,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 31999,
+              "ean": "4009900401937",
+              "articleNumber": "ART00004",
+              "desc": "Kommode Shabby Chic",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 7499,
+              "ean": "4009900401937",
+              "articleNumber": "ART00005",
+              "desc": "Stuhl",
+              "quantity": 1,
+              "tax": 7,
+              "id": 5
+              },
+              {
+              "id": 6,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 10999,
+              "ean": "4009900401937",
+              "articleNumber": "ART00006",
+              "desc": "Regal Groß",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 7,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 24999,
+              "ean": "4009900401937",
+              "articleNumber": "ART00007",
+              "desc": "Esstisch",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 8,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 3995,
+              "ean": "4009900401937",
+              "articleNumber": "ART00008",
+              "desc": "Surfbrett",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 9,
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 4499,
+              "ean": "4009900401937",
+              "articleNumber": "ART00009",
+              "desc": "Strandtuch in mehreren Farben",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 2899,
+              "ean": "4009900401937",
+              "articleNumber": "ART00010",
+              "desc": "Strandbag",
+              "quantity": 1,
+              "tax": 7,
+              "id": 10
+              },
+              {
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 499,
+              "ean": "4009900401937",
+              "articleNumber": "ART00011",
+              "desc": "Flip Flop Sunshine",
+              "quantity": 1,
+              "tax": 7,
+              "id": 11
+              },
+              {
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 1495,
+              "ean": "4009900401937",
+              "articleNumber": "ART00012",
+              "desc": "Sonnenschirm Pendalex V+, 280cm",
+              "quantity": 1,
+              "tax": 7,
+              "id": 12
+              },
+              {
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 2399,
+              "ean": "4009900401937",
+              "articleNumber": "ART00013",
+              "desc": "Strohhut mit UV Schutz",
+              "quantity": 1,
+              "tax": 7,
+              "id": 13
+              },
+              {
+              "group": [
+                        {
+                        "id": "1",
+                        "desc": "Haushalt",
+                        "level": 1
+                        },
+                        {
+                        "id": "2",
+                        "desc": "Sommerartikel",
+                        "level": 2
+                        }
+                        ],
+              "priceOne": 249,
+              "ean": "4009900401937",
+              "articleNumber": "ART00014",
+              "desc": "Pilotenbrille Sunset Red",
+              "quantity": 1,
+              "tax": 7,
+              "id": 14
+              },
+              {
+              "id": 15,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4260447140080",
+              "articleNumber": "ART00301",
+              "desc": "EPlus 15€",
+              "priceOne": 1500,
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 16,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 2000,
+              "ean": "4260447140097",
+              "articleNumber": "ART00302",
+              "desc": "EPlus 20€",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 17,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4260447140103",
+              "articleNumber": "ART00303",
+              "desc": "EPlus 30€",
+              "priceOne": 3000,
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 16,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 1500,
+              "ean": "4260447140752",
+              "articleNumber": "ART00312",
+              "desc": "Vodafone 15€",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 17,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4260447140769",
+              "articleNumber": "ART00313",
+              "desc": "Vodafone 25€",
+              "priceOne": 2500,
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 15,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4260447140691",
+              "articleNumber": "ART00321",
+              "desc": "T-Mobile 15€",
+              "priceOne": 1500,
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 16,
+              "group": [
+                        {
+                        "id": "3",
+                        "desc": "Prepaid (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 3000,
+              "ean": "4260447140707",
+              "articleNumber": "ART00322",
+              "desc": "T-Mobile 30€",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 16,
+              "group": [
+                        {
+                        "id": "99",
+                        "desc": "Loyalty (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "priceOne": 1500,
+              "ean": "4260447149519",
+              "articleNumber": "ART00341",
+              "desc": "Gutscheinaufladung 15€",
+              "quantity": 1,
+              "tax": 7
+              },
+              {
+              "id": 17,
+              "group": [
+                        {
+                        "id": "99",
+                        "desc": "Loyalty (Smart)",
+                        "level": 1
+                        }
+                        ],
+              "ean": "4260447149519",
+              "articleNumber": "ART00342",
+              "desc": "Gutscheinaufladung 30€",
+              "priceOne": 3000,
+              "quantity": 1,
+              "tax": 7
+              }
+              ]
 }
